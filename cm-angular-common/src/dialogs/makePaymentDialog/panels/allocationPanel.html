@@ -1,0 +1,54 @@
+<div>
+    <div class="modal-body">
+        <p>Total Amount Outstanding <strong>{{model.invoicesForAllocation.totalOutstandingAmount|currency}}</strong></p>
+
+        <p>How much of the Total Outstanding do you wish to pay immediately?</p>
+        <br/>
+
+        <div style="margin:0 auto" ng-style="{width:  (model.invoicesForAllocation.possibleDiscounts ? '560px' : '475px')}">
+            <div style="overflow-y:auto; max-height:175px">
+                <table class="cm-table" ji-parent-scope-element="allocationTable" style="width: 100%">
+                    <tr>
+                        <th>Pay?</th>
+                        <th>Invoice</th>
+                        <th>Due Date</th>
+                        <th>Outstanding<br/>Amount</th>
+                        <th>Amount<br/>to pay</th>
+                        <th ng-if="model.invoicesForAllocation.possibleDiscounts">Discount</th>
+                    </tr>
+                    <tr ng-repeat="invoice in model.invoicesForAllocation.invoices">
+                        <td style="text-align: center">
+                            <input type="checkbox" ng-model="invoice.include" ng-disabled="invoice.allocationChangedDisabled"
+                                   ng-change="invoice.allocatedAmount = invoice.include ? invoice.outstandingAmount - invoice.discountIfFullyPaid : 0;
+                                              invoice.discount = invoice.include ? invoice.discountIfFullyPaid : 0;
+                                              disableAllButLastAllocatedInvoiceIfAppropriate()"/>
+                        </td>
+                        <td ng-class="{'text-muted': invoice.allocationChangedDisabled}">{{invoice.invoiceNumber}}</td>
+                        <td ng-class="{'text-muted': invoice.allocationChangedDisabled}" style="white-space: nowrap">{{invoice.dueDate}}</td>
+                        <td ng-class="{'text-muted': invoice.allocationChangedDisabled}" class="text-right">{{invoice.outstandingAmount|currency}}</td>
+                        <td style="padding-top: 3px">
+                            <form name="allocationForm">
+                                <div class="form-group" ng-style="invoice.include ? {'opacity': 1} : {'opacity': 0}"
+                                     ng-class="{ 'has-error' :allocationForm.allocatedAmountField.$invalid }" style="margin: 0">
+                                    <input name="allocatedAmountField" ji-non-negative-currency ng-disabled="invoice.allocationChangedDisabled"
+                                           class='text-right form-control' style="width: 100%" ng-model="invoice.allocatedAmount"
+                                           ng-change="validateOrAdjustAllocation()"/>
+                                </div>
+                            </form>
+                        </td>
+                        <td ng-if="model.invoicesForAllocation.possibleDiscounts" class="panel-primary text-right"><span ng-hide="invoice.discount === 0">{{invoice.discount|currency}}</span></td>
+                    </tr>
+                </table>
+            </div>
+            <br/>
+
+            <p class="text-right">Total amount to pay: {{model.invoicesForAllocation.getTotalAllocated() | currency}}</p>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="$dismiss('cancel')">Cancel</button>
+        <button class="btn btn-primary" ng-click="allocationPanelNext()">Next</button>
+    </div>
+
+</div>

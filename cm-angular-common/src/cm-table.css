@@ -1,0 +1,34 @@
+table.cm-table  {
+    border: 1px solid #428bca;
+    border-radius: 3px;
+    border-collapse: separate;
+    overflow: hidden;
+}
+
+table.cm-table th {
+    font-weight: normal;
+    color: #ffffff;
+    background-color: #428bca;
+    border-left: 1px solid #ffffff;
+    padding: 3px 10px 3px 10px;
+    vertical-align: bottom;
+}
+
+table.cm-table th:first-child {
+    border-left-style: none;
+}
+
+table.cm-table td {
+    border-left: 1px solid #428bca;
+    border-bottom: 1px solid #428bca;
+    padding: 3px 3px 3px 3px;
+    vertical-align: baseline;
+}
+
+table.cm-table td:first-child {
+    border-left-style: none;
+}
+
+table.cm-table tr:last-child td {
+    border-bottom-style: none;
+}

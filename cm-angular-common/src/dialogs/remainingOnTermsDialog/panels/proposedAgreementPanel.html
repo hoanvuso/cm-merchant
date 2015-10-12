@@ -1,0 +1,35 @@
+<div>
+    <div class="modal-body">
+
+        <div><strong>Summary of Instalments</strong></div>
+
+        <div align="center" style="padding-top: 10px; padding-left: 40px; padding-right: 40px">
+            <table class="proposedAgreement">
+                <tr>
+                    <td>First&nbsp;Instalment Date</td>
+                    <td><strong>{{extractFirstInstalmentDate(model.proposedTermPaymentAgreement)}}</strong></td>
+                </tr>
+                <tr>
+                    <td>Instalment&nbsp;Frequency</td>
+                    <td><strong>{{extractFrequency(model.proposedTermPaymentAgreement)}}</strong></td>
+                </tr>
+                <tr>
+                    <td>Number&nbsp;of&nbsp;instalments</td>
+                    <td><strong>{{model.proposedTermPaymentAgreement.paymentSchedules[0].scheduledPayments.length}}</strong></td>
+                </tr>
+                <tr>
+                    <td>Instalment&nbsp;Amounts</td>
+                    <td><strong>{{extractInstallmentAmountsText(model.proposedTermPaymentAgreement)}}</strong></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <div style="position:relative; width: 100%">
+            <button class="btn btn-primary" style="position: absolute; left: 0" ng-click="proposedAgreementPanelPrevious()">Back</button>
+            <button class="btn btn-warning" ng-click="$dismiss('cancel')">Cancel</button>
+            <button class="btn btn-primary" ng-click="proposedAgreementPanelNext()">Next</button>
+        </div>
+    </div>
+</div>

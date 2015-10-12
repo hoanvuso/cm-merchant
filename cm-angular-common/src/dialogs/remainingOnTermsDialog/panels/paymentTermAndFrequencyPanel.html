@@ -1,0 +1,25 @@
+<div>
+    <div class="modal-body" style="position: relative">
+
+        <p>You can settle the Total Amount Outstanding <strong>({{totalOutstandingAmount | currency}})</strong> in instalments over a period of time, by selecting one of the options below.</p>
+
+        <div style="padding-left: 100px; padding-top: 10px">
+            <div class="radio" ng-repeat="paymentTerm in offeredPaymentTerms">
+                <label>
+                    <input type="radio" ng-model="model.chosenTerm" ng-value="paymentTerm">
+                    {{paymentTerm.description}}
+                </label>
+            </div>
+        </div>
+
+        <br/>
+        <p ng-if="!merchantConfig.paymentTerms.serviceFeeRateIsCostToMerchant">Note: A Service Fee of {{merchantConfig.paymentTerms.serviceFeeRate}}% of the invoice amount applies.</p>
+
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="$dismiss('cancel')">Cancel</button>
+        <button class="btn btn-primary" ng-click="paymentTermAndFrequencyPanelNext()">Next</button>
+    </div>
+
+</div>

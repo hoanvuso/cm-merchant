@@ -1,0 +1,88 @@
+<form name="form" ng-controller="GeneralPanelController" class="css-form form-horizontal" ji-form style="margin-top: 30px" novalidate>
+    <div class="form-group">
+        <label class="col-sm-4 control-label">Entity Type</label>
+        <div class="col-sm-8">
+            <label class="radio-inline">
+                <input type="radio" name="entityTypeOptions" ng-model="merchantConfigService.generalEntityType" value="SoleTrader" ng-change="merchantConfigService.merchantConfig.general.entityType = 'SoleTrader'"> Sole Trader
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="entityTypeOptions" ng-model="merchantConfigService.generalEntityType" value="PtyLtd" ng-change="merchantConfigService.merchantConfig.general.entityType = 'PtyLtd'"> Pty Ltd
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="entityTypeOptions" ng-model="merchantConfigService.generalEntityType" value="Partnership" ng-change="merchantConfigService.merchantConfig.general.entityType = 'Partnership'"> Partnership
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="entityTypeOptions" ng-model="merchantConfigService.generalEntityType" value="Other" ng-change="merchantConfigService.merchantConfig.general.entityType = null"> Other
+            </label>
+            <input ng-if="merchantConfigService.generalEntityType === 'Other'" name="otherEntityType" type="text" class="form-control" placeholder="Other" ng-model="merchantConfigService.merchantConfig.general.entityType" style="margin-top: 10px">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Entity Legal Name</label>
+        <div class="col-sm-9">
+            <input name="merchantName" type="text" class="form-control" placeholder="Entity Legal Name" required ng-model="merchantConfigService.merchantConfig.general.merchantName">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Entity Trading Name</label>
+        <div class="col-sm-9">
+            <input name="merchantTradingName" type="text" class="form-control" placeholder="Entity Trading Name" ng-model="merchantConfigService.merchantConfig.general.merchantTradingName">
+            <div ng-show="form.merchantTradingName.$jiHasFocus && form.merchantTradingName.$error.required && !form.merchantTradingName.$pristine" class="error-message" required>Username is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">ABN</label>
+        <div class="col-sm-9">
+            <input name="abnNumber" type="text" class="form-control" placeholder="ABN" ng-model="merchantConfigService.merchantConfig.abnNumber">
+            <!--<div ng-show="form.abnNumber.$jiHasFocus && form.abnNumber.$error.required && !form.abnNumber.$pristine" class="error-message" required>Username is required</div>-->
+            <div ng-show="form.abnNumber.$error.required && !form.abnNumber.$pristine" class="error-message" required>Username is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Industry Type</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" placeholder="Industry Type" ng-model="merchantConfigService.merchantConfig.general.industryType">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Phone</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Phone Number" ng-model="merchantConfigService.merchantConfig.general.primaryPhoneNumber">
+        </div>
+        <label class="col-sm-1 control-label">After hours</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="After Hours Phone Number" ng-model="merchantConfigService.merchantConfig.general.afterHoursPhoneNumber">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Accounting Package</label>
+        <div class="col-sm-9">
+            <div style="height: 40px">
+                <label class="radio-inline">
+                    <input type="radio" name="accountingPackageOptions" style="margin-top: 7px"
+                           ng-model="merchantConfigService.generalAccountingPackage" value="Xero" ng-change="merchantConfigService.merchantConfig.general.accountingPackage = 'Xero'">
+                    <img src="/common/images/Xero 82x27.png">
+                </label>
+            </div>
+            <div style="height: 40px">
+                <label class="radio-inline" style="vertical-align: middle">
+                    <input type="radio" name="accountingPackageOptions" style="margin-top: 9px"
+                           ng-model="merchantConfigService.generalAccountingPackage" value="MYOBAccountRight" ng-change="merchantConfigService.merchantConfig.general.accountingPackage = 'MYOBAccountRight'">
+                    <img src="/common/images/MYOB AccountRight 204x28.jpeg">
+                </label>
+            </div>
+            <div style="height: 40px; margin-top: 5px">
+                <label class="radio-inline">
+                    <input type="radio" name="accountingPackageOptions" ng-model="merchantConfigService.generalAccountingPackage" value="Other" ng-change="merchantConfigService.merchantConfig.general.accountingPackage = null"> Other
+                </label>
+            </div>
+            <input ng-if="merchantConfigService.generalAccountingPackage === 'Other'" name="otherAccountingPackage" type="text" class="form-control" placeholder="Other" ng-model="merchantConfigService.merchantConfig.general.accountingPackage" style="margin-top: 10px">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Debtor Emails From Address</label>
+        <div class="col-sm-9">
+            <input name="poBox" type="text" class="form-control" placeholder='"From" Address for Emails to Debtors' required ng-model="merchantConfigService.merchantConfig.emailAddresses.debtorEmailsFromAddress">
+        </div>
+    </div>
+</form>

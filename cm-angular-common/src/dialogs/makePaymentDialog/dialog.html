@@ -1,0 +1,23 @@
+<div class="cm-dialog" style="height: 100%; position: relative">
+
+    <div class="modal-header" style="vertical-align: bottom">
+        <h3 class="modal-title" style="display: inline-block">{{dialogTitle}}</h3>
+    </div>
+
+
+    <div ji-scope-element="panelContainer" class="ji-sliding-panel-container">
+
+        <div class="ji-sliding-panel" ng-show="currentPanel === 'allocationPanel'" ng-include="'/common/dialogs/makePaymentDialog/panels/allocationPanel.html'"></div>
+
+        <div class="ji-sliding-panel" ng-show="currentPanel === 'paymentMethodPanel'" ng-include="'/common/dialogs/makePaymentDialog/panels/paymentMethodPanel.html'"></div>
+
+        <div class="ji-sliding-panel" ng-show="currentPanel === 'ccDetailsPanel'" ng-include="'/common/dialogs/makePaymentDialog/panels/ccDetailsPanel.html'"></div>
+
+        <div class="ji-sliding-panel" ng-show="currentPanel === 'ddrDetailsPanel'" ng-include="'/common/dialogs/makePaymentDialog/panels/ddrDetailsPanel.html'"></div>
+
+        <div class="ji-sliding-panel" ng-show="currentPanel === 'resultsPanel'" ng-include="'/common/dialogs/makePaymentDialog/panels/resultsPanel.html'"></div>
+
+    </div>
+
+
+</div>

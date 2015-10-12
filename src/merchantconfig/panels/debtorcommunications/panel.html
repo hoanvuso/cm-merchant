@@ -1,0 +1,153 @@
+<div ng-controller="DebtorCommunicationsController">
+    <table width="100%">
+        <tr>
+            <td style="padding-right: 10px">
+
+                <div class="panel panel-default" style="min-height: 405px">
+                    <div class="panel-heading">Invoice Past Due (PD) Reminders</div>
+                    <div class="panel-body">
+
+                        <form name="overdueInvoiceRemindersForm" class="css-form form-horizontal" ji-form style="margin-top: 30px; min-height: 250px" novalidate>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">Minimum Invoice Size</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" placeholder="Minimum Invoice Size" required ng-model="merchantConfigService.merchantConfig.debtorCommunications.overdueInvoiceReminders.minimumInvoiceSize">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">Delay Between Reminders</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" placeholder="Delay Between Reminders" required ng-model="merchantConfigService.merchantConfig.debtorCommunications.overdueInvoiceReminders.delayBetweenReminders">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label"></label>
+                                <div class="col-sm-7">
+                                    <label>
+                                        <input type="checkbox" ng-model="merchantConfigService.merchantConfig.debtorCommunications.overdueInvoiceReminders.sendSms">&nbsp;&nbsp;Send SMS in addition to Email
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </td>
+            <td style="padding-left: 10px">
+
+                <div class="panel panel-default" style="min-height: 405px">
+                    <div class="panel-heading">Serious Arrears (SA) Notifications</div>
+                    <div class="panel-body">
+
+                        <form name="seriousArrearsNotificationsForm" class="css-form form-horizontal" ji-form style="margin-top: 30px" novalidate>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label>
+                                        <input type="checkbox" ng-model="merchantConfigService.seriousArrearsNotificationsEnabled" checked ng-click="onSeriousArrearsNotificationsChange()">&nbsp;&nbsp;Enabled
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-7 control-label" ng-class="{disabled: !merchantConfigService.seriousArrearsNotificationsEnabled}">Minimum Arrears Amount</label>
+                                <div class="col-sm-5">
+                                    <input ng-disabled="!merchantConfigService.seriousArrearsNotificationsEnabled" type="text" class="form-control" placeholder="Minimum Arrears Amount" required ng-model="merchantConfigService.merchantConfig.debtorCommunications.seriousArrearsNotifications.minimumArrearsAmount">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-7 control-label" ng-class="{disabled: !merchantConfigService.seriousArrearsNotificationsEnabled}">Minimum Days Overdue</label>
+                                <div class="col-sm-5">
+                                    <input ng-disabled="!merchantConfigService.seriousArrearsNotificationsEnabled" type="text" class="form-control" placeholder="Minimum Days Overdue" required ng-model="merchantConfigService.merchantConfig.debtorCommunications.seriousArrearsNotifications.minimumDaysOverdue">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-7 control-label" ng-class="{disabled: !merchantConfigService.seriousArrearsNotificationsEnabled}" style="white-space: nowrap">Delay Between Reminders (days)</label>
+                                <div class="col-sm-5">
+                                    <input ng-disabled="!merchantConfigService.seriousArrearsNotificationsEnabled" type="text" class="form-control" placeholder="Delay Between Reminders (days)" required ng-model="merchantConfigService.merchantConfig.debtorCommunications.seriousArrearsNotifications.delayBetweenReminders">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-7 control-label" ng-class="{disabled: !merchantConfigService.seriousArrearsNotificationsEnabled}">Maximum Number of Reminders</label>
+                                <div class="col-sm-5">
+                                    <input ng-disabled="!merchantConfigService.seriousArrearsNotificationsEnabled" type="text" class="form-control" placeholder="Maximum Number of Reminders" required ng-model="merchantConfigService.merchantConfig.debtorCommunications.seriousArrearsNotifications.maximumNumberOfReminders">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-7 control-label" ng-class="{disabled: !merchantConfigService.seriousArrearsNotificationsEnabled}"></label>
+                                <div class="col-sm-5">
+                                    <label ng-class="{disabled: !merchantConfigService.seriousArrearsNotificationsEnabled}">
+                                        <input ng-disabled="!merchantConfigService.seriousArrearsNotificationsEnabled" type="checkbox" ng-model="merchantConfigService.merchantConfig.debtorCommunications.seriousArrearsNotifications.sendSms">&nbsp;&nbsp;Send SMS in addition to Email
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </td>
+        </tr>
+    </table>
+
+    <div id="debtorCommunicationsFlowDiagram">
+        <div>
+            <div style="visibility: hidden">
+                <img src="/common/images/Debtor Communication Circle.png">
+            </div>
+            <div style="margin-top: 10px">
+                <img src="/common/images/Debtor Communication Arrow 2.png">
+            </div>
+            <span class="arrowText" style="top: 102px">New Invoice</span>
+        </div>
+        <div>
+            <div>
+                <img src="/common/images/Debtor Communication Circle.png" ng-style="merchantConfigService.merchantConfig.debtorCommunications.overdueInvoiceReminders.sendSms ? null : {opacity: 0.25}">
+            </div>
+            <div style="margin-top: 10px">
+                <img src="/common/images/Debtor Communication Arrow 2.png">
+            </div>
+            <span class="smsText">SMS</span>
+            <span class="arrowText" style="top: 92px">Invoice<br/>Past Due</span>
+        </div>
+        <div>
+            <div>
+                <img src="/common/images/Debtor Communication Circle.png" ng-style="merchantConfigService.merchantConfig.debtorCommunications.overdueInvoiceReminders.sendSms ? null : {opacity: 0.25}">
+            </div>
+            <div style="margin-top: 10px">
+                <img src="/common/images/Debtor Communication Arrow 2.png">
+            </div>
+            <span class="smsText">SMS</span>
+            <span class="arrowText">Past Due<br/>Reminder</span>
+        </div>
+        <div>
+            <div>
+                <img src="/common/images/Debtor Communication Circle.png" ng-style="merchantConfigService.merchantConfig.debtorCommunications.seriousArrearsNotifications.sendSms ? null : {opacity: 0.25}">
+            </div>
+            <div style="margin-top: 10px" ng-style="merchantConfigService.seriousArrearsNotificationsEnabled ? null : {opacity: 0.25}">
+                <img src="/common/images/Debtor Communication Arrow 2.png">
+            </div>
+            <span class="smsText">SMS</span>
+            <span class="arrowText">Serious<br/>Arrears</span>
+        </div>
+        <div>
+            <div>
+                <img src="/common/images/Debtor Communication Circle.png" ng-style="merchantConfigService.merchantConfig.debtorCommunications.seriousArrearsNotifications.sendSms ? null : {opacity: 0.25}">
+            </div>
+            <div style="margin-top: 10px" ng-style="merchantConfigService.seriousArrearsNotificationsEnabled ? null : {opacity: 0.25}">
+                <img src="/common/images/Debtor Communication Arrow 2.png">
+            </div>
+            <span class="smsText">SMS</span>
+            <span class="arrowText" style="top: 82px">Serious<br/>Arrears<br/>Reminder</span>
+        </div>
+        <div style="opacity: 0.25">
+            <div>
+                <img src="/common/images/Debtor Communication Circle.png">
+            </div>
+            <div style="margin-top: 10px">
+                <img src="/common/images/Debtor Communication Arrow 2.png">
+            </div>
+            <span class="smsText">SMS</span>
+            <span class="arrowText">Notice<br/>of Default</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="cm-dialog" style="height: 100%">
+
+    <form name="form" ji-form class="css-form form-horizontal" novalidate>  <!-- novalidate prevents HTML5 validation -->
+
+        <div class="modal-header" style="vertical-align: bottom">
+            <h3 class="modal-title" style="display: inline-block">Change Password</h3>
+        </div>
+        <div class="modal-body" style="padding-top: 30px;padding-bottom: 10px">
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Password</label>
+                <div class="col-sm-8">
+                    <input name="password" type="password" placeholder="password" required class="form-control" ng-model="model.password">
+                    <div ng-show="form.password.$error.required && !form.password.$pristine" class="error-message">Password is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Confirm Password</label>
+
+                <div class="col-sm-8">
+                    <input name="passwordConfirmation" type="password" placeholder="password confirmation" required class="form-control" ng-class="passwordConfirmationDiffers() && !form.passwordConfirmation.$pristine ? 'ng-invalid ng-dirty' : null" ng-model="passwordConfirmation">
+                    <div ng-show="form.passwordConfirmation.$jiHasFocus && !form.passwordConfirmation.$pristine && passwordConfirmationDiffers()" class="error-message">Confirmation does not match password</div>
+                    <div ng-show="form.passwordConfirmation.$error.required && !form.passwordConfirmation.$pristine" class="error-message">Password confirmation is required</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" type="button" ng-click="$close()">Cancel</button>
+            <button class="btn btn-primary" type="submit" ng-click="ok()">OK</button>
+        </div>
+
+    </form>
+
+</div>

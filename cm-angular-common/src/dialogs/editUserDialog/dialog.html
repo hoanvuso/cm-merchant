@@ -1,0 +1,120 @@
+<div class="cm-dialog" style="height: 100%">
+
+    <form name="form" ji-form class="css-form form-horizontal" novalidate>  <!-- novalidate prevents HTML5 validation -->
+
+        <div class="modal-header" style="vertical-align: bottom">
+            <h3 class="modal-title" style="display: inline-block">{{dialogTitle}}</h3>
+        </div>
+        <div class="modal-body" style="padding-top: 30px;padding-bottom: 10px">
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Username</label>
+                <div class="col-sm-8">
+                    <input ng-if="model.userId" name="username" placeholder="username" class="form-control" disabled ng-model="model.username" required>
+                    <input ng-if="!model.userId" name="username" placeholder="username" class="form-control" ng-model="model.username" required>
+                    <div ng-show="form.username.$jiHasFocus && form.username.$error.required && !form.username.$pristine" class="error-message">Username is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Password</label>
+                <div class="col-sm-8">
+                    <input name="password" type="password" placeholder="password" class="form-control" ng-model="model.password">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Confirm Password</label>
+
+                <div class="col-sm-8">
+                    <input name="passwordConfirmation" type="password" placeholder="password confirmation" class="form-control" ng-class="passwordConfirmationDiffers() ? 'ng-invalid ng-dirty' : null" ng-model="passwordConfirmation">
+                    <div ng-show="form.passwordConfirmation.$jiHasFocus && passwordConfirmationDiffers()" class="error-message">Confirmation does not match password</div>
+                </div>
+            </div>
+            <div ng-if="app.user.isACmAdmin" class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <div class="checkbox text-muted">
+                        <label>
+                            <input type="checkbox" ng-model="model.isACmAdmin" disabled> CM Administrator
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="model.isAnAdmin"> Administrator
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!--  todo - add trust fund support -->
+            <!--<div ng-if="false" class="form-group"> -->
+            <!--<div class="col-sm-offset-4 col-sm-8">-->
+            <!--<div class="checkbox">-->
+            <!--<label>-->
+            <!--<input type="checkbox" ng-model="model.isATrustFundAdmin"> Trust Fund Administrator-->
+            <!--</label>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <div ng-if="custom1" class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="custom1Checked" ng-change="custom1Checked ? null : model.custom1 = null"> {{custom1.title}}
+                        </label>
+                        <input ng-if="custom1Checked" name="custom1" placeholder="{{custom1.title | lowercase}}" class="form-control" ng-model="model.custom1" required style="margin-top: 5px">
+                        <div ng-show="form.custom1.$error.required && !form.custom1.$pristine" class="error-message">Value for {{custom1.title | lowercase}} is required if box is checked</div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="custom2" class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="custom2Checked" ng-change="custom2Checked ? null : model.custom2 = null"> {{custom2.title}}
+                        </label>
+                        <input ng-if="custom2Checked" name="custom2" placeholder="{{custom2.title | lowercase}}" class="form-control" ng-model="model.custom2" required style="margin-top: 5px">
+                    </div>
+                </div>
+            </div>
+            <div ng-if="custom3" class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="custom3Checked" ng-change="custom3Checked ? null : model.custom3 = null"> {{custom3.title}}
+                        </label>
+                        <input ng-if="custom3Checked" name="custom3" placeholder="{{custom3.title | lowercase}}" class="form-control" ng-model="model.custom3" required style="margin-top: 5px">
+                    </div>
+                </div>
+            </div>
+            <div ng-if="custom4" class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="custom4Checked" ng-change="custom4Checked ? null : model.custom4 = null"> {{custom4.title}}
+                        </label>
+                        <input ng-if="custom4Checked" name="custom4" placeholder="{{custom4.title | lowercase}}" class="form-control" ng-model="model.custom4" required style="margin-top: 5px">
+                    </div>
+                </div>
+            </div>
+            <div ng-if="custom5" class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="custom5Checked" ng-change="custom5Checked ? null : model.custom5 = null"> {{custom5.title}}
+                        </label>
+                        <input ng-if="custom5Checked" name="custom5" placeholder="{{custom5.title | lowercase}}" class="form-control" ng-model="model.custom5" required style="margin-top: 5px">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" type="button" ng-click="$close()">Cancel</button>
+            <button class="btn btn-primary" type="submit" ng-click="ok()">OK</button>
+        </div>
+
+    </form>
+
+</div>

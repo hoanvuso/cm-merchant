@@ -1,0 +1,7 @@
+.change-password-dialog .modal-dialog {
+    width: 500px;
+}
+
+.change-password-dialog .modal-content {
+    min-height: 100px;
+}

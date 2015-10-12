@@ -1,0 +1,67 @@
+@cm-dark-color: #303977;
+
+/*
+ *  Original Bootstrap's CSS depends on empty href attributes to style cursors for several components (pagination, tabs etc.).
+ *  But in AngularJS adding empty href attributes to link tags will cause unwanted route changes. This is why Bootstrap UI needs
+    to remove empty href attributes from directive templates and as a result styling is not applied correctly.
+    The remedy is to add the following styling to the application:
+*/
+.nav, .pagination, .carousel, .panel-title a {
+  cursor: pointer;
+}
+
+.cm-dark-background {
+  background-color: @cm-dark-color;
+}
+
+h1.cm-dark small {
+  color: @cm-dark-color;
+}
+
+.popover-style-tooltip + div > div.tooltip-arrow {
+  border-bottom-color: rgba(0, 0, 0, .25) !important;
+}
+
+.popover-style-tooltip + div > div.tooltip-inner {
+  padding: 9px 14px 9px 14px;
+  max-width: 900px;
+  font-size: 14px;
+  color: inherit;
+  background-color: #7ab5d3;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.hover-link:hover {
+  text-decoration: underline;
+}
+
+.cm-btn-small {
+  padding: 2px 6px 1px 6px;
+  border-radius: 0;
+  font-size: 13px;
+}
+
+div.cm-dialog div.row {
+  margin-top: 10px;
+}
+
+.css-form .error-message {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: #bf130a;
+}
+
+.css-form input.ng-invalid.ng-dirty {
+  border-color: #bf130a;
+}
+
+.css-form input.ng-invalid.ng-dirty:focus {
+  border-color: #bf130a;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+}
+
+label.disabled {
+  color: rgb(153, 153, 153);
+  font-weight: normal;
+}

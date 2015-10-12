@@ -1,0 +1,19 @@
+.change-nominated-account-dialog .modal-dialog {
+    width: 500px;
+}
+
+.change-nominated-account-dialog .ji-sliding-panel-container {
+    height: 300px;
+}
+
+.change-nominated-account-dialog .ji-sliding-panel {
+    height: 100%;
+    width: 100%;
+}
+
+.change-nominated-account-dialog .modal-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

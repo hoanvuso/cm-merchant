@@ -1,0 +1,66 @@
+<div>
+    <div class="modal-body">
+        <br/>
+
+        <form name="paymentMethodForm" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-sm-5 control-label">Amount</label>
+
+                <div class="col-xs-3">
+                    <input class="form-control" disabled value="{{model.invoicesForAllocation.getTotalAllocated() | currency}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-5 control-label">Payment Method</label>
+
+                <div class="col-xs-7">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" ng-model="model.paymentMethod" value="Visa">
+                            Visa
+                        </label>
+                        <img src="/common/images/Visa%2033x24.png" width="33" alt="Visa" style="position: absolute; left: 200px">
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" ng-model="model.paymentMethod" value="MasterCard">
+                            Mastercard
+                        </label>
+                        <img src="/common/images/Mastercard%2033x24.png" alt="Mastercard" style="position: absolute; left: 200px">
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" ng-model="model.paymentMethod" value="American Express">
+                            American Express
+                        </label>
+                        <img src="/common/images/Amex%2033x24.png" alt="Amex" style="position: absolute; left: 200px">
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" ng-model="model.paymentMethod" value="Diners Club">
+                            Diners Club
+                        </label>
+                        <img src="/common/images/Diners%20Club%2033x24.png" alt="Diners" style="position: absolute; left: 200px">
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" ng-model="model.paymentMethod" value="DDR">
+                            Direct Debit
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <div style="position:relative; width: 100%">
+            <button class="btn btn-primary" style="position: absolute; left: 0" ng-click="paymentMethodPanelPrevious()">Back</button>
+            <button class="btn btn-warning" ng-click="$dismiss('cancel')">Cancel</button>
+            <button class="btn btn-primary" ng-click="paymentMethodPanelNext()">Next</button>
+        </div>
+    </div>
+
+
+
+</div>

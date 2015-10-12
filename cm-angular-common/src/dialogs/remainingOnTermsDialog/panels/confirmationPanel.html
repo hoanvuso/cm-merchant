@@ -1,0 +1,23 @@
+<div>
+    <div class="modal-body" style="position: relative">
+
+        <progressbar ng-if="processing" class="progress-striped active" value="100" type="info" style="width: 250px; margin-top: 80px; margin-left: auto; margin-right: auto">processing...</progressbar>
+
+        <br/>
+
+        <div ng-if="paymentAgreementSaved">
+            <p>Thank you, your standing payment authority is now confirmed.</p>
+            <p>A copy of the Standing Payment Authority, together with your schedule of payments has been emailed to you.</p>
+        </div>
+
+        <p ng-if="errorMessage" class="text-danger">{{errorMessage}}</p>
+
+    </div>
+
+    <div class="modal-footer">
+        <div style="position:relative; width: 100%">
+            <button class="btn btn-primary" ng-click="$close(true)">Ok</button>
+        </div>
+    </div>
+
+</div>

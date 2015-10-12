@@ -1,0 +1,56 @@
+<div>
+    <div class="modal-body">
+        <br/>
+
+        <form name="ddrForm" ji-form class="form-horizontal" role="form" novalidate>  <!-- novalidate prevents HTML5 validation -->
+
+            <div class="form-group" ng-class="{ 'has-error' :ddrForm.accountName.$invalid && !ddrForm.accountName.$pristine }">
+                <label class="col-sm-5 control-label">Account Name</label>
+
+                <div class="col-xs-7">
+                    <input name="accountName" placeholder="Account name" class="form-control" ng-model="model.account.name" required style="width: 13em">
+
+                    <p ng-show="ddrForm.accountName.$jiHasFocus && ddrForm.accountName.$error.required && !ddrForm.accountName.$pristine" class="help-block">Account name is required</p>
+
+                    <p ng-show="ddrForm.accountName.$jiHasFocus && ddrForm.accountName.errorMessage" class="help-block">{{ddrForm.accountName.errorMessage}}</p>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' :ddrForm.bsbNumber.$invalid && !ddrForm.bsbNumber.$pristine }">
+                <label class="col-sm-5 control-label">BSB Number</label>
+
+                <div class="col-xs-7">
+                    <input name="bsbNumber" placeholder="NNN-NNN" class="form-control" ng-model="model.account.bsb" ji-bsb-number required style="width: 13em">
+
+                    <p ng-show="ddrForm.bsbNumber.$jiHasFocus && ddrForm.bsbNumber.$error.required && !ddrForm.bsbNumber.$pristine" class="help-block">BSB number is required</p>
+
+                    <p ng-show="ddrForm.bsbNumber.$jiHasFocus && ddrForm.bsbNumber.errorMessage" class="help-block">{{ddrForm.bsbNumber.errorMessage}}</p>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' :ddrForm.accountNumber.$invalid && !ddrForm.accountNumber.$pristine }">
+                <label class="col-sm-5 control-label">Account Number</label>
+
+                <div class="col-xs-7">
+                    <input name="accountNumber" placeholder="Account number" class="form-control" ng-model="model.account.number"
+                           ng-pattern="/^\d*$/" style="width: 13em" required>
+
+                    <p ng-show="ddrForm.accountNumber.$jiHasFocus && ddrForm.accountNumber.$error.required && !ddrForm.accountNumber.$pristine" class="help-block">Account Number is required</p>
+
+                    <p ng-show="ddrForm.accountNumber.$jiHasFocus && ddrForm.accountNumber.$error.pattern" class="help-block">Account Number must be numeric</p>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="modal-footer">
+        <div style="position:relative; width: 100%">
+            <button class="btn btn-primary" style="position: absolute; left: 0" ng-click="ddrDetailsPanelPrevious()">Back</button>
+            <button class="btn btn-warning" ng-click="$dismiss('cancel')">Cancel</button>
+            <button class="btn btn-primary" ng-click="ddrDetailsPanelNext(ddrForm)">Next</button>
+        </div>
+    </div>
+
+</div>

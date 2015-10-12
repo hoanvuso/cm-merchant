@@ -1,0 +1,20 @@
+<div id="remainingOnTermsDialog" class="cm-dialog" style="height: 100%; position: relative">
+
+    <div class="modal-header" style="vertical-align: bottom">
+        <h3 class="modal-title" style="display: inline-block">Pay Outstanding Invoices on Terms</h3>
+    </div>
+
+
+    <div ji-scope-element="panelContainer" class="ji-sliding-panel-container">
+
+        <div class="ji-sliding-panel" ng-show="currentPanel === 'paymentTermAndFrequencyPanel'" ng-include="'/common/dialogs/remainingOnTermsDialog/panels/paymentTermAndFrequencyPanel.html'"></div>
+        <div class="ji-sliding-panel" ng-show="currentPanel === 'paymentMethodPanel'" ng-include="'/common/dialogs/remainingOnTermsDialog/panels/paymentMethodPanel.html'"></div>
+        <div class="ji-sliding-panel" ng-show="currentPanel === 'proposedAgreementPanel'" ng-include="'/common/dialogs/remainingOnTermsDialog/panels/proposedAgreementPanel.html'"></div>
+        <div class="ji-sliding-panel" ng-show="currentPanel === 'ddrDetailsPanel'" ng-include="'/common/dialogs/remainingOnTermsDialog/panels/ddrDetailsPanel.html'"></div>
+        <div class="ji-sliding-panel" ng-show="currentPanel === 'ccDetailsPanel'" ng-include="'/common/dialogs/remainingOnTermsDialog/panels/ccDetailsPanel.html'"></div>
+        <div class="ji-sliding-panel" ng-show="currentPanel === 'confirmationPanel'" ng-include="'/common/dialogs/remainingOnTermsDialog/panels/confirmationPanel.html'"></div>
+
+    </div>
+
+
+</div>

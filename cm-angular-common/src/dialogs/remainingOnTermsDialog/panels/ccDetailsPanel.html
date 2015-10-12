@@ -1,0 +1,80 @@
+<div>
+    <div class="modal-body">
+        <br/>
+
+        <form name="creditCardForm" ji-form class="form-horizontal" role="form" novalidate>  <!-- novalidate prevents HTML5 validation -->
+
+            <div class="form-group" ng-class="{ 'has-error' :creditCardForm.cardNumber.$invalid && !creditCardForm.cardNumber.$pristine }">
+                <label class="col-sm-5 control-label" ng-style="suppressErrorFormatting(creditCardForm) ? {color: '#333'} : null">Card number</label>
+
+                <div class="col-xs-7">
+                    <input name="cardNumber" type="text" placeholder="Card Number" class="form-control" ng-model="model.card.number"
+                           novalidate cc-number cc-format cc-type="model.paymentMethod" cc-eager-type required style="width: 13em"
+                           ng-style="suppressErrorFormatting(creditCardForm) ? {borderColor: '#ccc'}: null">
+
+                    <p ng-show="showCardNumberRequiredError(creditCardForm)" class="help-block">Card Number is required</p>
+
+                    <p ng-show="showWrongCardTypeError(creditCardForm)" class="help-block">Looks like you're typing a {{creditCardForm.cardNumber.$ccEagerType}} number<br/>(you selected {{model.paymentMethod}} at the last step).</p>
+
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div ng-class="{ 'has-error' : (expiryMonthHasError(creditCardForm) || expiryYearHasError(creditCardForm))  }">
+                    <label class="col-sm-5 control-label">Expiry</label>
+                </div>
+
+                <div class="col-xs-7">
+
+                    <div cc-exp style="position: relative">
+                        <div ng-class="{ 'has-error' : expiryMonthHasError(creditCardForm) }" style="width: 4em; display: inline-block">
+                            <input name="cardExpiryMonth" class="form-control" placeholder="MM" ng-model="model.card.expiryMonth" cc-exp-month required
+                                   ng-change="onExpiryMonthChange(creditCardForm)"/>
+                        </div>
+                        &nbsp;&nbsp;/&nbsp;&nbsp;
+                        <div ng-class="{ 'has-error' : expiryYearHasError(creditCardForm) }" style="width: 4em; display: inline-block">
+                            <input name="cardExpiryYear" class="form-control" placeholder="YY" ng-model="model.card.expiryYear" cc-exp-year required
+                                   ng-change="onExpiryYearChange(creditCardForm)"/>
+                        </div>
+                    </div>
+
+                    <div class="has-error">
+                        <p ng-show="showExpiryMonthRequiredError(creditCardForm)" class="help-block">Expiry month is required</p>
+                        <p ng-show="showExpiryYearRequiredError(creditCardForm)" class="help-block">Expiry year is required</p>
+                        <p ng-show="showExpiryPastError(creditCardForm)" class="help-block">Expiry date has passed</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' :creditCardForm.cvc.$invalid && !creditCardForm.cvc.$pristine }">
+                <label class="col-sm-5 control-label">CVC Number</label>
+
+                <div class="col-xs-7">
+                    <input name="cvc" placeholder="Security code" class="form-control" ng-model="model.card.cvc"
+                           ng-minlength="3" ng-maxlength="4" ng-pattern="/^\d*$/" style="width: 13em" required>
+
+                    <p ng-show="creditCardForm.cvc.$jiHasFocus && creditCardForm.cvc.$error.required && !creditCardForm.cvc.$pristine" class="help-block">CVC Number is required</p>
+
+                    <p ng-show="creditCardForm.cvc.$jiHasFocus && creditCardForm.cvc.$error.minlength" class="help-block">CVC Number must be at least 3 digits</p>
+
+                    <p ng-show="creditCardForm.cvc.$jiHasFocus && creditCardForm.cvc.$error.maxlength" class="help-block">CVC Number must be at most 4 digits</p>
+
+                    <p ng-show="creditCardForm.cvc.$jiHasFocus && creditCardForm.cvc.$error.pattern" class="help-block">CVC Number must be numeric</p>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="modal-footer">
+        <div style="position:relative; width: 100%">
+            <button class="btn btn-primary" style="position: absolute; left: 0" ng-click="ccDetailsPanelPrevious()">Back</button>
+            <button class="btn btn-warning" ng-click="$dismiss('cancel')">Cancel</button>
+            <button class="btn btn-primary" ng-click="ccDetailsPanelNext(creditCardForm)">Next</button>
+        </div>
+    </div>
+
+</div>

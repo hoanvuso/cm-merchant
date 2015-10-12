@@ -1,0 +1,25 @@
+.remaining-on-terms-dialog .modal-dialog {
+    width: 600px;
+}
+
+.remaining-on-terms-dialog .ji-sliding-panel-container {
+    height: 300px;
+}
+
+.remaining-on-terms-dialog .ji-sliding-panel {
+    height: 100%;
+    width: 100%;
+}
+
+.remaining-on-terms-dialog .modal-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#remainingOnTermsDialog table.proposedAgreement td {
+    padding-top: 10px;
+    padding-left: 30px;
+    vertical-align: top;
+}

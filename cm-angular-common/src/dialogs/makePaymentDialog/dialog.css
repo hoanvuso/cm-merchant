@@ -1,0 +1,19 @@
+.make-payment-dialog .modal-dialog {
+    width: 700px;
+}
+
+.make-payment-dialog .ji-sliding-panel-container {
+    height: 400px;
+}
+
+.make-payment-dialog .ji-sliding-panel {
+    height: 100%;
+    width: 100%;
+}
+
+.make-payment-dialog .modal-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

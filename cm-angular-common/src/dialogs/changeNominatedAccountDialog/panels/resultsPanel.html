@@ -1,0 +1,18 @@
+<div>
+    <div class="modal-body" style="position: relative">
+
+        <progressbar ng-if="processing" class="progress-striped active" value="100" type="info" style="width: 250px; margin-top: 120px; margin-left: auto; margin-right: auto">processing...</progressbar>
+
+        <br/>
+        <p ng-if="success">Thank you, the nominated account has been changed.</p>
+        <p ng-if="errorMessage" class="text-danger">{{errorMessage}}</p>
+
+    </div>
+
+    <div class="modal-footer">
+        <div style="position:relative; width: 100%">
+            <button class="btn btn-primary" ng-click="$close(true)">Ok</button>
+        </div>
+    </div>
+
+</div>
