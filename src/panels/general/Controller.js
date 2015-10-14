@@ -37,7 +37,6 @@
         } else {
           $scope.error.abnNumber = "";
         }
-        console.log($scope.error.abnNumber);
       }
     },true);
 
