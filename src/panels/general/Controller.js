@@ -22,7 +22,7 @@
       $scope.phone = [
         phone.substring(0,3),
         phone.substring(3,10)
-      ]
+      ];
     } else {
       $scope.phone = [];
     }
@@ -89,7 +89,7 @@
 
     this.selectEntityType = function (entityType) {
       var asdfs = 3;
-    }
+    };
 
   }
 
