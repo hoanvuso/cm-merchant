@@ -15,8 +15,38 @@
     <div ng-include="'merchantconfig/navbar.html'"></div>
 
     <input ji-scope-element="fileSelectInput" type="file" nv-file-select uploader="uploader" style="display: none"/>
-
-    <div class="main">
+    
+    
+    <div class="control-group pull-right">
+      <div class="btn-group">
+        <button class="btn btn-primary pull-right" style="margin: 20px 20px 20px 0;"
+          ng-click="validateAndExportConfig()">Live merchant
+        </button>
+      </div>      
+      <!-- Split button -->
+      <div class="btn-group">
+        <button type="button" class="btn btn-danger">Pending merchant</button>
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="caret"></span>
+          <span class="sr-only">Pending merchant</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+        </ul>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0" ng-click="importConfig()">
+          Create new merchant
+        </button>
+      </div>
+      
+    </div>
+    <div class="clearfix"></div>
+    <div class="main">      
       <div id="mainTabSet">
         <div class="btn" ng-click="currentPanel = 'general'" ng-class="{selected: currentPanel === 'general'}">General</div>
         <div class="btn" ng-click="currentPanel = 'addresses'" ng-class="{selected: currentPanel === 'addresses'}">
@@ -62,6 +92,7 @@
       <!--<div ng-include="'merchantconfig/panels/debtorcommunications/panel.html'"></div>-->
       <!--</accordion-group>-->
       <!--</accordion>-->
+      
       <div id="mainPanels">
         <h3>{{tradingName}}</h3>
 
@@ -101,7 +132,7 @@
 
         </div>
 
-        <button class="btn btn-primary pull-right" style="margin: 20px 20px 20px 0; width: 100px"
+<!--        <button class="btn btn-primary pull-right" style="margin: 20px 20px 20px 0; width: 100px"
                 ng-click="validateAndExportConfig()">Save
         </button>
         <button class="btn btn-primary pull-right" style="margin: 20px 20px 20px 0; width: 100px" ng-click="exportConfig()">
@@ -109,6 +140,9 @@
         </button>
         <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0; width: 100px" ng-click="importConfig()">
           Load
+        </button>-->
+        <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0;" ng-click="validateAndExportConfig()">
+          Send to merchant
         </button>
       </div>
 
@@ -138,6 +172,7 @@
     <script src="../cm-angular-common/src/dialogs/remainingOnTermsDialog/Controller.js"></script>
     <script src="app.js"></script>
     <script src="Service.js"></script>
+    <script src="Directive.js"></script>
     <script src="PageInitializationModuleAndService.js"></script>
     <script src="IndexController.js"></script>
     <script src="panels/general/Controller.js"></script>

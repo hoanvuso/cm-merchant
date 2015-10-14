@@ -4,7 +4,7 @@
     "navbar": {
       "height": 100,
       "classes": "navbar",
-      "headerContent": "<img src='/assets/referralPartners/79023490234/Serendipity-396x74.png' style='margin-top: 10px; margin-left: 10px'>"
+      "headerContent": "<img src='http://lily.collectionsmanager.com.au:8080/assets/referralPartners/79023490234/Serendipity-396x74.png' style='margin-top: 10px; margin-left: 10px'>"
     },
     "stylesheet": "div.navbar {\n border-bottom: solid rgb(49, 120, 186) 3px;\n padding: 0;\n border-radius: 0;\n}\n\ndiv.navbar a {\n color: rgb(49, 120, 186);\n}\n\ntable.cm-table {\n border-color: rgb(49, 120, 186);\n}\n\ntable.cm-table th {\n background-color: rgb(49, 120, 186);\n}\n\ntable.cm-table td {\n border-color: rgb(49, 120, 186);\n}\n\n#mainPanels > div {\n border-color: rgb(49, 120, 186);\n}\n\n#mainTabSet > div {\n background-color: rgb(49, 120, 186);\n}\n"
   }
