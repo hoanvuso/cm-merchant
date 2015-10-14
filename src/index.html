@@ -2,9 +2,11 @@
 <meta charset="utf-8">
 <html>
 <head>
-    <link rel="stylesheet" href="http://lily.collectionsmanager.com.au:8080/merchantconfig/lib/css/dependencies-efcd0299.css" type="text/css"/>
-    
-    <link rel="stylesheet" href="style.css" type="text/css"/>
+  <link rel="stylesheet"
+        href="http://lily.collectionsmanager.com.au:8080/merchantconfig/lib/css/dependencies-efcd0299.css"
+        type="text/css"/>
+
+  <link rel="stylesheet" href="style.css" type="text/css"/>
 </head>
 <body data-ng-controller="IndexController" style="margin: 0">
 
@@ -12,84 +14,103 @@
 
 <div ng-include="'merchantconfig/navbar.html'"></div>
 
-<input ji-scope-element="fileSelectInput" type="file" nv-file-select uploader="uploader" style="display: none"/><br/>
+<input ji-scope-element="fileSelectInput" type="file" nv-file-select uploader="uploader" style="display: none"/>
 
-<div>
-    <div id="mainTabSet">
-        <div class="btn" ng-click="currentPanel = 'general'" ng-class="{selected: currentPanel === 'general'}">General</div>
-        <div class="btn" ng-click="currentPanel = 'addresses'" ng-class="{selected: currentPanel === 'addresses'}">Addresses</div>
-        <!--<div class="btn" ng-click="currentPanel = 'emailaddresses'" ng-class="{selected: currentPanel === 'emailaddresses'}">Email Addresses</div>-->
-        <div class="btn" ng-click="currentPanel = 'contacts'" ng-class="{selected: currentPanel === 'contacts'}">Contacts</div>
-        <div class="btn" ng-click="currentPanel = 'administrators'" ng-class="{selected: currentPanel === 'administrators'}">Administrators</div>
-        <div class="btn" ng-click="currentPanel = 'banking'" ng-class="{selected: currentPanel === 'banking'}">Banking Details</div>
-        <div class="btn" ng-click="currentPanel = 'businessrules'" ng-class="{selected: currentPanel === 'businessrules'}">Business Rules</div>
-        <div class="btn" ng-click="currentPanel = 'debtorcommunications'" ng-class="{selected: currentPanel === 'debtorcommunications'}">Communications</div>
+<div class="main">
+  <div id="mainTabSet">
+    <div class="btn" ng-click="currentPanel = 'general'" ng-class="{selected: currentPanel === 'general'}">General</div>
+    <div class="btn" ng-click="currentPanel = 'addresses'" ng-class="{selected: currentPanel === 'addresses'}">
+      Addresses
+    </div>
+    <!--<div class="btn" ng-click="currentPanel = 'emailaddresses'" ng-class="{selected: currentPanel === 'emailaddresses'}">Email Addresses</div>-->
+    <div class="btn" ng-click="currentPanel = 'contacts'" ng-class="{selected: currentPanel === 'contacts'}">Contacts
+    </div>
+    <div class="btn" ng-click="currentPanel = 'administrators'"
+         ng-class="{selected: currentPanel === 'administrators'}">Administrators
+    </div>
+    <div class="btn" ng-click="currentPanel = 'banking'" ng-class="{selected: currentPanel === 'banking'}">Banking
+      Details
+    </div>
+    <div class="btn" ng-click="currentPanel = 'businessrules'" ng-class="{selected: currentPanel === 'businessrules'}">
+      Business Rules
+    </div>
+    <div class="btn" ng-click="currentPanel = 'debtorcommunications'"
+         ng-class="{selected: currentPanel === 'debtorcommunications'}">Communications
+    </div>
+  </div>
+
+  <!--<accordion close-others="true">-->
+  <!--<accordion-group heading="General" is-open="true">-->
+  <!--<div ng-include="'merchantconfig/panels/general/panel.html'"></div>-->
+  <!--</accordion-group>-->
+  <!--<accordion-group heading="Addresses">-->
+  <!--<div ng-include="'merchantconfig/panels/addresses/panel.html'"></div>-->
+  <!--</accordion-group>-->
+  <!--<accordion-group heading="Email Addresses">-->
+  <!--<div ng-include="'merchantconfig/panels/emailaddresses/panel.html'"></div>-->
+  <!--</accordion-group>-->
+  <!--<accordion-group heading="Contacts/Administrators etc">-->
+  <!--<div ng-include="'merchantconfig/panels/contactsetc/panel.html'"></div>-->
+  <!--</accordion-group>-->
+  <!--<accordion-group heading="Banking Details">-->
+  <!--<div ng-include="'merchantconfig/panels/banking/panel.html'"></div>-->
+  <!--</accordion-group>-->
+  <!--<accordion-group heading="Business Rules">-->
+  <!--<div ng-include="'merchantconfig/panels/businessrules/panel.html'"></div>-->
+  <!--</accordion-group>-->
+  <!--<accordion-group heading="Debtor Communications">-->
+  <!--<div ng-include="'merchantconfig/panels/debtorcommunications/panel.html'"></div>-->
+  <!--</accordion-group>-->
+  <!--</accordion>-->
+  <div id="mainPanels">
+    <h3>{{tradingName}}</h3>
+
+    <div ng-switch="currentPanel">
+
+      <div ng-switch-when="general">
+        <div ng-include="'merchantconfig/panels/general/panel.html'"></div>
+      </div>
+
+      <div ng-switch-when="addresses">
+        <div ng-include="'merchantconfig/panels/addresses/panel.html'"></div>
+      </div>
+
+      <!--<div ng-switch-when="emailaddresses">-->
+      <!--<div ng-include="'merchantconfig/panels/emailaddresses/panel.html'"></div>-->
+      <!--</div>-->
+
+      <div ng-switch-when="contacts">
+        <div ng-include="'merchantconfig/panels/contacts/panel.html'"></div>
+      </div>
+
+      <div ng-switch-when="administrators">
+        <div ng-include="'merchantconfig/panels/administrators/panel.html'"></div>
+      </div>
+
+      <div ng-switch-when="banking">
+        <div ng-include="'merchantconfig/panels/banking/panel.html'"></div>
+      </div>
+
+      <div ng-switch-when="businessrules">
+        <div ng-include="'merchantconfig/panels/businessrules/panel.html'"></div>
+      </div>
+
+      <div ng-switch-when="debtorcommunications">
+        <div ng-include="'merchantconfig/panels/debtorcommunications/panel.html'"></div>
+      </div>
+
     </div>
 
-    <!--<accordion close-others="true">-->
-    <!--<accordion-group heading="General" is-open="true">-->
-    <!--<div ng-include="'merchantconfig/panels/general/panel.html'"></div>-->
-    <!--</accordion-group>-->
-    <!--<accordion-group heading="Addresses">-->
-    <!--<div ng-include="'merchantconfig/panels/addresses/panel.html'"></div>-->
-    <!--</accordion-group>-->
-    <!--<accordion-group heading="Email Addresses">-->
-    <!--<div ng-include="'merchantconfig/panels/emailaddresses/panel.html'"></div>-->
-    <!--</accordion-group>-->
-    <!--<accordion-group heading="Contacts/Administrators etc">-->
-    <!--<div ng-include="'merchantconfig/panels/contactsetc/panel.html'"></div>-->
-    <!--</accordion-group>-->
-    <!--<accordion-group heading="Banking Details">-->
-    <!--<div ng-include="'merchantconfig/panels/banking/panel.html'"></div>-->
-    <!--</accordion-group>-->
-    <!--<accordion-group heading="Business Rules">-->
-    <!--<div ng-include="'merchantconfig/panels/businessrules/panel.html'"></div>-->
-    <!--</accordion-group>-->
-    <!--<accordion-group heading="Debtor Communications">-->
-    <!--<div ng-include="'merchantconfig/panels/debtorcommunications/panel.html'"></div>-->
-    <!--</accordion-group>-->
-    <!--</accordion>-->
-    <div id="mainPanels">
-        <div ng-switch="currentPanel">
-
-            <div ng-switch-when="general">
-                <div ng-include="'merchantconfig/panels/general/panel.html'"></div>
-            </div>
-
-            <div ng-switch-when="addresses">
-                <div ng-include="'merchantconfig/panels/addresses/panel.html'"></div>
-            </div>
-
-            <!--<div ng-switch-when="emailaddresses">-->
-                <!--<div ng-include="'merchantconfig/panels/emailaddresses/panel.html'"></div>-->
-            <!--</div>-->
-
-            <div ng-switch-when="contacts">
-                <div ng-include="'merchantconfig/panels/contacts/panel.html'"></div>
-            </div>
-
-            <div ng-switch-when="administrators">
-                <div ng-include="'merchantconfig/panels/administrators/panel.html'"></div>
-            </div>
-
-            <div ng-switch-when="banking">
-                <div ng-include="'merchantconfig/panels/banking/panel.html'"></div>
-            </div>
-
-            <div ng-switch-when="businessrules">
-                <div ng-include="'merchantconfig/panels/businessrules/panel.html'"></div>
-            </div>
-
-            <div ng-switch-when="debtorcommunications">
-                <div ng-include="'merchantconfig/panels/debtorcommunications/panel.html'"></div>
-            </div>
-
-        </div>
-
-        <button class="btn btn-primary pull-right" style="margin: 20px 20px 20px 0; width: 100px" ng-click="validateAndExportConfig()">Save</button>
-        <button class="btn btn-primary pull-right" style="margin: 20px 20px 20px 0; width: 100px" ng-click="exportConfig()">Save Draft</button>
-        <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0; width: 100px" ng-click="importConfig()">Load</button>
-    </div>
+    <button class="btn btn-primary pull-right" style="margin: 20px 20px 20px 0; width: 100px"
+            ng-click="validateAndExportConfig()">Save
+    </button>
+    <button class="btn btn-primary pull-right" style="margin: 20px 20px 20px 0; width: 100px" ng-click="exportConfig()">
+      Save Draft
+    </button>
+    <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0; width: 100px" ng-click="importConfig()">
+      Load
+    </button>
+  </div>
 
 </div>
 

@@ -27,7 +27,7 @@
                 "abnNumber": null,
                 "general": {
                     "entityType": "PtyLtd",
-                    "industryType": null,
+                    "industryType": "",
                     "merchantName": null,
                     "merchantTradingName": null,
                     "primaryPhoneNumber": null,

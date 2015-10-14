@@ -1,0 +1,29 @@
+div.navbar {
+    border-bottom: solid rgb(49, 120, 186) 3px;
+    padding: 0;
+    border-radius: 0;
+}
+
+div.navbar a {
+    color: rgb(49, 120, 186);
+}
+
+table.cm-table {
+    border-color: rgb(49, 120, 186);
+}
+
+table.cm-table th {
+    background-color: rgb(49, 120, 186);
+}
+
+table.cm-table td {
+    border-color: rgb(49, 120, 186);
+}
+
+#mainPanels > div {
+    border-color: rgb(49, 120, 186);
+}
+
+#mainTabSet > div {
+    background-color: rgb(49, 120, 186);
+}

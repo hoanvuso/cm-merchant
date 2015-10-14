@@ -1,6 +1,6 @@
 #mainTabSet {
     position: absolute;
-    top: 115px;
+    top: 36px;
     left: 20px;
     width: 135px
 }
@@ -25,10 +25,7 @@
 }
 
 #mainPanels {
-    position: absolute;
-    top: 115px;
-    left: 155px;
-    right: 20px;
+
 }
 
 #mainPanels > div {
@@ -40,4 +37,24 @@
     border-bottom-left-radius: 4px;
     border-top-left-radius: 0;
     min-height: 275px;
+}
+
+.main {
+    padding-left: 155px;
+    position: relative;
+}
+
+#mainPanels > h3 {
+    display: block;
+    min-height: 26px;
+}
+
+body > hr {
+    margin-top:0;
+    margin-bottom: -15px;
+    border-top:solid 6px #286090;
+}
+
+.row.abnNumber .col-xs-2{
+    width: 12% !important;
 }

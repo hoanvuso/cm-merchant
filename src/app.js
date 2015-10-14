@@ -35,14 +35,14 @@ angular.module('CmMerchantConfigApp', ['ngRoute',
     .config(function ($routeProvider, $provide, $httpProvider) {
                 JiConfig.baseAppConfig($provide, $httpProvider);
             })
-    .directive('merchantconfigStylesheet', function (referralPartnerConfig) {
+    .directive('merchantconfigStylesheet', function (referralPartnerConfig,skin) {
 
                    return {
                        restrict: 'EA',
                        replace: 'false',
                        template: function () {
                            return "<style>\n" +
-                                  referralPartnerConfig.appskin.stylesheet +
+                             (referralPartnerConfig.appskin.stylesheet || skin.stylesheet) +
                                   "\n</style>";
                        }
                    };
