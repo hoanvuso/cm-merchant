@@ -32,7 +32,7 @@
       if (value.length > 0) {
         merchantConfigService.merchantConfig.banking.settlementAccountBsb = value.join("-");
         if (merchantConfigService.merchantConfig.banking.settlementAccountBsb.length < 7) {
-          $scope.error.bsb = "Abn number must have 11 digits";
+          $scope.error.bsb = "Settlement Account BSB must have 6 digits";
         } else {
           $scope.error.bsb = "";
         }
