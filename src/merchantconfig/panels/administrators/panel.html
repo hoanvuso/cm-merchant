@@ -1,14 +1,15 @@
-<form name="form" ng-controller="GeneralPanelController" class="css-form form-horizontal" ji-form
+<form name="form" ng-controller="AdministratorPanelController" class="css-form form-horizontal" ji-form
       style="margin-top: 30px" novalidate>
   <div ng-repeat="merchantAdministrator in merchantConfigService.merchantConfig.merchantAdministrators"
-       class="form-group" ng-class="{'has-error': form['email' + $index].$invalid}">
+       class="form-group" ng-class="{'has-error': form['email' + $index].$invalid && submitted}">
     <label class="col-sm-4 control-label">Merchant Administrator {{$index + 1}}</label>
 
     <div class="col-sm-8" style="position: relative">
       <div style="padding-right: 60px">
         <input type="email" class="form-control" placeholder="Email" name="email{{$index}}"
-               ng-model="merchantAdministrator.emailAddress">
-        <div class="help-block" ng-if="form['email' + $index].$error.email">Wrong email format</div>
+               ng-model="merchantAdministrator.emailAddress" required>
+        <div class="help-block" ng-if="form['email' + $index].$error.email && submitted">Wrong email format</div>
+        <div class="help-block" ng-if="form['email' + $index].$error.required && submitted ">This input is required</div>
       </div>
 
       <span class="glyphicon glyphicon-minus btn-lg"
