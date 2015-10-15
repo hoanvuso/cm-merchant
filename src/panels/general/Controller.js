@@ -3,42 +3,18 @@
   angular.module('CmMerchantConfigApp')
     .controller('GeneralPanelController', Controller);
 
-  function Controller($scope, merchantConfigService,FileUploader) {
+  function Controller($scope,$rootScope, merchantConfigService,FileUploader) {
     $scope.error = {};
-    if (merchantConfigService.merchantConfig.abnNumber) {
-      var abnNumber = merchantConfigService.merchantConfig.abnNumber.toString();
-      $scope.abnNumber = [
-        abnNumber.substring(0,2),
-        abnNumber.substring(2,5),
-        abnNumber.substring(5,8),
-        abnNumber.substring(8,11)
-      ]
-    } else {
-      $scope.abnNumber = [];
-    }
-
+    $scope.submitted = false;
     if (merchantConfigService.merchantConfig.general.phone) {
       var phone = merchantConfigService.merchantConfig.general.phone.toString();
       $scope.phone = [
-        phone.substring(0,3),
-        phone.substring(3,10)
+        phone.substring(0,2),
+        phone.substring(2,10)
       ];
     } else {
       $scope.phone = [];
     }
-
-    $scope.$watch(function() {
-      return $scope.abnNumber;
-    },function(value) {
-      if (value.length > 0) {
-        merchantConfigService.merchantConfig.abnNumber = value.join("");
-        if (merchantConfigService.merchantConfig.abnNumber.length < 11) {
-          $scope.error.abnNumber = "Abn number must have 11 digits";
-        } else {
-          $scope.error.abnNumber = "";
-        }
-      }
-    },true);
 
     $scope.$watch(function() {
       return $scope.phone;
@@ -50,13 +26,20 @@
         } else {
           $scope.error.phone = "";
         }
-        console.log($scope.error.phone);
+      } else {
+        $scope.error.phone = "Phone number is required";
       }
     },true);
 
     $scope.onlyDigits = function($event) {
       if(isNaN(String.fromCharCode($event.keyCode))){
         $event.preventDefault();
+      }
+    };
+
+    $scope.changeFocus = function() {
+      if ($scope.phone[0] && $scope.phone[0].length >= 2) {
+        angular.element('#phoneNumber').trigger('focus');
       }
     };
 
@@ -81,6 +64,13 @@
         return '|png|'.indexOf(type) !== -1;
       }
     });
+
+    $rootScope.next = function() {
+      $scope.submitted = true;
+      if ($scope.form.$valid) {
+        $rootScope.currentPanel = 'addresses';
+      }
+    };
 
     merchantConfigService.generalController = this;
     this.validate = validate;

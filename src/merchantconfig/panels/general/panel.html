@@ -1,86 +1,95 @@
+<style>
+  .fileUpload {
+    position: relative;
+    overflow: hidden;
+  }
+  .fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+</style>
 <div ng-controller="GeneralPanelController">
 <form name="form" class="css-form form-horizontal" ji-form
       style="margin-top: 30px" novalidate>
 
-  <div class="form-group">
+  <div class="form-group" ng-class="{'has-error': form.merchantName.$invalid && submitted}">
     <label class="col-sm-3 control-label">Legal Name</label>
 
     <div class="col-sm-9">
       <input name="merchantName" type="text" class="form-control" placeholder="Entity Legal Name" required
              ng-model="merchantConfigService.merchantConfig.general.merchantName">
+      <div class="help-block" ng-if="form.merchantName.$error.required && submitted">Legal name is required</div>
     </div>
+
   </div>
-  <div class="form-group">
+  <div class="form-group" ng-class="{'has-error': form.merchantTradingName.$invalid && submitted}">
     <label class="col-sm-3 control-label">Trading Name</label>
 
     <div class="col-sm-9">
-      <input name="merchantTradingName" type="text" class="form-control" placeholder="Entity Trading Name"
+      <input name="merchantTradingName" type="text" class="form-control" placeholder="Entity Trading Name" required
              ng-model="merchantConfigService.merchantConfig.general.merchantTradingName">
 
-      <div
-          ng-show="form.merchantTradingName.$jiHasFocus && form.merchantTradingName.$error.required && !form.merchantTradingName.$pristine"
-          class="error-message" required>Username is required
-      </div>
+      <div class="help-block" ng-if="form.merchantTradingName.$error.required && submitted">Trading name is required</div>
     </div>
   </div>
-  <div class="form-group" ng-class="{'has-error': error.abnNumber}">
+  <div class="form-group" ng-class="{'has-error': form.abnNumber.$invalid && submitted}">
     <label class="col-sm-3 control-label">ABN</label>
 
-    <div class="col-sm-9">
-      <div class="row abnNumber">
-        <div class="col-xs-1">
-          <input type="text" class="form-control" name="abnNumber[0]" maxlength="2" ng-model="abnNumber[0]" ng-keypress="onlyDigits($event)">
-        </div>
-        <div class="col-xs-2">
-          <input type="text" class="form-control" name="abnNumber[1]" maxlength="3"  ng-model="abnNumber[1]" ng-keypress="onlyDigits($event)">
-        </div>
-        <div class="col-xs-2">
-          <input type="text" class="form-control" name="abnNumber[2]" maxlength="3" ng-model="abnNumber[2]" ng-keypress="onlyDigits($event)">
-        </div>
-        <div class="col-xs-2">
-          <input type="text" class="form-control" name="abnNumber[3]" maxlength="3" ng-model="abnNumber[3]" ng-keypress="onlyDigits($event)">
-        </div>
-      </div>
-      <!--<input name="abnNumber" type="text" class="form-control" placeholder="ABN" ng-model="merchantConfigService.merchantConfig.abnNumber">-->
-      <!--<div ng-show="form.abnNumber.$jiHasFocus && form.abnNumber.$error.required && !form.abnNumber.$pristine" class="error-message" required>Username is required</div>-->
-      <div ng-if="error.abnNumber" class="help-block">{{error.abnNumber}}
-      </div>
+    <div class="col-sm-5">
+      <input id="abnNumber" name="abnNumber" type="text" class="form-control"
+             placeholder="ABN"
+             ng-model="merchantConfigService.merchantConfig.abnNumber" required
+             mask='99-999-999-999' clean="true"
+             ng-keypress="onlyDigits($event)">
+      <div ng-if="form.abnNumber.$error.required && submitted" class="help-block">Abn number is required</div>
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" ng-class="{'has-error': form.industryType.$invalid && submitted}">
     <label class="col-sm-3 control-label">Industry Type</label>
 
-    <div class="col-sm-9">
-      <select class="form-control" ng-model="merchantConfigService.merchantConfig.general.industryType">
+    <div class="col-sm-5">
+      <select class="form-control" name="industryType" ng-model="merchantConfigService.merchantConfig.general.industryType" required>
         <option value="" selected>Industry Type</option>
         <option value="0">Type 1</option>
         <option value="1">Type 2</option>
       </select>
+      <div ng-if="form.industryType.$error.required && submitted" class="help-block">Industry Type is required</div>
       <!--<input type="text" class="form-control" placeholder="Industry Type" ng-model="merchantConfigService.merchantConfig.general.industryType">-->
     </div>
   </div>
-  <div class="form-group" ng-class="{'has-error': error.phone}">
+  <div class="form-group" ng-class="{'has-error': error.phone && submitted}">
     <label class="col-sm-3 control-label">Phone</label>
-    <div class="col-sm-9">
+    <div class="col-sm-5">
       <div class="row">
-        <div class="col-xs-2">
-          <input type="text" class="form-control" maxlength="3" placeholder="Area Code" ng-model="phone[0]" ng-keypress="onlyDigits($event)">
+        <div class="col-xs-4">
+          <input type="text" class="form-control" maxlength="2" placeholder="Area Code" ng-model="phone[0]"
+                 ng-keyup="changeFocus()"
+                 ng-keypress="onlyDigits($event)">
         </div>
-        <div class="col-xs-5">
-          <input type="text" class="form-control" maxlength="7" placeholder="Number" ng-model="phone[1]" ng-keypress="onlyDigits($event)">
+        <div class="col-xs-8">
+          <input type="text" class="form-control" id="phoneNumber"
+                 maxlength="8" placeholder="Number" ng-model="phone[1]"
+                 ng-keypress="onlyDigits($event)">
         </div>
       </div>
-      <div ng-if="error.phone" class="help-block">{{error.phone}}</div>
+      <div ng-if="error.phone && submitted" class="help-block">{{error.phone}}</div>
     </div>
 
   </div>
-  <div class="form-group" ng-class="{'has-error': form.mobile.$invalid}">
+  <div class="form-group" ng-class="{'has-error': form.mobile.$invalid && submitted}">
     <label class="col-sm-3 control-label">Mobile</label>
 
-    <div class="col-sm-7">
+    <div class="col-sm-5">
       <input type="text" class="form-control" placeholder="Mobile" name="mobile"
-             ng-model="merchantConfigService.merchantConfig.general.afterHoursPhoneNumber" maxlength="10" minlength="10">
-      <div class="help-block" ng-if="form.mobile.$error.minlength">Mobile number must have 10 digits</div>
+             ng-model="merchantConfigService.merchantConfig.general.afterHoursPhoneNumber" maxlength="10" required>
+      <div class="help-block" ng-if="form.mobile.$error.required && submitted">Mobile number is Required</div>
     </div>
   </div>
   <div class="form-group">
@@ -116,16 +125,20 @@
           </label>
         </div>
         <div ng-if="merchantConfigService.generalAccountingPackage === 'Other'" class="col-xs-9">
-          <div class="form-group">
+          <div class="form-group" ng-class="{'has-error': form.packageName.$invalid && submitted}">
             <label class="control-label col-xs-3">Name</label>
             <div class="col-xs-4">
-              <input type="text" class="form-control" ng-model="merchantConfigService.merchantConfig.general.AccountingPackageDetail.name">
+              <input type="text" class="form-control" name="packageName" required
+                     ng-model="merchantConfigService.merchantConfig.general.AccountingPackageDetail.name">
+              <div class="help-block" ng-if="form.packageName.$error.required && submitted">Package name is required</div>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group" ng-class="{'has-error': form.packageVersion.$invalid && submitted}">
             <label class="control-label col-xs-3">Version</label>
             <div class="col-xs-4">
-              <input type="text" class="form-control" ng-model="merchantConfigService.merchantConfig.general.AccountingPackageDetail.version">
+              <input type="text" class="form-control" name="packageVersion" required
+                     ng-model="merchantConfigService.merchantConfig.general.AccountingPackageDetail.version">
+              <div class="help-block" ng-if="form.packageVersion.$error.required && submitted">Package version is required</div>
             </div>
           </div>
         </div>
@@ -134,28 +147,40 @@
 
     </div>
   </div>
-  <div class="form-group" ng-class="{'has-error': form.email.$invalid}">
+  <div class="form-group" ng-class="{'has-error': form.email.$invalid && submitted}">
     <label class="col-sm-3 control-label">Debtor Emails From Address</label>
 
     <div class="col-sm-9">
       <input name="email" type="email" class="form-control" placeholder='"From" Address for Emails to Debtors'
-             ng-model="merchantConfigService.merchantConfig.emailAddresses.debtorEmailsFromAddress">
-      <div class="help-block" ng-if="form.email.$error.email">Wrong email format</div>
+             ng-model="merchantConfigService.merchantConfig.emailAddresses.debtorEmailsFromAddress" required>
+      <div class="help-block" ng-if="form.email.$error.required && submitted">Debtor Emails From Address is required</div>
+      <div class="help-block" ng-if="form.email.$error.email && submitted">Wrong email format</div>
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" ng-class="{'has-error': form.smsSenderName.$invalid && submitted}">
     <label class="col-sm-3 control-label">SMS sender name</label>
 
-    <div class="col-sm-9">
-      <input name="poBox" type="text" class="form-control" placeholder='Max 9 characters' required
+    <div class="col-sm-5">
+      <input name="smsSenderName" type="text" class="form-control" placeholder='Max 9 characters' required
              ng-model="merchantConfigService.merchantConfig.general.smsSenderName" maxlength="9">
+      <div class="help-block" ng-if="form.smsSenderName.$error.required && submitted">SMS Sender Name is required</div>
     </div>
   </div>
-  <div class="form-group">
-    <div class="col-sm-offset-3 col-sm-9">
-      <input id="upload" type="file" nv-file-select uploader="uploader" accept=".png" style="display:none"/>
-      <button class="btn btn-primary" ng-click="uploadFile()">Upload logo</button>
+  <div class="form-group" ng-class="{'has-error': error.logo}">
+    <div class="col-sm-9 col-sm-offset-3">
+      <div class="fileUpload btn btn-primary">
+        <span>Upload Logo</span>
+        <input type="file" class="upload" nv-file-select uploader="uploader" accept=".png" accept="image/x-png, image/png" custom-on-change="uploadFile" />
+      </div>
+      <div class="help-block" ng-if="error.logo">{{error.logo}}</div>
     </div>
   </div>
 </form>
 </div>
+
+<script>
+  function addDashes(f)
+  {
+    f.value = f.value.slice(0,3)+"-"+f.value.slice(3,6);
+  }
+</script>

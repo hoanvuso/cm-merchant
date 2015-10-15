@@ -3,7 +3,7 @@
   angular.module('CmMerchantConfigApp')
     .controller('IndexController', Controller);
 
-  function Controller($scope, $http, $window, ji, cm, referralPartnerConfig, FileUploader, changePasswordDialog, merchantConfigService) {
+  function Controller($scope,$rootScope, $http, $window, ji, cm, referralPartnerConfig, FileUploader, changePasswordDialog, merchantConfigService) {
 
     $scope.merchantConfigService = merchantConfigService;
     $scope.referralPartnerConfig = referralPartnerConfig;
@@ -19,7 +19,7 @@
     $scope.uploader.onErrorItem = onUploadError;
     $scope.uploader.autoUpload = true;
 
-    $scope.currentPanel = 'general';
+    $rootScope.currentPanel = 'general';
 
     $scope.$watch(function () {
       return $scope.currentPanel
