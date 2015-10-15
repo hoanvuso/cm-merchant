@@ -1,38 +1,37 @@
-<form name="form" ng-controller="BankingPanelController" class="css-form form-horizontal" ji-form style="margin-top: 30px" novalidate>
-  <div class="form-group">
+<form name="form" ng-controller="BankingPanelController" class="css-form form-horizontal" ji-form
+      style="margin-top: 30px" novalidate>
+  <div class="form-group" ng-class="{'has-error': form.settlementAccountName.$invalid && submitted}">
     <label class="col-sm-4 control-label">Settlement Account Name</label>
+
     <div class="col-sm-8">
-      <input name="settlementAccountName" type="text" class="form-control" placeholder="Settlement Account Name" required ng-model="merchantConfigService.merchantConfig.banking.settlementAccountName">
+      <input name="settlementAccountName" type="text" class="form-control" placeholder="Settlement Account Name"
+             required ng-model="merchantConfigService.merchantConfig.banking.settlementAccountName">
+      <div ng-if="form.settlementAccountName.$error.required && submitted" class="help-block">Settlement Account Name is required</div>
     </div>
   </div>
-  <div class="form-group" ng-class="{'has-error': error.bsb}">
+  <div class="form-group" ng-class="{'has-error': form.settlementAccountBsb.$invalid && submitted}">
     <label class="col-sm-4 control-label">Settlement Account BSB</label>
+
     <div class="col-sm-8">
-      <div class="row">
-        <div class="col-sm-3">
-          <input name="settlementAccountBsb" type="text" class="form-control" placeholder="Enter first 3 digits" required
-                 maxlength="3"
-                 ng-model="bsb[0]"
-                 ng-keypress="onlyDigits($event)">
-        </div>
-        <div class="col-sm-3">
-          <input name="settlementAccountBsb" type="text" class="form-control" placeholder="Enter last 3 digits" required
-                 ng-model="bsb[1]"
-                 maxlength="3"
-                 ng-keypress="onlyDigits($event)">
-        </div>
-      </div>
-      <div ng-if="error.bsb" class="help-block">{{error.bsb}}</div>
+
+      <input name="settlementAccountBsb" type="text" class="form-control" placeholder="Enter 6 digits" required
+             maxlength="6" ng-model="merchantConfigService.merchantConfig.banking.settlementAccountBsb"
+             mask='999-999' clean="true"
+             ng-keypress="onlyDigits($event)">
+
+      <div ng-if=" form.settlementAccountBsb.$error.required && submitted" class="help-block">Settlement Account BSB is required</div>
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" ng-class="{'has-error': form.settlementAccountNumber.$invalid && submitted}">
     <label class="col-sm-4 control-label">Settlement Account Number</label>
+
     <div class="col-sm-8">
       <input name="settlementAccountNumber" type="text" class="form-control"
              placeholder="Settlement Account Number"
              maxlength="9"
              ng-keypress="onlyDigits($event)"
              required ng-model="merchantConfigService.merchantConfig.banking.settlementAccountNumber">
+      <div ng-if=" form.settlementAccountNumber.$error.required && submitted" class="help-block">Settlement Account Number is required</div>
     </div>
   </div>
 </form>

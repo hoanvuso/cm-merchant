@@ -3,9 +3,10 @@
   angular.module('CmMerchantConfigApp')
     .controller('BankingPanelController', Controller);
 
-  function Controller($scope, merchantConfigService) {
+  function Controller($scope,$rootScope, merchantConfigService) {
     $scope.error = {};
-    
+    $scope.submitted = false;
+
     $scope.onlyDigits = function($event) {
       if(isNaN(String.fromCharCode($event.keyCode))){
         $event.preventDefault();
@@ -25,6 +26,17 @@
     } else {
       $scope.bsb = [];
     }
+
+    $rootScope.next = function() {
+      $scope.submitted = true;
+      if ($scope.form.$valid) {
+        $rootScope.currentPanel = 'businessrules';
+      }
+    };
+    $rootScope.back = function() {
+      $rootScope.currentPanel = 'administrators';
+      console.log($rootScope.currentPanel);
+    };
 
     $scope.$watch(function() {
       return $scope.bsb;

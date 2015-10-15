@@ -22,7 +22,7 @@
     $rootScope.currentPanel = 'general';
 
     $scope.$watch(function () {
-      return $scope.currentPanel
+      return $rootScope.currentPanel
     }, function (value) {
       if (value !== 'general' && merchantConfigService.merchantConfig.general.merchantTradingName) {
         $scope.tradingName = merchantConfigService.merchantConfig.general.merchantTradingName;

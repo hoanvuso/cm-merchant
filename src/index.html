@@ -48,23 +48,23 @@
     <div class="clearfix"></div>
     <div class="main">      
       <div id="mainTabSet">
-        <div class="btn" ng-click="currentPanel = 'general'" ng-class="{selected: currentPanel === 'general'}">General</div>
-        <div class="btn" ng-click="currentPanel = 'addresses'" ng-class="{selected: currentPanel === 'addresses'}">
+        <div class="btn" ng-click="$root.currentPanel = 'general'" ng-class="{selected: currentPanel === 'general'}">General</div>
+        <div class="btn" ng-click="$root.currentPanel = 'addresses'" ng-class="{selected: currentPanel === 'addresses'}">
           Addresses
         </div>
         <!--<div class="btn" ng-click="currentPanel = 'emailaddresses'" ng-class="{selected: currentPanel === 'emailaddresses'}">Email Addresses</div>-->
-        <div class="btn" ng-click="currentPanel = 'contacts'" ng-class="{selected: currentPanel === 'contacts'}">Contacts
+        <div class="btn" ng-click="$root.currentPanel = 'contacts'" ng-class="{selected: currentPanel === 'contacts'}">Contacts
         </div>
-        <div class="btn" ng-click="currentPanel = 'administrators'"
+        <div class="btn" ng-click="$root.currentPanel = 'administrators'"
              ng-class="{selected: currentPanel === 'administrators'}">Administrators
         </div>
-        <div class="btn" ng-click="currentPanel = 'banking'" ng-class="{selected: currentPanel === 'banking'}">Banking
+        <div class="btn" ng-click="$root.currentPanel = 'banking'" ng-class="{selected: currentPanel === 'banking'}">Banking
           Details
         </div>
-        <div class="btn" ng-click="currentPanel = 'businessrules'" ng-class="{selected: currentPanel === 'businessrules'}">
+        <div class="btn" ng-click="$root.currentPanel = 'businessrules'" ng-class="{selected: currentPanel === 'businessrules'}">
           Business Rules
         </div>
-        <div class="btn" ng-click="currentPanel = 'debtorcommunications'"
+        <div class="btn" ng-click="$root.currentPanel = 'debtorcommunications'"
              ng-class="{selected: currentPanel === 'debtorcommunications'}">Communications
         </div>
       </div>
@@ -141,7 +141,7 @@
         <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0; width: 100px" ng-click="importConfig()">
           Load
         </button>-->
-        <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0;" ng-click="next(form)">
+        <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0;" ng-click="next()">
           Next
         </button>
         <button class="btn btn-primary pull-right" style="margin: 20px 20px 20px 0;" ng-click="validateAndExportConfig()">
