@@ -22,7 +22,7 @@
       $scope.phone = [
         phone.substring(0,3),
         phone.substring(3,10)
-      ]
+      ];
     } else {
       $scope.phone = [];
     }
@@ -37,7 +37,6 @@
         } else {
           $scope.error.abnNumber = "";
         }
-        console.log($scope.error.abnNumber);
       }
     },true);
 
@@ -112,8 +111,20 @@
 
     this.selectEntityType = function (entityType) {
       var asdfs = 3;
-    }
+    };
 
+    $scope.uploadFile = function(event){      
+      var files = event.target.files;
+      var file = files[0];
+      var ext = file.name.split('.').pop();
+      if(ext !== 'png' && ext !== 'PNG'){ 
+        $scope.error.logo = 'Accept png only';
+         
+      }else{
+        $scope.error.logo = '';
+      }
+      $scope.$apply();
+    };
   }
 
 })();

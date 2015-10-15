@@ -34,7 +34,9 @@
 
         this.selectEntityType = function (entityType) {
             var asdfs = 3;
-        }
+        };
+        
+        
 
     }
 
