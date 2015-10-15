@@ -2,7 +2,7 @@
   angular.module('CmMerchantConfigApp')
     .controller('ContactPanelController', Controller);
 
-  function Controller($scope, merchantConfigService) {
+  function Controller($scope,$rootScope, merchantConfigService) {
     $scope.error = {};
 
     if (merchantConfigService.merchantConfig.contacts.keyCommercial.phone) {
@@ -42,6 +42,24 @@
       }
     };
 
+    $scope.changeFocusKeyCommercial = function() {
+      if ($scope.keyCommercialPhone[0] && $scope.keyCommercialPhone[0].length >= 2) {
+        angular.element('#keyCommercialPhone').trigger('focus');
+      }
+    };
+
+    $scope.changeFocusIt = function() {
+      if ($scope.itPhone[0] && $scope.itPhone[0].length >= 2) {
+        angular.element('#itPhone').trigger('focus');
+      }
+    };
+
+    $scope.changeFocusOneBoxBilling = function() {
+      if ($scope.oneBoxBillingPhone[0] && $scope.oneBoxBillingPhone[0].length >= 2) {
+        angular.element('#oneBoxBillingPhone').trigger('focus');
+      }
+    };
+
     $scope.$watch(function() {
       return $scope.keyCommercialPhone;
     },function(value) {
@@ -52,6 +70,8 @@
         } else {
           $scope.error.keyCommercialPhone = "";
         }
+      } else {
+        $scope.error.keyCommercialPhone = "This input is required";
       }
     },true);
 
@@ -65,7 +85,8 @@
         } else {
           $scope.error.itPhone = "";
         }
-        console.log($scope.error.phone);
+      } else {
+        $scope.error.itPhone = "This input is required";
       }
     },true);
 
@@ -79,8 +100,19 @@
         } else {
           $scope.error.oneBoxBillingPhone = "";
         }
-        console.log($scope.error.phone);
+      } else {
+        $scope.error.oneBoxBillingPhone = "This input is required";
       }
     },true);
+
+    $rootScope.next = function() {
+      $scope.submitted = true;
+      if ($scope.form.$valid) {
+        $rootScope.currentPanel = 'administrators';
+      }
+    };
+    $rootScope.back = function() {
+      $rootScope.currentPanel = 'addresses';
+    };
   }
 })();
