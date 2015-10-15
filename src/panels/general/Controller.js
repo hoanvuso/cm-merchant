@@ -3,7 +3,7 @@
   angular.module('CmMerchantConfigApp')
     .controller('GeneralPanelController', Controller);
 
-  function Controller($scope, merchantConfigService) {
+  function Controller($scope, merchantConfigService,FileUploader) {
     $scope.error = {};
     if (merchantConfigService.merchantConfig.abnNumber) {
       var abnNumber = merchantConfigService.merchantConfig.abnNumber.toString();
@@ -17,8 +17,8 @@
       $scope.abnNumber = [];
     }
 
-    if (merchantConfigService.merchantConfig.phone) {
-      var phone = merchantConfigService.merchantConfig.phone.toString();
+    if (merchantConfigService.merchantConfig.general.phone) {
+      var phone = merchantConfigService.merchantConfig.general.phone.toString();
       $scope.phone = [
         phone.substring(0,3),
         phone.substring(3,10)
@@ -45,8 +45,8 @@
       return $scope.phone;
     },function(value) {
       if (value.length > 0) {
-        merchantConfigService.merchantConfig.phone = value.join("");
-        if (merchantConfigService.merchantConfig.phone.length < 10) {
+        merchantConfigService.merchantConfig.general.phone = value.join("");
+        if (merchantConfigService.merchantConfig.general.phone.length < 10) {
           $scope.error.phone = "Phone number must have 10 digits";
         } else {
           $scope.error.phone = "";
@@ -59,7 +59,30 @@
       if(isNaN(String.fromCharCode($event.keyCode))){
         $event.preventDefault();
       }
-    }
+    };
+
+    $scope.uploadFile = function() {
+      angular.element('#upload').trigger('click');
+    };
+
+    var uploader = $scope.uploader = new FileUploader({
+      url: 'iapi/uploads',
+      onAfterAddingFile : function(item) {
+        item.upload();
+      },
+      onCompleteItem: function(item,res) {
+        merchantConfigService.merchantConfig.general.logo = res.fileUrl
+      }
+    });
+
+    uploader.filters.push({
+      name: 'imageFilter',
+      fn: function (item) {
+        var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+        return '|png|'.indexOf(type) !== -1;
+      }
+    });
+
     merchantConfigService.generalController = this;
     this.validate = validate;
 

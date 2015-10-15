@@ -1,18 +1,111 @@
-<form name="form" ng-controller="GeneralPanelController" class="css-form form-horizontal" ji-form style="margin-top: 30px" novalidate>
-    <div class="form-group">
-        <label class="col-sm-3 control-label">IT Administrator</label>
-        <div class="col-sm-9">
-            <input name="itAdminName" type="text" class="form-control" placeholder="Name" required ng-model="merchantConfigService.merchantConfig.itAdmin.name">
-            <input name="itAdminEmail" type="email" class="form-control" placeholder="Email" required ng-model="merchantConfigService.merchantConfig.itAdmin.email" style="margin-top: 10px">
-            <input name="itAdminPhone" type="text" class="form-control" placeholder="Phone" required ng-model="merchantConfigService.merchantConfig.itAdmin.phone" style="margin-top: 10px">
+<form name="form" ng-controller="ContactPanelController" class="css-form form-horizontal contact-form" ji-form
+      style="margin-top: 30px" novalidate>
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Key Commercial Contact</label>
+
+    <div class="col-sm-8">
+      <div class="row">
+        <div class="col-xs-7">
+          <input name="keyCommercialName" type="text" class="form-control" placeholder="Name"
+             ng-model="merchantConfigService.merchantConfig.contacts.keyCommercial.name">
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-3 control-label">CM Billing</label>
-        <div class="col-sm-9">
-            <input name="cmBillingName" type="text" class="form-control" placeholder="Name" required ng-model="merchantConfigService.merchantConfig.cmBilling.name">
-            <input name="cmBillingEmail" type="email" class="form-control" placeholder="Email" required ng-model="merchantConfigService.merchantConfig.cmBilling.email" style="margin-top: 10px">
-            <input name="cmBillingPhone" type="text" class="form-control" placeholder="Phone" required ng-model="merchantConfigService.merchantConfig.cmBilling.phone" style="margin-top: 10px">
+      </div>
+      <div class="row" ng-class="{'has-error': form.keyCommercialEmail.$invalid}">
+        <div class="col-xs-7">
+          <input name="keyCommercialEmail" type="email" class="form-control" placeholder="Email"
+             ng-model="merchantConfigService.merchantConfig.contacts.keyCommercial.email" style="margin-top: 10px">
         </div>
+        <div class="help-block col-xs-5" ng-if="form.keyCommercialEmail.$error.email">Wrong email format</div>
+      </div>
+      <div class="row" ng-class="{'has-error': error.keyCommercialPhone}">
+        <div class="col-xs-2">
+          <input type="text" class="form-control" maxlength="3" placeholder="Area Code" ng-model="keyCommercialPhone[0]"
+                 ng-keypress="onlyDigits($event)" style="margin-top: 10px">
+        </div>
+        <div class="col-xs-5">
+          <input type="text" class="form-control" maxlength="7" placeholder="Phone Number" ng-model="keyCommercialPhone[1]"
+                 ng-keypress="onlyDigits($event)" style="margin-top: 10px">
+        </div>
+        <div class="help-block col-xs-5" ng-if="error.keyCommercialPhone">{{error.keyCommercialPhone}}</div>
+      </div>
+      <div class="row" ng-class="{'has-error': form.keyCommercialMobile.$invalid}">
+        <div class="col-xs-7">
+          <input type="text" class="form-control" placeholder="Mobile" name="keyCommercialMobile" ng-keypress="onlyDigits($event)"
+             ng-model="merchantConfigService.merchantConfig.contacts.keyCommercial.mobile" maxlength="10" style="margin-top: 10px"
+             minlength="10">
+        </div>
+        <div class="help-block col-xs-5" ng-if="form.keyCommercialMobile.$error.minlength">Mobile number must have 10 digits</div>
+      </div>
     </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">IT Contact</label>
+
+    <div class="col-sm-8">
+      <div class="row">
+        <div class="col-xs-7">
+          <input name="itName" type="text" class="form-control" placeholder="Name"
+               ng-model="merchantConfigService.merchantConfig.contacts.it.name">
+        </div>
+      </div>
+      <div class="row" ng-class="{'has-error': form.itEmail.$invalid}">
+        <div class="col-xs-7">
+          <input name="itEmail" type="email" class="form-control" placeholder="Email"
+               ng-model="merchantConfigService.merchantConfig.contacts.it.email" style="margin-top: 10px">
+        </div>
+        <div class="help-block col-xs-5" ng-if="form.itEmail.$error.email">Wrong email format</div>
+      </div>
+      <div class="row" ng-class="{'has-error': error.itPhone}">
+        <div class="col-xs-2">
+          <input type="text" class="form-control" maxlength="3" placeholder="Area Code" ng-model="itPhone[0]"
+                 ng-keypress="onlyDigits($event)" style="margin-top: 10px">
+        </div>
+        <div class="col-xs-5">
+          <input type="text" class="form-control" maxlength="7" placeholder="Phone Number" ng-model="itPhone[1]"
+                 ng-keypress="onlyDigits($event)" style="margin-top: 10px">
+        </div>
+        <div class="help-block col-xs-5" ng-if="error.itPhone">{{error.itPhone}}</div>
+      </div>
+      <div class="row" ng-class="{'has-error': form.itMobile.$invalid}">
+        <div class="col-xs-7">
+          <input type="text" class="form-control" placeholder="Mobile" name="itMobile" ng-keypress="onlyDigits($event)"
+               ng-model="merchantConfigService.merchantConfig.contacts.it.mobile" maxlength="10"
+               minlength="10" style="margin-top: 10px">
+        </div>
+        <div class="help-block col-xs-5" ng-if="form.itMobile.$error.minlength">Mobile number must have 10 digits</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">OneBox Billing Contact</label>
+
+    <div class="col-sm-8">
+      <div class="row">
+        <div class="col-xs-7">
+          <input name="oneBoxBillingName" type="text" class="form-control" placeholder="Name"
+               ng-model="merchantConfigService.merchantConfig.contacts.oneBoxBilling.name">
+        </div>
+      </div>
+      <div class="row" ng-class="{'has-error': form.oneBoxBillingEmail.$invalid}">
+        <div class="col-xs-7">
+          <input name="oneBoxBillingEmail" type="email" class="form-control" placeholder="Email"
+               ng-model="merchantConfigService.merchantConfig.contacts.oneBoxBilling.email" style="margin-top: 10px">
+        </div>
+        <div class="help-block col-xs-5" ng-if="form.oneBoxBillingEmail.$error.email">Wrong email format</div>
+      </div>
+      <div class="row"  ng-class="{'has-error': error.oneBoxBillingPhone}">
+        <div class="col-xs-2">
+          <input type="text" class="form-control" maxlength="3" placeholder="Area Code" ng-model="oneBoxBillingPhone[0]"
+                 ng-keypress="onlyDigits($event)" style="margin-top: 10px">
+        </div>
+        <div class="col-xs-5">
+          <input type="text" class="form-control" maxlength="7" placeholder="Phone Number" ng-model="oneBoxBillingPhone[1]"
+                 ng-keypress="onlyDigits($event)" style="margin-top: 10px">
+        </div>
+        <div class="help-block col-xs-5" ng-if="error.oneBoxBillingPhone ">{{error.keyCommercialPhone}}</div>
+      </div>
+    </div>
+  </div>
 </form>

@@ -1,20 +1,28 @@
-<form name="form" ng-controller="GeneralPanelController" class="css-form form-horizontal" ji-form style="margin-top: 30px" novalidate>
-    <div ng-repeat="merchantAdministrator in merchantConfigService.merchantConfig.merchantAdministrators" class="form-group">
-        <label class="col-sm-4 control-label">Merchant Administrator {{$index + 1}}</label>
-        <div class="col-sm-8" style="position: relative">
-            <!--<input type="text" class="form-control" placeholder="Name" required ng-model="merchantAdministrator.name">-->
-            <div style="padding-right: 40px">
-                <input type="email" class="form-control" placeholder="Email" required ng-model="merchantAdministrator.emailAddress">
-            </div>
-            <span class="glyphicon glyphicon-minus btn-lg" style="position: absolute; right: 10px; height: 34px; padding-top: 6px; cursor: pointer" ng-click="merchantConfigService.merchantConfig.merchantAdministrators.splice($index, 1)"></span>
-            <div ng-show="form.merchantTradingName.$jiHasFocus && form.merchantTradingName.$error.required && !form.merchantTradingName.$pristine" class="error-message" required>Username is required</div>
-            <!--<input type="text" class="form-control" placeholder="Phone" required ng-model="merchantAdministrator.phone" style="margin-top: 10px">-->
-        </div>
+<form name="form" ng-controller="GeneralPanelController" class="css-form form-horizontal" ji-form
+      style="margin-top: 30px" novalidate>
+  <div ng-repeat="merchantAdministrator in merchantConfigService.merchantConfig.merchantAdministrators"
+       class="form-group" ng-class="{'has-error': form['email' + $index].$invalid}">
+    <label class="col-sm-4 control-label">Merchant Administrator {{$index + 1}}</label>
+
+    <div class="col-sm-8" style="position: relative">
+      <div style="padding-right: 60px">
+        <input type="email" class="form-control" placeholder="Email" name="email{{$index}}"
+               ng-model="merchantAdministrator.emailAddress">
+        <div class="help-block" ng-if="form['email' + $index].$error.email">Wrong email format</div>
+      </div>
+
+      <span class="glyphicon glyphicon-minus btn-lg"
+            style="position: absolute; right: 10px; height: 34px; padding-top: 6px; cursor: pointer"
+            ng-click="merchantConfigService.merchantConfig.merchantAdministrators.splice($index, 1)"></span>
     </div>
-    <div class="form-group">
-        <label class="col-sm-4 control-label"></label>
-        <div class="col-sm-8" style="position: relative" style="background-color: green">
-            <span class="glyphicon glyphicon-plus  btn-lg" style="position: absolute; right: 10px; height: 34px; padding-top: 6px; cursor: pointer" ng-click="merchantConfigService.merchantConfig.merchantAdministrators.push({'emailAddress': null,'custom1': null, 'custom2': null, 'custom3': null, 'custom4': null, 'custom5': null})"></span>
-        </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-4 control-label"></label>
+
+    <div class="col-sm-8" style="position: relative" style="background-color: green">
+      <span class="glyphicon glyphicon-plus  btn-lg"
+            style="position: absolute; right: 10px; height: 34px; padding-top: 6px; cursor: pointer"
+            ng-click="merchantConfigService.merchantConfig.merchantAdministrators.push({'emailAddress': null,'custom1': null, 'custom2': null, 'custom3': null, 'custom4': null, 'custom5': null})"></span>
     </div>
+  </div>
 </form>

@@ -58,3 +58,8 @@ body > hr {
 .row.abnNumber .col-xs-2{
     width: 12% !important;
 }
+
+.contact-form .help-block{
+    margin-bottom: 0;
+    margin-top: 15px;
+}
