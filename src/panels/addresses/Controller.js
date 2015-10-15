@@ -3,7 +3,8 @@
   angular.module('CmMerchantConfigApp')
     .controller('AddressesPanelController', Controller);
 
-  function Controller($scope, merchantConfigService) {
+  function Controller($scope,$rootScope, merchantConfigService) {
+    $scope.submitted = false;
     $scope.states = [
       {
         name: "state 1",
@@ -16,8 +17,12 @@
       {
         name: "state 3",
         value: '2'
-      },
-    ]
+      }
+    ];
+
+    $rootScope.next = function() {
+    };
+
     merchantConfigService.addressesController = this;
     this.validate = validate;
     $scope.validate = validate;

@@ -1,126 +1,162 @@
-<form name="form" ng-controller="BusinessRulesPanelController" class="css-form form-horizontal" ji-form style="margin-top: 30px" novalidate>
+<form name="form" ng-controller="BusinessRulesPanelController" class="css-form form-horizontal" ji-form
+      style="margin-top: 30px" novalidate>
 
-    <div class="form-group" style="margin-bottom: 0">
-        <label class="col-sm-3 control-label">Discount for Early Payment</label>
-        <div class="col-sm-9">
-            <input name="discountForEarlyPayment" type="checkbox" ng-model="discountForEarlyPayment" ng-click="onDiscountForEarlyPaymentChange()" style="height: 25px;width: 25px">
-        </div>
+  <div class="form-group" style="margin-bottom: 0">
+    <label class="col-sm-3 control-label">Discount for Early Payment</label>
+
+    <div class="col-sm-9">
+      <input name="discountForEarlyPayment" type="checkbox" ng-model="discountForEarlyPayment"
+             ng-click="onDiscountForEarlyPaymentChange()" style="height: 25px;width: 25px">
     </div>
-    <div ng-if="discountForEarlyPayment">
-        <div class="form-group">
-            <label class="col-sm-3 control-label"></label>
-            <label class="col-sm-4 control-label" style="text-align: left">EPD Cut-off (days){{zac}}
-            </label>
-            <div class="col-sm-5">
-                <input name="earlyPaymentDays" type="text" class="form-control" placeholder="EPD Cut-off (days)" required ng-model="merchantConfigService.merchantConfig.discounts.earlyPaymentDays">
-            </div>
+  </div>
+  <div ng-if="discountForEarlyPayment">
+    <div class="form-group">
+      <label class="col-sm-offset-3 col-sm-2 control-label" style="text-align: left">EPD Cut-off (days){{zac}}
+      </label>
+
+      <div class="col-sm-5">
+        <input name="earlyPaymentDays" type="text" class="form-control" placeholder="Early payment discount available until X days" required
+               ng-model="merchantConfigService.merchantConfig.discounts.earlyPaymentDays">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-offset-3 col-sm-2 control-label" style="text-align: left">Invoice Minimum Amount
+      </label>
+
+      <div class="col-sm-5">
+        <input name="earlyPaymentDiscountInvoiceMin" type="text" class="form-control"
+               placeholder="Minimum Invoice Amount" required
+               ng-model="merchantConfigService.merchantConfig.discounts.earlyPaymentDiscountInvoiceMin">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-offset-3 col-sm-2 control-label" style="text-align: left">Discount</label>
+
+      <div class="col-sm-5">
+        <div class="col-sm-7" style="padding-left: 0">
+          <input name="earlyPaymentDiscountAmount" type="text" class="form-control" placeholder="Discount - Fixed Amount"
+               required ng-model="merchantConfigService.merchantConfig.discounts.earlyPaymentDiscountAmount">
         </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label"></label>
-            <label class="col-sm-4 control-label" style="text-align: left">Invoice Minimum Amount
-            </label>
-            <div class="col-sm-5">
-                <input name="earlyPaymentDiscountInvoiceMin" type="text" class="form-control" placeholder="Invoice Minimum Amount" required ng-model="merchantConfigService.merchantConfig.discounts.earlyPaymentDiscountInvoiceMin">
-            </div>
+        <div class="col-sm-5">
+          <select class="form-control">
+            <option value="fixed">$ (Fixed)</option>
+            <option value="percentage">% (Percentage)</option>
+          </select>
         </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label"></label>
-            <label class="col-sm-4 control-label" style="text-align: left">Discount - Fixed Amount
-            </label>
-            <div class="col-sm-5">
-                <input name="earlyPaymentDiscountAmount" type="text" class="form-control" placeholder="Discount - Fixed Amount" required ng-model="merchantConfigService.merchantConfig.discounts.earlyPaymentDiscountAmount">
-            </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group" style="margin-top: 40px; margin-bottom: 0">
+    <label class="col-sm-3 control-label">Universally available payment terms</label>
+
+    <div class="col-sm-9">
+      <input name="universallyAvailablePaymentTerms" type="checkbox"
+             ng-model="merchantConfigService.universallyAvailablePaymentTermsSelected"
+             ng-click="onUniversallyAvailablePaymentTerms()" style="height: 25px;width: 25px">
+    </div>
+  </div>
+  <div ng-if="merchantConfigService.universallyAvailablePaymentTerms">
+    <div class="form-group">
+      <label class="col-sm-offset-3 col-sm-2 control-label" style="text-align: left">Term Duration</label>
+
+      <div class="col-sm-5">
+        <div class="col-sm-7" style="padding-left: 0">
+          <input name="earlyPaymentDiscountAmount" type="text" class="form-control" placeholder="No. weeks / months"
+                 required ng-model="merchantConfigService.merchantConfig.discounts.earlyPaymentDiscountAmount">
         </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label"></label>
-            <label class="col-sm-4 control-label" style="text-align: left">Discount - Percentage
-            </label>
-            <div class="col-sm-5">
-                <input name="earlyPaymentDiscountRate" type="text" class="form-control" placeholder="Discount - Percentage" required ng-model="merchantConfigService.merchantConfig.discounts.earlyPaymentDiscountRate">
-            </div>
+        <div class="col-sm-5">
+          <select class="form-control">
+            <option value="week">Week(s)</option>
+            <option value="month">Month(s)</option>
+          </select>
         </div>
+      </div>
     </div>
 
-    <div class="form-group" style="margin-top: 40px; margin-bottom: 0">
-        <label class="col-sm-3 control-label">Universally available payment terms</label>
-        <div class="col-sm-9">
-            <input name="universallyAvailablePaymentTerms" type="checkbox" ng-model="merchantConfigService.universallyAvailablePaymentTermsSelected" ng-click="onUniversallyAvailablePaymentTerms()" style="height: 25px;width: 25px">
-        </div>
-    </div>
-    <div ng-if="merchantConfigService.universallyAvailablePaymentTerms">
-        <div class="form-group">
-            <label class="col-sm-3 control-label"></label>
-            <label class="col-sm-4 control-label" style="text-align: left">Term Duration (months)
-            </label>
-            <div class="col-sm-5">
-                <input type="text" class="form-control" placeholder="Term Duration (months)" required ng-model="merchantConfigService.universallyAvailablePaymentTerms.termDuration" ng-change="updateUniversallyAvailablePaymentTerms()">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label"></label>
-            <label class="col-sm-4 control-label" style="text-align: left">Payment Frequency
-            </label>
-            <div class="col-sm-5">
-                <input type="text" class="form-control" placeholder="Payment Frequency" required ng-model="merchantConfigService.universallyAvailablePaymentTerms.paymentInterval" ng-change="updateUniversallyAvailablePaymentTerms()">
-            </div>
-        </div>
-    </div>
+    <div class="form-group">
+      <label class="col-sm-offset-3 col-sm-2 control-label" style="text-align: left">Payment frequency</label>
 
-    <div class="form-group" style="margin-top: 40px; margin-bottom: 0">
-        <label class="col-sm-3 control-label">Debtor Specific Payment Terms</label>
-        <div class="col-sm-9">
-            <input type="checkbox" ng-model="merchantConfigService.merchantConfig.offersSpecialPaymentTerms" style="height: 25px;width: 25px">
+      <div class="col-sm-5">
+        <div class="col-sm-7" style="padding-left: 0">
+          <input name="earlyPaymentDiscountAmount" type="text" class="form-control" placeholder="No. weeks / months"
+                 required ng-model="merchantConfigService.merchantConfig.discounts.earlyPaymentDiscountAmount">
         </div>
+        <div class="col-sm-5">
+          <select class="form-control">
+            <option value="week">Week(s)</option>
+            <option value="month">Month(s)</option>
+          </select>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="form-group" style="margin-top: 40px; margin-bottom: 0">
-        <label class="col-sm-3 control-label">Debtor Surcharges</label>
-        <div class="col-sm-9">
-            <input name="debtorSurcharges" type="checkbox" ng-model="merchantConfigService.debtorSurchargesSelected" style="height: 25px;width: 25px" ng-click="onDebtorSurchargesChange()">
-        </div>
+  <div class="form-group" style="margin-top: 40px; margin-bottom: 0">
+    <label class="col-sm-3 control-label">Debtor Specific Payment Terms</label>
+
+    <div class="col-sm-9">
+      <input type="checkbox" ng-model="merchantConfigService.merchantConfig.offersSpecialPaymentTerms"
+             style="height: 25px;width: 25px">
     </div>
-    <div ng-if="merchantConfigService.debtorSurchargesSelected">
-        <div class="form-group">
-            <label class="col-sm-3 control-label"></label>
-            <label class="col-sm-5 control-label" style="text-align: left">Direct Debit Charge (fixed amount)
-            </label>
-            <div class="col-sm-4">
-                <input type="text" ji-currency-input class="form-control" placeholder="Direct Debit" required ng-model="merchantConfigService.merchantConfig.fees.directDebitChargeToDebtor">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label"></label>
-            <label class="col-sm-5 control-label" style="text-align: left">Visa Rate (percentage)
-            </label>
-            <div class="col-sm-4">
-                <input type="text" ji-percentage-input decimalPlaces="4" class="form-control" placeholder="Visa" required ng-model="merchantConfigService.merchantConfig.fees.visaRateToDebtor">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label"></label>
-            <label class="col-sm-5 control-label" style="text-align: left">Mastercard Rate (percentage)
-            </label>
-            <div class="col-sm-4">
-                <input type="text" ji-percentage-input decimalPlaces="4" class="form-control" placeholder="Mastercard" required ng-model="merchantConfigService.merchantConfig.fees.mastercardRateToDebtor">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label"></label>
-            <label class="col-sm-5 control-label" style="text-align: left">American Express Rate (percentage)
-            </label>
-            <div class="col-sm-4">
-                <input type="text" ji-percentage-input decimalPlaces="4" class="form-control" placeholder="American Express" required ng-model="merchantConfigService.merchantConfig.fees.amexRateToDebtor">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label"></label>
-            <label class="col-sm-5 control-label" style="text-align: left">Diners Club Rate (percentage)
-            </label>
-            <div class="col-sm-4">
-                <input type="text" ji-percentage-input decimalPlaces="4" class="form-control" placeholder="Diners Club" required ng-model="merchantConfigService.merchantConfig.fees.dinersRateToDebtor">
-            </div>
-        </div>
+  </div>
+
+  <div class="form-group" style="margin-top: 40px; margin-bottom: 0">
+    <label class="col-sm-3 control-label">Debtor Surcharges</label>
+
+    <div class="col-sm-9">
+      <input name="debtorSurcharges" type="checkbox" ng-model="merchantConfigService.debtorSurchargesSelected"
+             style="height: 25px;width: 25px" ng-click="onDebtorSurchargesChange()">
     </div>
+  </div>
+  <div ng-if="merchantConfigService.debtorSurchargesSelected">
+    <div class="form-group">
+      <label class="col-sm-offset-3 col-sm-2 control-label" style="text-align: left">Nominated Back A/C Charge
+      </label>
+
+      <div class="col-sm-4">
+        <input type="text" ji-currency-input class="form-control" placeholder="Nominated Back A/C Charge" required
+               ng-model="merchantConfigService.merchantConfig.fees.directDebitChargeToDebtor">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-offset-3 col-sm-2 control-label" style="text-align: left">Visa Rate
+      </label>
+
+      <div class="col-sm-4">
+        <input type="text" ji-percentage-input decimalPlaces="4" class="form-control" placeholder="Visa" required
+               ng-model="merchantConfigService.merchantConfig.fees.visaRateToDebtor">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-offset-3 col-sm-2 control-label" style="text-align: left">Mastercard Rate
+      </label>
+
+      <div class="col-sm-4">
+        <input type="text" ji-percentage-input decimalPlaces="4" class="form-control" placeholder="Mastercard" required
+               ng-model="merchantConfigService.merchantConfig.fees.mastercardRateToDebtor">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-offset-3 col-sm-2 control-label" style="text-align: left">American Express Rate
+      </label>
+
+      <div class="col-sm-4">
+        <input type="text" ji-percentage-input decimalPlaces="4" class="form-control" placeholder="American Express"
+               required ng-model="merchantConfigService.merchantConfig.fees.amexRateToDebtor">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-offset-3 col-sm-2 control-label" style="text-align: left">Diners Club Rate
+      </label>
+
+      <div class="col-sm-4">
+        <input type="text" ji-percentage-input decimalPlaces="4" class="form-control" placeholder="Diners Club" required
+               ng-model="merchantConfigService.merchantConfig.fees.dinersRateToDebtor">
+      </div>
+    </div>
+  </div>
 
 </form>
+
 <!--<pre>{{merchantConfigService.merchantConfig.fees|json}}</pre>-->

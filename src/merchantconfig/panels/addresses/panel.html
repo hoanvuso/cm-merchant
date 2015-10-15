@@ -10,6 +10,7 @@
           <div class="col-sm-9">
             <input name="poBox" type="text" class="form-control" placeholder="PO Box" required
                    ng-model="merchantConfigService.merchantConfig.addresses.business.poBox">
+
           </div>
         </div>
         <div class="form-group">
@@ -92,7 +93,7 @@
                ng-change="onSameAsBusinessAddressChange()">&nbsp;&nbsp; Same as Business Address
       </label>
 
-      <form ng-hide="merchantConfigService.mailingAddressSameAsBusinessAddress" name="form"
+      <form ng-hide="merchantConfigService.mailingAddressSameAsBusinessAddress" name="form1"
             class="css-form form-horizontal" ji-form style="margin-top: 30px" novalidate>
         <div class="form-group">
           <label class="col-sm-3 control-label">PO Box</label>
