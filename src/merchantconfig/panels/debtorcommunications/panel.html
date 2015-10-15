@@ -1,153 +1,288 @@
 <div ng-controller="DebtorCommunicationsController">
-    <table width="100%">
-        <tr>
-            <td style="padding-right: 10px">
+  <style>
+    .referral-parner {
+      padding-right: 50px;
+    }
 
-                <div class="panel panel-default" style="min-height: 405px">
-                    <div class="panel-heading">Invoice Past Due (PD) Reminders</div>
-                    <div class="panel-body">
+    .menu-step {
+      display: table;
+      width: 100%;
+      padding: 0px;
+      margin-left: -5px;
+      margin-right: -5px;
+    }
 
-                        <form name="overdueInvoiceRemindersForm" class="css-form form-horizontal" ji-form style="margin-top: 30px; min-height: 250px" novalidate>
-                            <div class="form-group">
-                                <label class="col-sm-5 control-label">Minimum Invoice Size</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" placeholder="Minimum Invoice Size" required ng-model="merchantConfigService.merchantConfig.debtorCommunications.overdueInvoiceReminders.minimumInvoiceSize">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-5 control-label">Delay Between Reminders</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" placeholder="Delay Between Reminders" required ng-model="merchantConfigService.merchantConfig.debtorCommunications.overdueInvoiceReminders.delayBetweenReminders">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-5 control-label"></label>
-                                <div class="col-sm-7">
-                                    <label>
-                                        <input type="checkbox" ng-model="merchantConfigService.merchantConfig.debtorCommunications.overdueInvoiceReminders.sendSms">&nbsp;&nbsp;Send SMS in addition to Email
-                                    </label>
-                                </div>
-                            </div>
-                        </form>
+    .menu-step li {
+      width: 16%;
+      list-style: none;
+      float: left;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
 
-                    </div>
-                </div>
+    .menu-step li a {
+      display: table;
+      width: 100%;
+    }
 
-            </td>
-            <td style="padding-left: 10px">
+    .menu-step li a span {
+      display: block;
+      height: 95px;
+      padding: 0;
+      background: #ddd;
+      vertical-align: middle;
+      display: table-cell;
+      font-weight: bold;
+      color: #666;
+      font-size: 15px;
+      position: relative;
+      padding-left: 59px;
+      text-align: center;
+    }
 
-                <div class="panel panel-default" style="min-height: 405px">
-                    <div class="panel-heading">Serious Arrears (SA) Notifications</div>
-                    <div class="panel-body">
+    .menu-step li a span:after {
+      content: ' ';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 47px 0 48px 50px;
+      border-color: transparent transparent transparent #ddd;
+      position: absolute;
+      right: -50px;
+      top: 0px;
+      z-index: 100;
+    }
 
-                        <form name="seriousArrearsNotificationsForm" class="css-form form-horizontal" ji-form style="margin-top: 30px" novalidate>
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <label>
-                                        <input type="checkbox" ng-model="merchantConfigService.seriousArrearsNotificationsEnabled" checked ng-click="onSeriousArrearsNotificationsChange()">&nbsp;&nbsp;Enabled
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-7 control-label" ng-class="{disabled: !merchantConfigService.seriousArrearsNotificationsEnabled}">Minimum Arrears Amount</label>
-                                <div class="col-sm-5">
-                                    <input ng-disabled="!merchantConfigService.seriousArrearsNotificationsEnabled" type="text" class="form-control" placeholder="Minimum Arrears Amount" required ng-model="merchantConfigService.merchantConfig.debtorCommunications.seriousArrearsNotifications.minimumArrearsAmount">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-7 control-label" ng-class="{disabled: !merchantConfigService.seriousArrearsNotificationsEnabled}">Minimum Days Overdue</label>
-                                <div class="col-sm-5">
-                                    <input ng-disabled="!merchantConfigService.seriousArrearsNotificationsEnabled" type="text" class="form-control" placeholder="Minimum Days Overdue" required ng-model="merchantConfigService.merchantConfig.debtorCommunications.seriousArrearsNotifications.minimumDaysOverdue">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-7 control-label" ng-class="{disabled: !merchantConfigService.seriousArrearsNotificationsEnabled}" style="white-space: nowrap">Delay Between Reminders (days)</label>
-                                <div class="col-sm-5">
-                                    <input ng-disabled="!merchantConfigService.seriousArrearsNotificationsEnabled" type="text" class="form-control" placeholder="Delay Between Reminders (days)" required ng-model="merchantConfigService.merchantConfig.debtorCommunications.seriousArrearsNotifications.delayBetweenReminders">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-7 control-label" ng-class="{disabled: !merchantConfigService.seriousArrearsNotificationsEnabled}">Maximum Number of Reminders</label>
-                                <div class="col-sm-5">
-                                    <input ng-disabled="!merchantConfigService.seriousArrearsNotificationsEnabled" type="text" class="form-control" placeholder="Maximum Number of Reminders" required ng-model="merchantConfigService.merchantConfig.debtorCommunications.seriousArrearsNotifications.maximumNumberOfReminders">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-7 control-label" ng-class="{disabled: !merchantConfigService.seriousArrearsNotificationsEnabled}"></label>
-                                <div class="col-sm-5">
-                                    <label ng-class="{disabled: !merchantConfigService.seriousArrearsNotificationsEnabled}">
-                                        <input ng-disabled="!merchantConfigService.seriousArrearsNotificationsEnabled" type="checkbox" ng-model="merchantConfigService.merchantConfig.debtorCommunications.seriousArrearsNotifications.sendSms">&nbsp;&nbsp;Send SMS in addition to Email
-                                    </label>
-                                </div>
-                            </div>
-                        </form>
+    .menu-step li a span:before {
+      content: ' ';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 47px 0 48px 50px;
+      border-color: transparent transparent transparent #fff;
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      z-index: 10;
+    }
 
-                    </div>
-                </div>
+    .menu-step li:first-child a span:before {
+      display: none;
+    }
 
-            </td>
-        </tr>
-    </table>
+    .menu-step li:first-child {
+      width: 20%;
+    }
 
-    <div id="debtorCommunicationsFlowDiagram">
-        <div>
-            <div style="visibility: hidden">
-                <img src="/common/images/Debtor Communication Circle.png">
-            </div>
-            <div style="margin-top: 10px">
-                <img src="/common/images/Debtor Communication Arrow 2.png">
-            </div>
-            <span class="arrowText" style="top: 102px">New Invoice</span>
-        </div>
-        <div>
-            <div>
-                <img src="/common/images/Debtor Communication Circle.png" ng-style="merchantConfigService.merchantConfig.debtorCommunications.overdueInvoiceReminders.sendSms ? null : {opacity: 0.25}">
-            </div>
-            <div style="margin-top: 10px">
-                <img src="/common/images/Debtor Communication Arrow 2.png">
-            </div>
-            <span class="smsText">SMS</span>
-            <span class="arrowText" style="top: 92px">Invoice<br/>Past Due</span>
-        </div>
-        <div>
-            <div>
-                <img src="/common/images/Debtor Communication Circle.png" ng-style="merchantConfigService.merchantConfig.debtorCommunications.overdueInvoiceReminders.sendSms ? null : {opacity: 0.25}">
-            </div>
-            <div style="margin-top: 10px">
-                <img src="/common/images/Debtor Communication Arrow 2.png">
-            </div>
-            <span class="smsText">SMS</span>
-            <span class="arrowText">Past Due<br/>Reminder</span>
-        </div>
-        <div>
-            <div>
-                <img src="/common/images/Debtor Communication Circle.png" ng-style="merchantConfigService.merchantConfig.debtorCommunications.seriousArrearsNotifications.sendSms ? null : {opacity: 0.25}">
-            </div>
-            <div style="margin-top: 10px" ng-style="merchantConfigService.seriousArrearsNotificationsEnabled ? null : {opacity: 0.25}">
-                <img src="/common/images/Debtor Communication Arrow 2.png">
-            </div>
-            <span class="smsText">SMS</span>
-            <span class="arrowText">Serious<br/>Arrears</span>
-        </div>
-        <div>
-            <div>
-                <img src="/common/images/Debtor Communication Circle.png" ng-style="merchantConfigService.merchantConfig.debtorCommunications.seriousArrearsNotifications.sendSms ? null : {opacity: 0.25}">
-            </div>
-            <div style="margin-top: 10px" ng-style="merchantConfigService.seriousArrearsNotificationsEnabled ? null : {opacity: 0.25}">
-                <img src="/common/images/Debtor Communication Arrow 2.png">
-            </div>
-            <span class="smsText">SMS</span>
-            <span class="arrowText" style="top: 82px">Serious<br/>Arrears<br/>Reminder</span>
-        </div>
-        <div style="opacity: 0.25">
-            <div>
-                <img src="/common/images/Debtor Communication Circle.png">
-            </div>
-            <div style="margin-top: 10px">
-                <img src="/common/images/Debtor Communication Arrow 2.png">
-            </div>
-            <span class="smsText">SMS</span>
-            <span class="arrowText">Notice<br/>of Default</span>
-        </div>
+    .menu-step li:first-child a span {
+      padding-left: 20px;
+    }
+
+    .menu-step li.active a span {
+      background: rgb(49, 120, 186);
+      color: #fff;
+    }
+
+    .menu-step li.active a span:after {
+      border-color: transparent transparent transparent rgb(49, 120, 186);
+    }
+
+    .sms-menu {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .sms-menu span {
+      display: inline-block;
+      padding: 5px 20px;
+      background: #ddd;
+      border-radius: 5px;
+    }
+
+    .arrow-timeline {
+      margin-bottom: 35px;
+    }
+
+    .arrow-timeline i {
+      border-bottom: 2px solid #333;
+      display: block;
+      position: relative;
+      clear: both;
+      margin: 2px 0px
+    }
+
+    .arrow-timeline i:after {
+      content: ' ';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 6px 0 6px 9px;
+      border-color: transparent transparent transparent #333;
+      position: absolute;
+      right: -2px;
+      top: -5px;
+    }
+
+    .arrow-timeline span {
+      font-size: 12px;
+    }
+
+    .table-time {
+      width: 100%;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .table-time tr:nth-child(2n+1) {
+      background: #eee;
+    }
+
+    .table-time td {
+      padding: 7px 5px;
+    }
+
+    .panel-body {
+      padding: 30px;
+    }
+  </style>
+  <div class="referral-parner">
+    <div class="row sms-menu">
+      <div class="col-xs-2">
+        <span>SMS</span>
+      </div>
+      <div class="col-xs-2">
+        <span>SMS</span>
+      </div>
+      <div class="col-xs-2">
+        <span>SMS</span>
+      </div>
+      <div class="col-xs-2">
+        <span>SMS</span>
+      </div>
+      <div class="col-xs-2">
+        <span>SMS</span>
+      </div>
+      <div class="col-xs-2">
+      </div>
     </div>
+
+    <ul class="menu-step">
+      <li>
+        <a href="#"><span>New Invoice</span></a>
+      </li>
+      <li class="active">
+        <a href="#"><span>Invoice Past Due</span></a>
+      </li>
+      <li>
+        <a href="#"><span>Past Due Reminder(s)</span></a>
+      </li>
+      <li>
+        <a href="#"><span>Serious Arrears</span></a>
+      </li>
+      <li>
+        <a href="#"><span>Serious Arrears Reminder(s)</span></a>
+      </li>
+      <li>
+        <a href="#"><span>Notice of Default</span></a>
+      </li>
+    </ul>
+
+    <div class="row">
+      <div class="col-xs-3">
+        <div class="arrow-timeline">
+          Current
+          <i></i>
+          <span class="pull-left">Invoice day</span>
+          <span class="pull-right">Due day</span>
+        </div>
+        <table class="table-time">
+          <tr>
+            <td>SMS Sent</td>
+            <td>Day 2</td>
+          </tr>
+          <tr>
+            <td>Email Sent</td>
+            <td>Day 2</td>
+          </tr>
+          <tr>
+            <td>Reminder Frequency(days)</td>
+            <td>Day 2</td>
+          </tr>
+          <tr>
+            <td>Min. Invoice Amt</td>
+            <td>Day 2</td>
+          </tr>
+          <tr>
+            <td>Min. Arrears Amt.</td>
+            <td>Day 2</td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-xs-9">
+        <div class="arrow-timeline">
+          Past Due
+          <i></i>
+          <span class="pull-right">Days</span>
+        </div>
+
+        <table class="table-time">
+          <tr>
+            <td>Day 2</td>
+            <td>Day 2</td>
+            <td>Day 2</td>
+            <td>Day 2</td>
+            <td>Day 2</td>
+          </tr>
+          <tr>
+            <td>Day 2</td>
+            <td>Day 2</td>
+            <td>Day 2</td>
+            <td>Day 2</td>
+            <td>Day 2</td>
+          </tr>
+          <tr>
+            <td>Day 2</td>
+            <td>Day 2</td>
+            <td>Day 2</td>
+            <td>Day 2</td>
+            <td>Day 2</td>
+          </tr>
+          <tr>
+            <td>Day 2</td>
+            <td>Day 2</td>
+            <td>Day 2</td>
+            <td>Day 2</td>
+            <td>Day 2</td>
+          </tr>
+          <tr>
+            <td>Day 2</td>
+            <td>Day 2</td>
+            <td>Day 2</td>
+            <td>Day 2</td>
+            <td>Day 2</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><strong>Serious Arrears Reminder - Configuration</strong></div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-6">
+            <p><strong>Email</strong></p>
+            <a href="#" class="btn btn-primary">Pro - Porma<br>Communication</a>
+          </div>
+          <div class="col-xs-6">
+            <p><strong>SMS</strong></p>
+            <a href="#" class="btn btn-primary">Pro - Forms<br>Communication</a>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer text-right">
+        <a href="#" class="btn btn-primary">Next</a>
+      </div>
+    </div>
+
+  </div>
 </div>
