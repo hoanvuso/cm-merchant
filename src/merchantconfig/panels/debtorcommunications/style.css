@@ -90,6 +90,11 @@
     margin-bottom: 10px;
 }
 
+.sms-menu div.active span {
+    background: rgb(49, 120, 186);
+    color: #FFF;
+}
+
 .sms-menu span {
     display: inline-block;
     padding: 5px 20px;

@@ -1,0 +1,38 @@
+<form class="form-horizontal" name="form" novalidate ng-submit="next(form)">
+  <div class="modal-header"><h3>New Invoice - Configuration</h3></div>
+  <div class="modal-body">
+    <p>For all current invoices according to the Merchant's definition of current</p>
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="form-group" style="margin-left: 0">
+          <p><strong>Email</strong></p>
+          <a href="#" class="btn btn-primary">Pro - Porma<br>Communication</a>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.noDayEmailed.$error.required && submitted}">
+          <label class="control-label col-sm-8" style="font-size: 13px">No. days invoice emailed after invoice date</label>
+          <div class="col-sm-4">
+            <input name="noDayEmailed" type="text" class="form-control"
+                   only-digits required maxlength="2"
+                   ng-model="newInvoice.noDaysEmailed">
+            <div class="help-block" ng-if="form.noDayEmailed.$error.required && submitted">This input is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group" style="margin-left: 0">
+          <p><strong>SMS</strong></p>
+          <a href="#" class="btn btn-primary">Pro - Forms<br>Communication</a>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="newInvoice.sendSMS"> Send SMS in additional to email
+          </label>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary">Next</button>
+  </div>
+</form>

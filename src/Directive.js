@@ -17,5 +17,16 @@
         element.bind('change', onChangeHandler);
       }
     };
+  }).directive('onlyDigits', function() {
+    return {
+      restrict: 'A',
+      link: function (scope, element, attrs) {
+        element.bind('keypress',function($event) {
+          if(isNaN(String.fromCharCode($event.keyCode))){
+            $event.preventDefault();
+          }
+        })
+      }
+    }
   });
 })();
