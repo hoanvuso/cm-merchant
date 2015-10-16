@@ -88,8 +88,8 @@
 
     <div class="col-sm-5">
       <input type="text" class="form-control" placeholder="Mobile" name="mobile"
-             ng-model="merchantConfigService.merchantConfig.general.afterHoursPhoneNumber"
-             mask="0999999999" clean="true" restrict="reject" ng-value="0"
+             ng-model="merchantConfigService.merchantConfig.general.mobile"
+             mask="0999999999" clean="true" restrict="reject"
              maxlength="10" required>
       <div class="help-block" ng-if="form.mobile.$error.required && submitted">Mobile number is Required</div>
     </div>

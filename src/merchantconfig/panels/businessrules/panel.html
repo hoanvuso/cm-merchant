@@ -11,12 +11,12 @@
   </div>
   <div ng-if="discountForEarlyPayment">
     <div class="form-group">
-      <label class="col-sm-offset-3 col-sm-2 control-label" style="text-align: left">EPD Cut-off (days){{zac}}
+      <label class="col-sm-offset-3 col-sm-2 control-label" style="text-align: left">EPD Cut-off (days)
       </label>
 
       <div class="col-sm-5">
         <input name="earlyPaymentDays" type="text" class="form-control" placeholder="Early payment discount available until X days" required
-               ng-model="merchantConfigService.merchantConfig.discounts.earlyPaymentDays">
+               ng-model="merchantConfigService.merchantConfig.businessRule.discounts.earlyPaymentDays" only-digits maxlength="2">
       </div>
     </div>
     <div class="form-group">
@@ -26,7 +26,8 @@
       <div class="col-sm-5">
         <input name="earlyPaymentDiscountInvoiceMin" type="text" class="form-control"
                placeholder="Minimum Invoice Amount" required
-               ng-model="merchantConfigService.merchantConfig.discounts.earlyPaymentDiscountInvoiceMin">
+               mask="$999" clean="true"
+               ng-model="merchantConfigService.merchantConfig.businessRule.discounts.earlyPaymentDiscountInvoiceMin">
       </div>
     </div>
     <div class="form-group">
@@ -35,10 +36,11 @@
       <div class="col-sm-5">
         <div class="col-sm-7" style="padding-left: 0">
           <input name="earlyPaymentDiscountAmount" type="text" class="form-control" placeholder="Discount - Fixed Amount"
-               required ng-model="merchantConfigService.merchantConfig.discounts.earlyPaymentDiscountAmount">
+               required ng-model="merchantConfigService.merchantConfig.businessRule.discounts.earlyPaymentDiscountAmount"
+                 mask="999" clean="true">
         </div>
         <div class="col-sm-5">
-          <select class="form-control">
+          <select class="form-control" ng-model="merchantConfigService.merchantConfig.businessRule.discounts.earlyPaymentDiscountAmountUnit">
             <option value="fixed">$ (Fixed)</option>
             <option value="percentage">% (Percentage)</option>
           </select>
@@ -62,11 +64,11 @@
 
       <div class="col-sm-5">
         <div class="col-sm-7" style="padding-left: 0">
-          <input name="earlyPaymentDiscountAmount" type="text" class="form-control" placeholder="No. weeks / months"
-                 required ng-model="merchantConfigService.merchantConfig.discounts.earlyPaymentDiscountAmount">
+          <input name="termDuration" type="text" class="form-control" placeholder="No. weeks / months"
+                 required ng-model="merchantConfigService.merchantConfig.businessRule.paymentTerm.termDuration"  only-digits maxlength="2">
         </div>
         <div class="col-sm-5">
-          <select class="form-control">
+          <select class="form-control" ng-model="merchantConfigService.merchantConfig.businessRule.paymentTerm.termDurationUnit">
             <option value="week">Week(s)</option>
             <option value="month">Month(s)</option>
           </select>
@@ -79,11 +81,11 @@
 
       <div class="col-sm-5">
         <div class="col-sm-7" style="padding-left: 0">
-          <input name="earlyPaymentDiscountAmount" type="text" class="form-control" placeholder="No. weeks / months"
-                 required ng-model="merchantConfigService.merchantConfig.discounts.earlyPaymentDiscountAmount">
+          <input name="paymentFrequency" type="text" class="form-control" placeholder="No. weeks / months"
+                 required ng-model="merchantConfigService.merchantConfig.businessRule.paymentTerm.paymentFrequency" only-digits maxlength="2">
         </div>
         <div class="col-sm-5">
-          <select class="form-control">
+          <select class="form-control" ng-model="merchantConfigService.merchantConfig.businessRule.paymentTerm.paymentFrequencyUnit">
             <option value="week">Week(s)</option>
             <option value="month">Month(s)</option>
           </select>
@@ -116,7 +118,9 @@
 
       <div class="col-sm-4">
         <input type="text" ji-currency-input class="form-control" placeholder="Nominated Back A/C Charge" required
-               ng-model="merchantConfigService.merchantConfig.fees.directDebitChargeToDebtor">
+               ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.directDebitCharge"
+               only-digits=""
+               mask="$999" clean="true">
       </div>
     </div>
     <div class="form-group">
@@ -125,7 +129,8 @@
 
       <div class="col-sm-4">
         <input type="text" ji-percentage-input decimalPlaces="4" class="form-control" placeholder="Visa" required
-               ng-model="merchantConfigService.merchantConfig.fees.visaRateToDebtor">
+               maxlength="3"
+               ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.visaRate">
       </div>
     </div>
     <div class="form-group">
@@ -133,8 +138,8 @@
       </label>
 
       <div class="col-sm-4">
-        <input type="text" ji-percentage-input decimalPlaces="4" class="form-control" placeholder="Mastercard" required
-               ng-model="merchantConfigService.merchantConfig.fees.mastercardRateToDebtor">
+        <input type="text" ji-percentage-input decimalPlaces="4" maxlength="3" class="form-control" placeholder="Mastercard" required
+               ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.masterCardRate">
       </div>
     </div>
     <div class="form-group">
@@ -142,8 +147,8 @@
       </label>
 
       <div class="col-sm-4">
-        <input type="text" ji-percentage-input decimalPlaces="4" class="form-control" placeholder="American Express"
-               required ng-model="merchantConfigService.merchantConfig.fees.amexRateToDebtor">
+        <input type="text" ji-percentage-input decimalPlaces="4"  maxlength="3" class="form-control" placeholder="American Express"
+               required ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.americanExpressRate">
       </div>
     </div>
     <div class="form-group">
@@ -151,8 +156,8 @@
       </label>
 
       <div class="col-sm-4">
-        <input type="text" ji-percentage-input decimalPlaces="4" class="form-control" placeholder="Diners Club" required
-               ng-model="merchantConfigService.merchantConfig.fees.dinersRateToDebtor">
+        <input type="text" ji-percentage-input decimalPlaces="4" maxlength="3" class="form-control" placeholder="Diners Club" required
+               ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.dinnerClubsRate">
       </div>
     </div>
   </div>

@@ -37,7 +37,7 @@
           <input type="text" class="form-control" placeholder="Mobile" name="keyCommercialMobile" ng-keypress="onlyDigits($event)"
                  ng-model="merchantConfigService.merchantConfig.contacts.keyCommercial.mobile"
                  maxlength="10" style="margin-top: 10px" required
-                 mask="0999999999" clean="true" restrict="reject" ng-value="0">
+                 mask="0999999999" restrict="reject">
         </div>
         <div class="help-block col-xs-5" ng-if="form.keyCommercialMobile.$error.required && submitted">This input is required</div>
       </div>
@@ -80,7 +80,7 @@
           <input type="text" class="form-control" placeholder="Mobile" name="itMobile" ng-keypress="onlyDigits($event)"
                 ng-model="merchantConfigService.merchantConfig.contacts.it.mobile"
                  maxlength="10" required style="margin-top: 10px"
-                 mask="0999999999" clean="true" restrict="reject" ng-value="0">
+                 mask="0999999999" restrict="reject">
         </div>
         <div class="help-block col-xs-5" ng-if="form.itMobile.$error.required && submitted">This input is required</div>
       </div>

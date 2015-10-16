@@ -44,6 +44,15 @@
           "settlementAccountBsb": null,
           "settlementAccountNumber": null
         },
+        "businessRule": {
+          "discounts": {
+            earlyPaymentDiscountAmountUnit: 'fixed',
+          },
+          "paymentTerm": {
+            termDurationUnit: 'week',
+            paymentFrequencyUnit: 'week'
+          }
+        },
         "debtorCommunications": {},
         "addresses": {
           "business": {
