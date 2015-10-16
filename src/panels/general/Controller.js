@@ -31,11 +31,6 @@
       }
     },true);
 
-    $scope.onlyDigits = function($event) {
-      if(isNaN(String.fromCharCode($event.keyCode))){
-        $event.preventDefault();
-      }
-    };
 
     $scope.changeFocus = function() {
       if ($scope.phone[0] && $scope.phone[0].length >= 2) {

@@ -6,7 +6,7 @@
         model: '=ngModel'
       },
       link: function(scope, elem){
-        
+
       }
     };
   }).directive('customOnChange', function() {
@@ -28,5 +28,22 @@
         })
       }
     }
-  });
+  }).directive('changeFocus', function() {
+      return {
+        restrict: 'A',
+        scope: {
+          target: '@changeFocus'
+        },
+        link: function ($scope, element, attrs) {
+          element.bind('keypress',function() {
+            if(element.val().length == element.attr("maxlength")) {
+              var $nextElement = angular.element($scope.target);
+              if($nextElement.length) {
+                $nextElement[0].focus();
+              }
+            }
+          })
+        }
+      }
+    });
 })();

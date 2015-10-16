@@ -47,7 +47,7 @@
              placeholder="ABN"
              ng-model="merchantConfigService.merchantConfig.abnNumber" required
              mask='99-999-999-999' clean="true"
-             ng-keypress="onlyDigits($event)">
+             only-digits>
       <div ng-if="form.abnNumber.$error.required && submitted" class="help-block">Abn number is required</div>
     </div>
   </div>
@@ -70,13 +70,13 @@
       <div class="row">
         <div class="col-xs-4">
           <input type="text" class="form-control" maxlength="2" placeholder="Area Code" ng-model="phone[0]"
-                 ng-keyup="changeFocus()"
-                 ng-keypress="onlyDigits($event)">
+                 change-focus="#phoneNumber" only-digits>
+
         </div>
         <div class="col-xs-8">
           <input type="text" class="form-control" id="phoneNumber"
                  maxlength="8" placeholder="Number" ng-model="phone[1]"
-                 ng-keypress="onlyDigits($event)">
+                 only-digits>
         </div>
       </div>
       <div ng-if="error.phone && submitted" class="help-block">{{error.phone}}</div>
@@ -88,7 +88,9 @@
 
     <div class="col-sm-5">
       <input type="text" class="form-control" placeholder="Mobile" name="mobile"
-             ng-model="merchantConfigService.merchantConfig.general.afterHoursPhoneNumber" maxlength="10" required>
+             ng-model="merchantConfigService.merchantConfig.general.afterHoursPhoneNumber"
+             mask="0999999999" clean="true" restrict="reject" ng-value="0"
+             maxlength="10" required>
       <div class="help-block" ng-if="form.mobile.$error.required && submitted">Mobile number is Required</div>
     </div>
   </div>
