@@ -22,23 +22,23 @@
     </div>
 
     <ul class="menu-step">
-      <li>
-        <a href="#"><span>New Invoice</span></a>
+      <li ng-class="{active: communicationActiveTab=='new'}">
+        <a href="#" ng-click="setActiveTab('new')"><span>New Invoice</span></a>
       </li>
-      <li class="active">
-        <a href="#"><span>Invoice Past Due</span></a>
+      <li ng-class="{active: communicationActiveTab=='pasDue'}">
+        <a href="#" ng-click="setActiveTab('pasDue')"><span>Invoice Past Due</span></a>
       </li>
-      <li>
-        <a href="#"><span>Past Due Reminder(s)</span></a>
+      <li ng-class="{active: communicationActiveTab=='pasDueReminder'}">
+        <a href="#" ng-click="setActiveTab('pasDueReminder')"><span>Past Due Reminder(s)</span></a>
       </li>
-      <li>
-        <a href="#"><span>Serious Arrears</span></a>
+      <li ng-class="{active: communicationActiveTab=='seriousArrears'}">
+        <a href="#" ng-click="setActiveTab('seriousArrears')"><span>Serious Arrears</span></a>
       </li>
-      <li>
-        <a href="#"><span>Serious Arrears Reminder(s)</span></a>
+      <li ng-class="{active: communicationActiveTab=='seriousArrearsReminder'}">
+        <a href="#" ng-click="setActiveTab('seriousArrearsReminder')"><span>Serious Arrears Reminder(s)</span></a>
       </li>
-      <li>
-        <a href="#"><span>Notice of Default</span></a>
+      <li ng-class="{active: communicationActiveTab=='noticeDefault'}">
+        <a href="#" ng-click="setActiveTab('noticeDefault')"><span>Notice of Default</span></a>
       </li>
     </ul>
 
@@ -138,6 +138,5 @@
         <a href="#" class="btn btn-primary">Next</a>
       </div>
     </div>
-
   </div>
 </div>
