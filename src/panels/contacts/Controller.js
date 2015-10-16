@@ -35,31 +35,6 @@
       $scope.oneBoxBillingPhone = [];
     }
 
-
-    $scope.onlyDigits = function($event) {
-      if(isNaN(String.fromCharCode($event.keyCode))){
-        $event.preventDefault();
-      }
-    };
-
-    $scope.changeFocusKeyCommercial = function() {
-      if ($scope.keyCommercialPhone[0] && $scope.keyCommercialPhone[0].length >= 2) {
-        angular.element('#keyCommercialPhone').trigger('focus');
-      }
-    };
-
-    $scope.changeFocusIt = function() {
-      if ($scope.itPhone[0] && $scope.itPhone[0].length >= 2) {
-        angular.element('#itPhone').trigger('focus');
-      }
-    };
-
-    $scope.changeFocusOneBoxBilling = function() {
-      if ($scope.oneBoxBillingPhone[0] && $scope.oneBoxBillingPhone[0].length >= 2) {
-        angular.element('#oneBoxBillingPhone').trigger('focus');
-      }
-    };
-
     $scope.$watch(function() {
       return $scope.keyCommercialPhone;
     },function(value) {
