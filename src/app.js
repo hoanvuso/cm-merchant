@@ -4,6 +4,7 @@ angular.module('CmMerchantConfigApp', ['ngRoute',
                                        'ngSanitize',
                                        'angularFileUpload',
                                        'jiAngular',
+                                       'ngCookies',
                                        'ngMask',
                                        'CmCommon'])
     .constant('skin', {
