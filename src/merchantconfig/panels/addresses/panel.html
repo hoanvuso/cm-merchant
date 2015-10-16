@@ -1,18 +1,11 @@
 <div ng-controller="AddressesPanelController">
-  <tabset>
-
-    <tab heading="Business Address">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" ng-class="{'active': activeTab === 'business'}"><a href="javascript:;" ng-click="changeTab('business')" aria-controls="home" role="tab" data-toggle="tab">Business addresses</a></li>
+    <li role="presentation" ng-class="{'active': activeTab === 'mailing'}"><a href="javascript:;" ng-click="changeTab('mailing')" aria-controls="profile" role="tab" data-toggle="tab">Mailing addresses</a></li>
+  </ul>
+    <div ng-show="activeTab === 'business'">
 
       <form name="form" class="css-form form-horizontal" ji-form style="margin-top: 30px" novalidate>
-        <div class="form-group">
-          <label class="col-sm-3 control-label">PO Box</label>
-
-          <div class="col-sm-9">
-            <input name="poBox" type="text" class="form-control" placeholder="PO Box" required
-                   ng-model="merchantConfigService.merchantConfig.addresses.business.poBox">
-
-          </div>
-        </div>
         <div class="form-group">
           <label class="col-sm-3 control-label">Unit/Level</label>
 
@@ -84,9 +77,9 @@
         </div>
       </form>
 
-    </tab>
+    </div>
 
-    <tab heading="Mailing Address">
+    <div ng-show="activeTab === 'mailing'">
 
       <label style="margin-top: 40px; margin-left: 40px">
         <input type="checkbox" ng-model="merchantConfigService.mailingAddressSameAsBusinessAddress"
@@ -169,8 +162,7 @@
         </div>
       </form>
 
-    </tab>
+    </div>
 
-  </tabset>
 
 </div>

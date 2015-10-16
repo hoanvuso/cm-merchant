@@ -5,6 +5,11 @@
 
   function Controller($scope,$rootScope, merchantConfigService) {
     $scope.submitted = false;
+    $scope.activeTab = 'business';
+    $scope.changeTab = function(tab) {
+      $scope.activeTab = tab
+    };
+
     $scope.states = [
       {
         name: "state 1",
@@ -21,6 +26,13 @@
     ];
 
     $rootScope.next = function() {
+      $scope.submitted = true;
+      if ($scope.form.$valid) {
+        $rootScope.currentPanel = 'contacts';
+      }
+    };
+    $rootScope.back = function() {
+      $rootScope.currentPanel = 'general';
     };
 
     merchantConfigService.addressesController = this;
