@@ -16,8 +16,8 @@
     <div ng-include="'merchantconfig/navbar.html'"></div>
 
     <input ji-scope-element="fileSelectInput" type="file" nv-file-select uploader="uploader" style="display: none"/>
-    
-    
+
+
     <div class="control-group pull-right">
       <div class="btn-group">
         <button type="button" class="btn btn-primary" style="width:142px">Live merchant</button>
@@ -53,7 +53,7 @@
           Create new merchant
         </button>
       </div>
-      
+
     </div>
     <div class="clearfix"></div>
     <div class="main">      
@@ -76,6 +76,16 @@
         </div>
         <div class="btn" ng-click="changeTab('debtorcommunications')"
              ng-class="{selected: currentPanel === 'debtorcommunications'}">Communications
+        </div>
+        <div class="btn" ng-click="changeTab('confirmation')"
+             ng-class="{selected: currentPanel === 'confirmation'}">
+          <small>Services Agreement <br/>& Business Rules</small> <br/>
+          Confirmation
+        </div>
+        <div class="btn" ng-click="changeTab('referral')"
+             ng-class="{selected: currentPanel === 'referral'}">
+          <small>Referral Partner</small><br/>
+          Certification
         </div>
       </div>
 
@@ -102,7 +112,7 @@
       <!--<div ng-include="'merchantconfig/panels/debtorcommunications/panel.html'"></div>-->
       <!--</accordion-group>-->
       <!--</accordion>-->
-      
+
       <div id="mainPanels">
         <h3 ng-bind="tradingName"></h3>
 
@@ -140,17 +150,25 @@
             <div ng-include="'merchantconfig/panels/debtorcommunications/panel.html'"></div>
           </div>
 
+          <div ng-switch-when="confirmation">
+            <div ng-include="'merchantconfig/panels/confirmation/panel.html'"></div>
+          </div>
+
+          <div ng-switch-when="referral">
+            <div ng-include="'merchantconfig/panels/referral/panel.html'"></div>
+          </div>
+
         </div>
 
-<!--        <button class="btn btn-primary pull-right" style="margin: 20px 20px 20px 0; width: 100px"
-                ng-click="validateAndExportConfig()">Save
-        </button>
-        <button class="btn btn-primary pull-right" style="margin: 20px 20px 20px 0; width: 100px" ng-click="exportConfig()">
-          Save Draft
-        </button>
-        <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0; width: 100px" ng-click="importConfig()">
-          Load
-        </button>-->
+        <!--        <button class="btn btn-primary pull-right" style="margin: 20px 20px 20px 0; width: 100px"
+                        ng-click="validateAndExportConfig()">Save
+                </button>
+                <button class="btn btn-primary pull-right" style="margin: 20px 20px 20px 0; width: 100px" ng-click="exportConfig()">
+                  Save Draft
+                </button>
+                <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0; width: 100px" ng-click="importConfig()">
+                  Load
+                </button>-->
         <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0;" ng-click="next()">
           Next
         </button>
@@ -165,12 +183,11 @@
     </div>
 
     <!--<button class="btn btn-primary pull-right" style="margin: 20px 20px 20px 0; width: 100px" ng-click="exportConfig()">-->
-      <!--Save Draft-->
+    <!--Save Draft-->
     <!--</button>-->
     <!--<button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0; width: 100px" ng-click="importConfig()">-->
-      <!--Load-->
+    <!--Load-->
     <!--</button>-->
-  </div>
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../bower_components/angular/angular.min.js"></script>
     <script src="../bower_components/angular-route/angular-route.js"></script>
@@ -208,9 +225,9 @@
     <script src="panels/addresses/Controller.js"></script>
     <script src="panels/emailaddresses/Controller.js"></script>
     <script src="panels/administrators/Controller.js"></script>
-<!--    <script src="panels/banking/Controller.js"></script>-->
+    <!--    <script src="panels/banking/Controller.js"></script>-->
     <script src="panels/businessrules/Controller.js"></script>
-<!--    <script src="panels/contacts/Controller.js"></script>-->
+    <!--    <script src="panels/contacts/Controller.js"></script>-->
     <script src="panels/debtorcommunications/Controller.js"></script>
     <script src="panels/banking/Controller.js"></script>
   </body>
