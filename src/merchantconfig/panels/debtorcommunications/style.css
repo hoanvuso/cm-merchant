@@ -23,6 +23,10 @@
     width: 100%;
 }
 
+.menu-step li a:hover, .menu-step li a:focus{
+    text-decoration: none;
+}
+
 .menu-step li a span {
     display: block;
     height: 95px;
