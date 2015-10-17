@@ -3,15 +3,10 @@
   angular.module('CmMerchantConfigApp')
     .controller('BankingPanelController', Controller);
 
-  function Controller($scope,$rootScope, merchantConfigService) {
+  function Controller($scope,$rootScope, merchantConfigService,Modal) {
     $scope.error = {};
     $scope.submitted = false;
 
-    $scope.onlyDigits = function($event) {
-      if(isNaN(String.fromCharCode($event.keyCode))){
-        $event.preventDefault();
-      }
-    };
     if(!merchantConfigService.merchantConfig.banking.settlementAccountBsb){
       merchantConfigService.merchantConfig.banking.settlementAccountBsb = '';
     }
@@ -27,10 +22,26 @@
       $scope.bsb = [];
     }
 
+    $scope.$watch(function() {
+      return $scope.form.$valid
+    },function(value) {
+      $rootScope.formValid = value;
+    });
+
+    $scope.$on('submitted',function(event,value) {
+      $scope.submitted = value;
+    });
+
     $rootScope.next = function() {
       $scope.submitted = true;
       if ($scope.form.$valid) {
         $rootScope.currentPanel = 'businessrules';
+      } else {
+        Modal.confirm.changeTab(function(confirm) {
+          if (confirm) {
+            $rootScope.currentPanel = 'businessrules';
+          }
+        });
       }
     };
     $rootScope.back = function() {

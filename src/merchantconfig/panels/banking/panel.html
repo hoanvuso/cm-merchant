@@ -15,7 +15,7 @@
     <div class="col-sm-8">
 
       <input name="settlementAccountBsb" type="text" class="form-control" placeholder="Enter 6 digits" required
-             maxlength="6" ng-model="merchantConfigService.merchantConfig.banking.settlementAccountBsb"
+             ng-model="merchantConfigService.merchantConfig.banking.settlementAccountBsb"
              mask='999-999' clean="true"
              ng-keypress="onlyDigits($event)">
 

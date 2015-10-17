@@ -58,23 +58,23 @@
     <div class="clearfix"></div>
     <div class="main">      
       <div id="mainTabSet">
-        <div class="btn" ng-click="$root.currentPanel = 'general'" ng-class="{selected: currentPanel === 'general'}">General</div>
-        <div class="btn" ng-click="$root.currentPanel = 'addresses'" ng-class="{selected: currentPanel === 'addresses'}">
+        <div class="btn" ng-click="changeTab('general')" ng-class="{selected: currentPanel === 'general'}">General</div>
+        <div class="btn" ng-click="changeTab('addresses')" ng-class="{selected: currentPanel === 'addresses'}">
           Addresses
         </div>
         <!--<div class="btn" ng-click="currentPanel = 'emailaddresses'" ng-class="{selected: currentPanel === 'emailaddresses'}">Email Addresses</div>-->
-        <div class="btn" ng-click="$root.currentPanel = 'contacts'" ng-class="{selected: currentPanel === 'contacts'}">Contacts
+        <div class="btn" ng-click="changeTab('contacts')" ng-class="{selected: currentPanel === 'contacts'}">Contacts
         </div>
-        <div class="btn" ng-click="$root.currentPanel = 'administrators'"
+        <div class="btn" ng-click="changeTab('administrators')"
              ng-class="{selected: currentPanel === 'administrators'}">Administrators
         </div>
-        <div class="btn" ng-click="$root.currentPanel = 'banking'" ng-class="{selected: currentPanel === 'banking'}">Banking
+        <div class="btn" ng-click="changeTab('banking')" ng-class="{selected: currentPanel === 'banking'}">Banking
           Details
         </div>
-        <div class="btn" ng-click="$root.currentPanel = 'businessrules'" ng-class="{selected: currentPanel === 'businessrules'}">
+        <div class="btn" ng-click="changeTab('businessrules')" ng-class="{selected: currentPanel === 'businessrules'}">
           Business Rules
         </div>
-        <div class="btn" ng-click="$root.currentPanel = 'debtorcommunications'"
+        <div class="btn" ng-click="changeTab('debtorcommunications')"
              ng-class="{selected: currentPanel === 'debtorcommunications'}">Communications
         </div>
       </div>
@@ -104,7 +104,7 @@
       <!--</accordion>-->
       
       <div id="mainPanels">
-        <h3>{{tradingName}}</h3>
+        <h3 ng-bind="tradingName"></h3>
 
         <div ng-switch="currentPanel">
 
@@ -202,6 +202,7 @@
     <script src="Filter.js"></script>
     <script src="PageInitializationModuleAndService.js"></script>
     <script src="IndexController.js"></script>
+    <script src="modals/modal.service.js"></script>
     <script src="panels/general/Controller.js"></script>
     <script src="panels/contacts/Controller.js"></script>
     <script src="panels/addresses/Controller.js"></script>

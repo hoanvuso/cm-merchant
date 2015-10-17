@@ -3,7 +3,7 @@
   angular.module('CmMerchantConfigApp')
     .controller('IndexController', Controller);
 
-  function Controller($scope,$rootScope, $http, $window, ji, cm, referralPartnerConfig, FileUploader, changePasswordDialog, merchantConfigService) {
+  function Controller($scope,$rootScope, $http, $window, ji, cm, referralPartnerConfig, FileUploader, changePasswordDialog, merchantConfigService,Modal) {
 
     $scope.merchantConfigService = merchantConfigService;
     $scope.referralPartnerConfig = referralPartnerConfig;
@@ -28,6 +28,19 @@
         $scope.tradingName = merchantConfigService.merchantConfig.general.merchantTradingName;
       }
     });
+
+    $scope.changeTab = function(tab) {
+      $scope.$broadcast('submitted',true);
+      if ($rootScope.formValid) {
+        $rootScope.currentPanel = tab;
+      } else {
+        Modal.confirm.changeTab(function(confirm) {
+          if (confirm) {
+            $rootScope.currentPanel = tab;
+          }
+        });
+      }
+    };
 
     refresh();
 

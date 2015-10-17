@@ -1,9 +1,9 @@
 (function () {
-
+  "use strict";
   angular.module('CmMerchantConfigApp')
     .controller('GeneralPanelController', Controller);
 
-  function Controller($scope,$rootScope, merchantConfigService,FileUploader) {
+  function Controller($scope,$rootScope, merchantConfigService,FileUploader,Modal) {
     $scope.error = {};
     $scope.submitted = false;
     if (merchantConfigService.merchantConfig.general.phone) {
@@ -64,8 +64,24 @@
       $scope.submitted = true;
       if ($scope.form.$valid) {
         $rootScope.currentPanel = 'addresses';
+      } else {
+        Modal.confirm.changeTab(function(confirm) {
+          if (confirm) {
+            $rootScope.currentPanel = 'addresses';
+          }
+        });
       }
     };
+
+    $scope.$watch(function() {
+      return $scope.form.$valid
+    },function(value) {
+      $rootScope.formValid = value;
+    });
+
+    $scope.$on('submitted',function(event,value) {
+      $scope.submitted = value;
+    });
 
     merchantConfigService.generalController = this;
     this.validate = validate;

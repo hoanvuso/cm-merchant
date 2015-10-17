@@ -2,7 +2,7 @@
   angular.module('CmMerchantConfigApp')
     .controller('ContactPanelController', Controller);
 
-  function Controller($scope,$rootScope, merchantConfigService) {
+  function Controller($scope,$rootScope, merchantConfigService,Modal) {
     $scope.error = {};
 
     if (merchantConfigService.merchantConfig.contacts.keyCommercial.phone) {
@@ -80,10 +80,26 @@
       }
     },true);
 
+    $scope.$watch(function() {
+      return $scope.form.$valid
+    },function(value) {
+      $rootScope.formValid = value;
+    });
+
+    $scope.$on('submitted',function(event,value) {
+      $scope.submitted = value;
+    });
+
     $rootScope.next = function() {
       $scope.submitted = true;
       if ($scope.form.$valid) {
         $rootScope.currentPanel = 'administrators';
+      } else {
+        Modal.confirm.changeTab(function(confirm) {
+          if (confirm) {
+            $rootScope.currentPanel = 'administrators';
+          }
+        });
       }
     };
     $rootScope.back = function() {

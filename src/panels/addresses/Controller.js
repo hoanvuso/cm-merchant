@@ -3,7 +3,7 @@
   angular.module('CmMerchantConfigApp')
     .controller('AddressesPanelController', Controller);
 
-  function Controller($scope,$rootScope, merchantConfigService) {
+  function Controller($scope,$rootScope, merchantConfigService,Modal) {
     $scope.submitted = false;
     $scope.activeTab = 'business';
     $scope.changeTab = function(tab) {
@@ -25,15 +25,36 @@
       }
     ];
 
+    $scope.$watch(function() {
+      return $scope.form.$valid
+    },function(value) {
+      $rootScope.formValid = value;
+    });
+
+    $scope.$on('submitted',function(event,value) {
+      $scope.submitted = value;
+    });
+
     $rootScope.next = function() {
       $scope.submitted = true;
       if ($scope.form.$valid) {
-        console.log(merchantConfigService.mailingAddressSameAsBusinessAddress);
         if ($scope.form1.$valid || merchantConfigService.mailingAddressSameAsBusinessAddress) {
           $rootScope.currentPanel = 'contacts';
-        } else {
+        } else if ( $scope.activeTab !== 'mailing'){
           $scope.activeTab = 'mailing'
+        } else {
+          Modal.confirm.changeTab(function(confirm) {
+            if (confirm) {
+              $rootScope.currentPanel = 'contacts';
+            }
+          });
         }
+      } else {
+        Modal.confirm.changeTab(function(confirm) {
+          if (confirm) {
+            $rootScope.currentPanel = 'contacts';
+          }
+        });
       }
     };
     $rootScope.back = function() {

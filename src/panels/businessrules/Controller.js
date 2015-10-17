@@ -3,7 +3,7 @@
   angular.module('CmMerchantConfigApp')
     .controller('BusinessRulesPanelController', Controller);
 
-  function Controller($scope,$rootScope, merchantConfigService) {
+  function Controller($scope,$rootScope, merchantConfigService,Modal) {
 
     var savedDiscountForEarlyPaymentChangeValues = null, savedUniversallyAvailablePaymentTerms = [], savedDebtorSurcharges = null;
 
@@ -12,10 +12,26 @@
       paymentInterval: null
     };
 
+    $scope.$watch(function() {
+      return $scope.form.$valid
+    },function(value) {
+      $rootScope.formValid = value;
+    });
+
+    $scope.$on('submitted',function(event,value) {
+      $scope.submitted = value;
+    });
+
     $rootScope.next = function() {
       $scope.submitted = true;
       if ($scope.form.$valid) {
         $rootScope.currentPanel = 'debtorcommunications';
+      } else {
+        Modal.confirm.changeTab(function(confirm) {
+          if (confirm) {
+            $rootScope.currentPanel = 'debtorcommunications';
+          }
+        });
       }
     };
     $rootScope.back = function() {

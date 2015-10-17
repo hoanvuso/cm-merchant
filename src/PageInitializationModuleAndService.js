@@ -25,7 +25,7 @@
 
                 console.log("getPreLogonInitializationDetails attempt: " + (numberOfAttempts + 1));
 
-                $http.get('/iapi/referralPartnerConfig/referralPartner.json')
+                $http.get('/cm-merchant/iapi/referralPartnerConfig/referralPartner.json')
                     .then(function (response) {
                               if (response.status === 200
                                   && response.data
