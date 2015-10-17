@@ -22,23 +22,23 @@
     </div>
 
     <ul class="menu-step">
-      <li ng-class="{'active': step === 1}">
+      <li ng-class="{'active': step === 1,'completed': step > 1}">
         <a href="#" ng-click="newInvoice(communication.newInvoice)"><span>New Invoice</span></a>
       </li>
 
-      <li ng-class="{'active': step === 2}">
+      <li ng-class="{'active': step === 2,'completed': step > 2}">
         <a href="#" ng-click="invoicePastDue(communication.invoicePastDue)"><span>Invoice Past Due</span></a>
       </li>
-      <li ng-class="{'active': step === 3}">
+      <li ng-class="{'active': step === 3,'completed': step > 3}">
         <a href="#" ng-click="pastDueReminder(communication.pastDueReminder)"><span>Past Due Reminder(s)</span></a>
       </li>
-      <li ng-class="{'active': step === 4}">
+      <li ng-class="{'active': step === 4,'completed': step > 4}">
         <a href="#" ng-click="seriousArrears(communication.seriousArrears)"><span>Serious Arrears</span></a>
       </li>
-      <li ng-class="{'active': step === 5}">
+      <li ng-class="{'active': step === 5,'completed': step > 5}">
         <a href="#" ng-click="seriousArrearsReminder(communication.seriousArrearsReminder)"><span>Serious Arrears Reminder(s)</span></a>
       </li>
-      <li ng-class="{'active': step >= 6}">
+      <li ng-class="{'active': step >= 6,'completed': step >= 6}">
         <a href="#" ng-click="noticeDefault()"><span>Notice of Default</span></a>
       </li>
     </ul>

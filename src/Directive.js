@@ -45,5 +45,40 @@
           })
         }
       }
-    });
+    }).directive('changePrefix', function() {
+    return {
+      restrict: 'A',
+      scope: {
+        prefix: '=changePrefix'
+      },
+      link: function ($scope, element, attrs) {
+        element.bind('keypress',function() {
+          var numberPattern = /\d+/g;
+          var number = element.val().match( numberPattern );
+          if (number) {
+            if ($scope.prefix === 'fixed') {
+              element.val('$' + number[0]);
+            } else {
+              element.val(number + '%');
+            }
+          }
+        });
+        $scope.$watch(function() {
+          return $scope.prefix;
+        },function(value) {
+          var numberPattern = /\d+/g;
+          var number = element.val().match( numberPattern );
+          if (number) {
+            if (value === 'fixed') {
+              element.attr('maxlength',4)
+              element.val('$' + number[0]);
+            } else {
+              element.attr('maxlength',3)
+              element.val(number + '%');
+            }
+          }
+        })
+      }
+    }
+  });
 })();

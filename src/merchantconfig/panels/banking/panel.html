@@ -29,7 +29,7 @@
       <input name="settlementAccountNumber" type="text" class="form-control"
              placeholder="Settlement Account Number"
              maxlength="9"
-             ng-keypress="onlyDigits($event)"
+             only-digits
              required ng-model="merchantConfigService.merchantConfig.banking.settlementAccountNumber">
       <div ng-if=" form.settlementAccountNumber.$error.required && submitted" class="help-block">Settlement Account Number is required</div>
     </div>

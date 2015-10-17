@@ -1,12 +1,12 @@
 <form class="form-horizontal" name="form" novalidate ng-submit="next(form)">
   <div class="modal-header"><h3>New Invoice - Configuration</h3></div>
   <div class="modal-body">
-    <p>For all current invoices according to the Merchant's definition of current</p>
+    <p>Debtor communication rules for all new invoices created</p>
     <div class="row">
       <div class="col-xs-6">
         <div class="form-group" style="margin-left: 0">
           <p><strong>Email</strong></p>
-          <a href="#" class="btn btn-primary">Pro - Porma<br>Communication</a>
+          <a href="#" class="btn btn-primary">Pro - Forma<br>Communication</a>
         </div>
         <div class="form-group" ng-class="{'has-error': form.noDayEmailed.$error.required && submitted}">
           <label class="control-label col-sm-8" style="font-size: 13px">No. days invoice emailed after invoice date</label>
@@ -21,7 +21,7 @@
       <div class="col-xs-6">
         <div class="form-group" style="margin-left: 0">
           <p><strong>SMS</strong></p>
-          <a href="#" class="btn btn-primary">Pro - Forms<br>Communication</a>
+          <a href="#" class="btn btn-primary">Pro - Forma<br>Communication</a>
         </div>
         <div class="checkbox">
           <label>

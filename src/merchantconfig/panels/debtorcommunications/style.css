@@ -25,6 +25,7 @@
 
 .menu-step li a:hover, .menu-step li a:focus{
     text-decoration: none;
+    outline: none;
 }
 
 .menu-step li a span {
@@ -83,6 +84,15 @@
 .menu-step li.active a span {
     background: rgb(49, 120, 186);
     color: #fff;
+}
+
+.menu-step li.completed a span {
+    background: #449d44;
+    color: #FFF;
+}
+
+.menu-step li.completed a span:after {
+    border-color: transparent transparent transparent #449d44;
 }
 
 .menu-step li.active a span:after {
