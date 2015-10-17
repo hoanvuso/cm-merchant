@@ -28,7 +28,12 @@
     $rootScope.next = function() {
       $scope.submitted = true;
       if ($scope.form.$valid) {
-        $rootScope.currentPanel = 'contacts';
+        console.log(merchantConfigService.mailingAddressSameAsBusinessAddress);
+        if ($scope.form1.$valid || merchantConfigService.mailingAddressSameAsBusinessAddress) {
+          $rootScope.currentPanel = 'contacts';
+        } else {
+          $scope.activeTab = 'mailing'
+        }
       }
     };
     $rootScope.back = function() {

@@ -8,9 +8,8 @@
       <form name="form" class="css-form form-horizontal" ji-form style="margin-top: 30px" novalidate>
         <div class="form-group">
           <label class="col-sm-3 control-label">Unit/Level</label>
-
           <div class="col-sm-9">
-            <input name="unitOrLevel" type="text" class="form-control" placeholder="Unit or Level" required
+            <input name="unitOrLevel" type="text" class="form-control" placeholder="Unit or Level"
                    ng-model="merchantConfigService.merchantConfig.addresses.business.unitOrLevel">
           </div>
         </div>
@@ -18,61 +17,66 @@
           <label class="col-sm-3 control-label">Property Name</label>
 
           <div class="col-sm-9">
-            <input name="propertyName" type="text" class="form-control" placeholder="Property Name" required
+            <input name="propertyName" type="text" class="form-control" placeholder="Property Name"
                    ng-model="merchantConfigService.merchantConfig.addresses.business.propertyName">
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': form.addressLine1.$invalid && submitted}">
           <label class="col-sm-3 control-label">Address Line 1</label>
 
           <div class="col-sm-9">
             <input name="addressLine1" type="text" class="form-control" placeholder="Address Line 1" required
                    ng-model="merchantConfigService.merchantConfig.addresses.business.addressLine1">
+            <div class="help-block" ng-if="form.addressLine1.$error.required && submitted">This input is required</div>
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-3 control-label">Address Line 2</label>
 
           <div class="col-sm-9">
-            <input name="addressLine2" type="text" class="form-control" placeholder="Address Line 2" required
+            <input name="addressLine2" type="text" class="form-control" placeholder="Address Line 2"
                    ng-model="merchantConfigService.merchantConfig.addresses.business.addressLine2">
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': form.suburb.$invalid && submitted}">
           <label class="col-sm-3 control-label">Suburb</label>
 
           <div class="col-sm-9">
             <input name="suburb" type="text" class="form-control" placeholder="Suburb" required
                    ng-model="merchantConfigService.merchantConfig.addresses.business.suburb">
+            <div class="help-block" ng-if="form.suburb.$error.required && submitted">This input is required</div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': form.state.$invalid && submitted}">
           <label class="col-sm-3 control-label">State</label>
 
           <div class="col-sm-9">
-            <select class="form-control"
+            <select class="form-control" required name="state"
                     ng-model="merchantConfigService.merchantConfig.addresses.business.state"
                     ng-options="state.name for state in states">
                 <option value="">Select state</option>
             </select>
+            <div class="help-block" ng-if="form.state.$error.required && submitted">This input is required</div>
             <!--<input name="state" type="text" class="form-control" placeholder="State" required-->
                    <!--ng-model="merchantConfigService.merchantConfig.addresses.business.state">-->
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': form.postCode.$invalid && submitted}">
           <label class="col-sm-3 control-label">Post Code</label>
 
           <div class="col-sm-9">
-            <input name="postCode" type="text" class="form-control" placeholder="Post Code" required
+            <input name="postCode" type="text" class="form-control" placeholder="Post Code" required maxlength="4" only-digits
                    ng-model="merchantConfigService.merchantConfig.addresses.business.postCode">
+            <div class="help-block" ng-if="form.postCode.$error.required && submitted">This input is required</div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': form.country.$invalid && submitted}">
           <label class="col-sm-3 control-label">Country</label>
 
           <div class="col-sm-9">
             <input name="country" type="text" class="form-control" placeholder="Country" required
                    ng-model="merchantConfigService.merchantConfig.addresses.business.country">
+            <div class="help-block" ng-if="form.country.$error.required && submitted">This input is required</div>
           </div>
         </div>
       </form>
@@ -112,12 +116,13 @@
                    ng-model="merchantConfigService.merchantConfig.addresses.mailing.propertyName">
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': form1.addressLine1.$invalid && submitted}">
           <label class="col-sm-3 control-label">Address Line 1</label>
 
           <div class="col-sm-9">
             <input name="addressLine1" type="text" class="form-control" placeholder="Address Line 1" required
                    ng-model="merchantConfigService.merchantConfig.addresses.mailing.addressLine1">
+            <div class="help-block" ng-if="form1.addressLine1.$error.required && submitted">This input is required</div>
           </div>
         </div>
         <div class="form-group">
@@ -128,36 +133,45 @@
                    ng-model="merchantConfigService.merchantConfig.addresses.mailing.addressLine2">
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': form1.suburb.$invalid && submitted}">
           <label class="col-sm-3 control-label">Suburb</label>
 
           <div class="col-sm-9">
             <input name="suburb" type="text" class="form-control" placeholder="Suburb" required
                    ng-model="merchantConfigService.merchantConfig.addresses.mailing.suburb">
+            <div class="help-block" ng-if="form1.suburb.$error.required && submitted">This input is required</div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': form1.state.$invalid && submitted}">
           <label class="col-sm-3 control-label">State</label>
 
           <div class="col-sm-9">
-            <input name="state" type="text" class="form-control" placeholder="State" required
-                   ng-model="merchantConfigService.merchantConfig.addresses.mailing.state">
+            <select class="form-control" required name="state"
+                    ng-model="merchantConfigService.merchantConfig.addresses.mailing.state"
+                    ng-options="state.name for state in states">
+              <option value="">Select state</option>
+            </select>
+            <div class="help-block" ng-if="form1.state.$error.required && submitted">This input is required</div>
+            <!--<input name="state" type="text" class="form-control" placeholder="State" required-->
+            <!--ng-model="merchantConfigService.merchantConfig.addresses.business.state">-->
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': form1.postCode.$invalid && submitted}">
           <label class="col-sm-3 control-label">Post Code</label>
 
           <div class="col-sm-9">
-            <input name="postCode" type="text" class="form-control" placeholder="Post Code" required
+            <input name="postCode" type="text" class="form-control" placeholder="Post Code" required maxlength="4" only-digits
                    ng-model="merchantConfigService.merchantConfig.addresses.mailing.postCode">
+            <div class="help-block" ng-if="form1.postCode.$error.required && submitted">This input is required</div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': form1.country.$invalid && submitted}">
           <label class="col-sm-3 control-label">Country</label>
 
           <div class="col-sm-9">
             <input name="country" type="text" class="form-control" placeholder="Country" required
                    ng-model="merchantConfigService.merchantConfig.addresses.mailing.country">
+            <div class="help-block" ng-if="form1.country.$error.required && submitted">This input is required</div>
           </div>
         </div>
       </form>
