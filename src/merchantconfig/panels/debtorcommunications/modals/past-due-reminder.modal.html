@@ -10,7 +10,8 @@
         <div class="form-group" ng-class="{'has-error': form.reminderFrequency.$error.required && submitted}">
           <label class="control-label col-sm-8" style="font-size: 13px">Reminder frequency (days)</label>
           <div class="col-sm-4">
-            <input name="reminderFrequency" type="text" class="form-control" only-digits required ng-model="pastDueReminder.reminderFrequency">
+            <input name="reminderFrequency" type="text" class="form-control" only-digits required
+                   ng-model="pastDueReminder.reminderFrequency">
             <div class="help-block" ng-if="form.reminderFrequency.$error.required && submitted">This input is required</div>
           </div>
         </div>
@@ -19,7 +20,7 @@
           <div class="col-sm-4">
             <input name="minArrearsAmount" type="text" class="form-control"
                    only-digits required
-                   mask="$999" clean="true"
+                   mask="$9" clean="true" limit="false" validate="false"
                    ng-model="pastDueReminder.minArrearsAmount">
             <div class="help-block" ng-if="form.minArrearsAmount.$error.required && submitted">This input is required</div>
           </div>
@@ -40,6 +41,7 @@
     </div>
   </div>
   <div class="modal-footer">
+    <button class="btn btn-primary pull-left" type="button" ng-click="back()">Back</button>
     <button class="btn btn-primary">Next</button>
   </div>
 </form>

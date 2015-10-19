@@ -11,7 +11,7 @@
 }
 
 .menu-step li {
-    width: 16%;
+    width: 15%;
     list-style: none;
     float: left;
     padding-left: 5px;
@@ -41,6 +41,7 @@
     position: relative;
     padding-left: 59px;
     text-align: center;
+    text-decoration: underline
 }
 
 .menu-step li a span:after {
@@ -74,7 +75,7 @@
 }
 
 .menu-step li:first-child {
-    width: 20%;
+    width: 21%;
 }
 
 .menu-step li:first-child a span {
@@ -86,13 +87,40 @@
     color: #fff;
 }
 
-.menu-step li.completed a span {
+.menu-step li.completed-green a span {
     background: #449d44;
     color: #FFF;
 }
 
-.menu-step li.completed a span:after {
+.menu-step li.completed-green a span:after {
     border-color: transparent transparent transparent #449d44;
+}
+
+.menu-step li.completed-yellow a span {
+    background: #f0ad4e;
+    color: #FFF;
+}
+
+.menu-step li.completed-yellow a span:after {
+    border-color: transparent transparent transparent #f0ad4e;
+}
+
+.menu-step li.completed-red a span {
+    background: #d9534f;
+    color: #FFF;
+}
+
+.menu-step li.completed-red a span:after {
+    border-color: transparent transparent transparent #d9534f;
+}
+
+.menu-step li.completed-purple a span {
+    background: #9256a3;
+    color: #FFF;
+}
+
+.menu-step li.completed-purple a span:after {
+    border-color: transparent transparent transparent #9256a3 !important;
 }
 
 .menu-step li.active a span:after {

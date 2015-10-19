@@ -52,14 +52,18 @@
         prefix: '=changePrefix'
       },
       link: function ($scope, element, attrs) {
-        element.bind('keypress',function() {
+        element.bind('keyup',function($event) {
           var numberPattern = /\d+/g;
-          var number = element.val().match( numberPattern );
-          if (number) {
-            if ($scope.prefix === 'fixed') {
-              element.val('$' + number[0]);
-            } else {
-              element.val(number + '%');
+          var number = element.val().match(numberPattern);
+          var charCode = ($event.which) ? $event.which : event.keyCode;
+          if ((charCode >= 48 && charCode <= 57) || charCode == 43) {
+            if (number) {
+              if ($scope.prefix === 'fixed') {
+                element.val('$' + number[0]);
+              } else {
+
+                element.val(number.join("") + '%');
+              }
             }
           }
         });
@@ -68,13 +72,12 @@
         },function(value) {
           var numberPattern = /\d+/g;
           var number = element.val().match( numberPattern );
+          console.log(number);
           if (number) {
             if (value === 'fixed') {
-              element.attr('maxlength',4)
               element.val('$' + number[0]);
             } else {
-              element.attr('maxlength',3)
-              element.val(number + '%');
+              element.val(number[0] + '%');
             }
           }
         })

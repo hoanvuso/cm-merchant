@@ -17,7 +17,7 @@ angular.module('CmMerchantConfigApp')
 
     return {
       confirm: {
-        changeTab : function(cb) {
+        changeTab: function (cb) {
           cb = (cb || angular.noop);
           var modal;
           modal = openModal({
@@ -28,21 +28,21 @@ angular.module('CmMerchantConfigApp')
               buttons: [{
                 classes: 'btn-warning',
                 text: 'Next tab',
-                click: function(e) {
+                click: function (e) {
                   modal.close(e);
                   return cb(true);
                 }
               }, {
                 classes: 'btn-default',
                 text: 'Back',
-                click: function(e) {
+                click: function (e) {
                   modal.dismiss(e);
                   return cb(false);
                 }
               }]
             }
-          },'modal-danger')
-        },
-      },
+          }, 'modal-danger')
+        }
+      }
     }
   });

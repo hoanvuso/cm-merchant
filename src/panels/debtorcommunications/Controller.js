@@ -3,10 +3,28 @@
   angular.module('CmMerchantConfigApp')
     .controller('DebtorCommunicationsController', Controller);
 
-  function Controller($scope, merchantConfigService,$modal) {
-    $scope.communication = {};
-    $scope.step = 1;
-
+  function Controller($scope,$rootScope, merchantConfigService,$modal, Modal) {
+    $scope.communication = merchantConfigService.communication = merchantConfigService.communication || {};
+    $scope.step = merchantConfigService.communication.step = merchantConfigService.communication.step ||  1;
+    if (merchantConfigService.communication.newInvoice) {
+      if ($scope.step >= 4) {
+        $scope.step3Day = parseInt($scope.communication.pastDueReminder.reminderFrequency) +
+          parseInt($scope.communication.invoicePastDue.invoicePastDueDate);
+      }
+      if ($scope.step >= 5) {
+        $scope.step4Day = parseInt($scope.communication.seriousArrears.daysAfterInvoicePastDueDate - 0) +
+          parseInt($scope.communication.invoicePastDue.invoicePastDueDate);
+      }
+      if ($scope.step >= 6) {
+        $scope.step5Day = $scope.step4Day + parseInt($scope.communication.seriousArrearsReminder.reminderFrequency);
+        $scope.step6Amount = $scope.communication.seriousArrears.minArrearsAmount;
+      }
+      if ($scope.step >= 7) {
+        $scope.step6Day = $scope.step5Day +
+          ($scope.communication.seriousArrearsReminder.reminderFrequency * $scope.communication.seriousArrearsReminder.maxNoReminders)
+        $scope.step7Amount = $scope.communication.seriousArrears.minArrearsAmount;
+      }
+    }
 
 
     $scope.newInvoice = function(newInvoice) {
@@ -19,6 +37,11 @@
           function($scope,$modalInstance) {
             $scope.submitted = false;
             $scope.newInvoice = angular.copy(newInvoice);
+
+            $scope.back = function() {
+              $modalInstance.dismiss('cancel');
+            };
+
             $scope.next = function(form) {
               $scope.submitted = true;
               if (form.$valid) {
@@ -31,7 +54,9 @@
 
       newInvoiceModal.result.then(function(result) {
         $scope.communication.newInvoice = result;
-        $scope.step = 2;
+        if ($scope.step === 1) {
+          $scope.step = merchantConfigService.communication.step = 2;
+        }
       })
 
     };
@@ -46,9 +71,15 @@
           '$scope','$modalInstance',
           function($scope,$modalInstance) {
             $scope.submitted = false;
-            $scope.invoicePastDue = angular.copy(invoicePastDue)
+            $scope.invoicePastDue = angular.copy(invoicePastDue);
+
+            $scope.back = function() {
+              $modalInstance.dismiss('cancel');
+            };
+
             $scope.next = function(form) {
               $scope.submitted = true;
+              console.log(form.$valid);
               if (form.$valid) {
                 $modalInstance.close($scope.invoicePastDue);
               }
@@ -58,10 +89,12 @@
       });
 
       invoicePastDueModal.result.then(function(result) {
-        console.log(result);
+
         $scope.communication.invoicePastDue = result;
         $scope.communication.invoicePastDue.invoicePastDueDate = 1;
-        $scope.step = 3;
+        if ($scope.step === 2) {
+          $scope.step = merchantConfigService.communication.step = 3;
+        }
       })
     };
 
@@ -75,6 +108,11 @@
           function($scope,$modalInstance) {
             $scope.submitted = false;
             $scope.pastDueReminder = angular.copy(pastDueReminder);
+
+            $scope.back = function() {
+              $modalInstance.dismiss('cancel');
+            };
+
             $scope.next = function(form) {
               $scope.submitted = true;
               if (form.$valid) {
@@ -89,9 +127,49 @@
         $scope.communication.pastDueReminder = result;
         $scope.step3Day = parseInt($scope.communication.pastDueReminder.reminderFrequency) +
           parseInt($scope.communication.invoicePastDue.invoicePastDueDate);
-        console.log('step3',$scope.step3Day);
-        $scope.step = 4;
-      })
+        if ($scope.step === 3) {
+          $scope.step = merchantConfigService.communication.step = 4;
+          var seriousArrearsConfirmModal = $modal.open({
+            templateUrl: 'merchantconfig/panels/debtorcommunications/modals/serious-arrears-confirm.modal.html',
+            size: 'md',
+            backdrop: 'static',
+            controller: [
+              '$scope','$modalInstance',
+              function($scope,$modalInstance) {
+                $scope.confirm = true;
+                $scope.next = function() {
+                  $modalInstance.close($scope.confirm);
+                }
+              }
+            ]
+          });
+
+          seriousArrearsConfirmModal.result.then(function(result) {
+            console.log(result);
+            if (result) {
+              console.log("true");
+              $scope.step = 4;
+            } else {
+              console.log("false");
+              $scope.step = 7;
+              $scope.communication.seriousArrears = {};
+              $scope.communication.seriousArrearsReminder = {};
+              $scope.communication.seriousArrears.daysAfterInvoicePastDueDate = 60;
+              $scope.communication.seriousArrears.minArrearsAmount = 500;
+              $scope.communication.seriousArrearsReminder.reminderFrequency = 5;
+              $scope.communication.seriousArrearsReminder.maxNoReminders = 3;
+
+              $scope.step4Day = parseInt($scope.communication.seriousArrears.daysAfterInvoicePastDueDate) +
+                parseInt($scope.communication.invoicePastDue.invoicePastDueDate);
+              $scope.step5Day = $scope.step4Day + parseInt($scope.communication.seriousArrearsReminder.reminderFrequency);
+              $scope.step6Amount = $scope.communication.seriousArrears.minArrearsAmount;
+              $scope.step6Day = $scope.step5Day +
+                ($scope.communication.seriousArrearsReminder.reminderFrequency * $scope.communication.seriousArrearsReminder.maxNoReminders)
+              $scope.step7Amount = $scope.communication.seriousArrears.minArrearsAmount;
+            }
+          })
+        }
+      });
     };
 
     $scope.seriousArrears = function(seriousArrears) {
@@ -104,6 +182,11 @@
           function($scope,$modalInstance) {
             $scope.submitted = false;
             $scope.seriousArrears = angular.copy(seriousArrears);
+
+            $scope.back = function() {
+              $modalInstance.dismiss('cancel');
+            };
+
             $scope.next = function(form) {
               $scope.submitted = true;
               if (form.$valid) {
@@ -118,7 +201,9 @@
         $scope.communication.seriousArrears = result;
         $scope.step4Day = parseInt($scope.communication.seriousArrears.daysAfterInvoicePastDueDate-0) +
           parseInt($scope.communication.invoicePastDue.invoicePastDueDate);
-        $scope.step = 5;
+        if ($scope.step === 4) {
+          $scope.step = merchantConfigService.communication.step = 5;
+        }
       })
     };
 
@@ -132,6 +217,11 @@
           function($scope,$modalInstance) {
             $scope.submitted = false;
             $scope.seriousArrearsReminder = angular.copy(seriousArrearsReminder);
+
+            $scope.back = function() {
+              $modalInstance.dismiss('cancel');
+            };
+
             $scope.next = function(form) {
               $scope.submitted = true;
               if (form.$valid) {
@@ -146,7 +236,9 @@
         $scope.communication.seriousArrearsReminder = result;
         $scope.step5Day = $scope.step4Day + parseInt($scope.communication.seriousArrearsReminder.reminderFrequency);
         $scope.step6Amount = $scope.communication.seriousArrears.minArrearsAmount;
-        $scope.step = 6;
+        if ($scope.step === 5) {
+          $scope.step = merchantConfigService.communication.step = 6;
+        }
       })
     };
 
@@ -159,6 +251,11 @@
           '$scope','$modalInstance',
           function($scope,$modalInstance) {
             $scope.submitted = false;
+
+            $scope.back = function() {
+              $modalInstance.dismiss('cancel');
+            };
+
             $scope.next = function(form) {
               $scope.submitted = true;
               if (form.$valid) {
@@ -170,11 +267,20 @@
       });
 
       noticeDefaultModal.result.then(function() {
-        $scope.step = 7;
+        if ($scope.step === 6) {
+          $scope.step = merchantConfigService.communication.step = 7;
+        }
         $scope.step6Day = $scope.step5Day +
           ($scope.communication.seriousArrearsReminder.reminderFrequency * $scope.communication.seriousArrearsReminder.maxNoReminders)
         $scope.step7Amount = $scope.communication.seriousArrears.minArrearsAmount;
       })
+    };
+
+    $rootScope.next = function() {
+      $rootScope.currentPanel = 'confirmation';
+    };
+    $rootScope.back = function() {
+      $rootScope.currentPanel = 'businessrules';
     };
 
     $scope.merchantConfigService = merchantConfigService;

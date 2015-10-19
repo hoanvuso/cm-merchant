@@ -13,7 +13,7 @@
           <div class="col-sm-4">
             <input name="minInvoiceAmount" type="text" class="form-control"
                    only-digits required
-                   mask="$999" clean="true"
+                   mask="$9" clean="true" limit="false" validate="false"
                    ng-model="invoicePastDue.minInvoiceAmount">
             <div class="help-block" ng-if="form.minInvoiceAmount.$error.required && submitted">This input is required</div>
           </div>
@@ -34,6 +34,7 @@
     </div>
   </div>
   <div class="modal-footer">
+    <button class="btn btn-primary pull-left" type="button" ng-click="back()">Back</button>
     <button class="btn btn-primary">Next</button>
   </div>
 </form>

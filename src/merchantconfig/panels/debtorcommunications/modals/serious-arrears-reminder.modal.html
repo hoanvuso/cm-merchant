@@ -11,7 +11,7 @@
           <label class="control-label col-sm-8" style="font-size: 13px">Reminders frequency (days)</label>
           <div class="col-sm-4">
             <input name="remindersFrequency" type="text" class="form-control"
-                   only-digits required maxlength="2"
+                   only-digits required maxlength="12"
                    ng-model="seriousArrearsReminder.reminderFrequency">
             <div class="help-block" ng-if="form.remindersFrequency.$error.required && submitted">This input is required</div>
           </div>
@@ -20,7 +20,7 @@
           <label class="control-label col-sm-8" style="font-size: 13px">Maximum no of Serious Arrears reminders</label>
           <div class="col-sm-4">
             <input name="maxNoReminders" type="text" class="form-control"
-                   only-digits required maxlength="2"
+                   only-digits required maxlength="12"
                    ng-model="seriousArrearsReminder.maxNoReminders">
             <div class="help-block" ng-if="form.maxNoReminders.$error.required && submitted">This input is required</div>
           </div>
@@ -41,6 +41,7 @@
     </div>
   </div>
   <div class="modal-footer">
+    <button class="btn btn-primary pull-left" type="button" ng-click="back()">Back</button>
     <button class="btn btn-primary">Next</button>
   </div>
 </form>

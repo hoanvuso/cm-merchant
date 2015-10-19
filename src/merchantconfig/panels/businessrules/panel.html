@@ -28,7 +28,7 @@
 
       <div class="col-sm-5">
         <input name="earlyPaymentDiscountInvoiceMin" type="text" class="form-control"
-               placeholder="Minimum Invoice Amount" required
+               placeholder="Minimum Invoice Amount" required only-digits=""
                mask="$999" clean="true"
                ng-model="merchantConfigService.merchantConfig.businessRule.discounts.earlyPaymentDiscountInvoiceMin">
         <div class="help-block" ng-if="form.earlyPaymentDiscountInvoiceMin.$error.required && submitted">This input is required</div>
@@ -129,7 +129,7 @@
       </label>
 
       <div class="col-sm-4">
-        <input type="text" ji-currency-input class="form-control" placeholder="Nominated Back A/C Charge" required
+        <input type="text" ji-currency-input class="form-control" placeholder="$" required
                ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.directDebitCharge"
                only-digits
                mask="$999" clean="true">
@@ -140,7 +140,7 @@
       </label>
 
       <div class="col-sm-4">
-        <input type="text" ji-percentage-input decimalPlaces="4" class="form-control" placeholder="Visa" required
+        <input type="text" ji-percentage-input decimalPlaces="4" class="form-control" placeholder="%" required
                maxlength="3" only-digits
                ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.visaRate">
       </div>
@@ -151,7 +151,7 @@
 
       <div class="col-sm-4">
         <input type="text" ji-percentage-input decimalPlaces="4" maxlength="3" class="form-control"
-               placeholder="Mastercard" required only-digits
+               placeholder="%" required only-digits
                ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.masterCardRate">
       </div>
     </div>
@@ -161,7 +161,7 @@
 
       <div class="col-sm-4">
         <input type="text" ji-percentage-input decimalPlaces="4" maxlength="3" class="form-control"
-               placeholder="American Express"
+               placeholder="%"
                required only-digits
                ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.americanExpressRate">
       </div>
@@ -172,7 +172,7 @@
 
       <div class="col-sm-4">
         <input type="text" ji-percentage-input decimalPlaces="4" maxlength="3" class="form-control"
-               placeholder="Diners Club" required only-digits
+               placeholder="%" required only-digits
                ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.dinnerClubsRate">
       </div>
     </div>

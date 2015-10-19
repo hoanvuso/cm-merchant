@@ -12,7 +12,7 @@
           <label class="control-label col-sm-8" style="font-size: 13px">No. days invoice emailed after invoice date</label>
           <div class="col-sm-4">
             <input name="noDayEmailed" type="text" class="form-control"
-                   only-digits required maxlength="2"
+                   only-digits required maxlength="12"
                    ng-model="newInvoice.noDaysEmailed">
             <div class="help-block" ng-if="form.noDayEmailed.$error.required && submitted">This input is required</div>
           </div>
