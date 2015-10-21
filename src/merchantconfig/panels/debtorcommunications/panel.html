@@ -3,19 +3,19 @@
   <div class="referral-parner">
     <div class="row sms-menu">
       <div class="col-xs-2" ng-class="{'active': communication.newInvoice.sendSMS}">
-        <span style="margin-left: 50px">SMS</span>
+        <span>SMS</span>
       </div>
       <div class="col-xs-2" ng-class="{'active': communication.invoicePastDue.sendSMS}">
-        <span style="margin-left: 78px">SMS</span>
+        <span>SMS</span>
       </div>
       <div class="col-xs-2" ng-class="{'active': communication.pastDueReminder.sendSMS}">
-        <span style="margin-left: 60px">SMS</span>
+        <span>SMS</span>
       </div>
       <div class="col-xs-2" ng-class="{'active': communication.seriousArrears.sendSMS}">
-        <span style="margin-left: 30px">SMS</span>
+        <span>SMS</span>
       </div>
       <div class="col-xs-2" ng-class="{'active': communication.seriousArrearsReminder.sendSMS}">
-        <span style="margin-left: 15px">SMS</span>
+        <span>SMS</span>
       </div>
       <div class="col-xs-2">
       </div>
@@ -42,6 +42,8 @@
         <a href="#" ng-click="noticeDefault()"><span>Notice of Default</span></a>
       </li>
     </ul>
+    
+    <div ng-show="step > 1" class="active-panel"></div>
 
     <div class="row">
       <div class="col-xs-3">

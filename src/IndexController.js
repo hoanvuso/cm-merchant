@@ -30,16 +30,10 @@
     });
 
     $scope.changeTab = function(tab) {
-      $scope.$broadcast('submitted',true);
-      if ($rootScope.formValid) {
-        $rootScope.currentPanel = tab;
-      } else {
-        Modal.confirm.changeTab(function(confirm) {
-          if (confirm) {
-            $rootScope.currentPanel = tab;
-          }
-        });
-      }
+      $rootScope[$rootScope.currentPanel + 'Invalid'] = !$rootScope.formValid;
+
+      $rootScope.currentPanel = tab;
+
     };
 
     refresh();

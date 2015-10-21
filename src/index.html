@@ -58,24 +58,31 @@
     <div class="clearfix"></div>
     <div class="main">      
       <div id="mainTabSet">
-        <div class="btn" ng-click="changeTab('general')" ng-class="{selected: currentPanel === 'general'}">General</div>
-        <div class="btn" ng-click="changeTab('addresses')" ng-class="{selected: currentPanel === 'addresses'}">
+        <div class="btn" ng-click="changeTab('general')"
+             ng-class="{selected: currentPanel === 'general','invalid': generalInvalid}"
+             ng-class="{}"
+            >General</div>
+        <div class="btn" ng-click="changeTab('addresses')"
+             ng-class="{selected: currentPanel === 'addresses','invalid': addressesInvalid}">
           Addresses
         </div>
         <!--<div class="btn" ng-click="currentPanel = 'emailaddresses'" ng-class="{selected: currentPanel === 'emailaddresses'}">Email Addresses</div>-->
-        <div class="btn" ng-click="changeTab('contacts')" ng-class="{selected: currentPanel === 'contacts'}">Contacts
+        <div class="btn" ng-click="changeTab('contacts')"
+             ng-class="{selected: currentPanel === 'contacts','invalid': contactsInvalid}">Contacts
         </div>
         <div class="btn" ng-click="changeTab('administrators')"
-             ng-class="{selected: currentPanel === 'administrators'}">Administrators
+             ng-class="{selected: currentPanel === 'administrators','invalid': administratorsInvalid}">Administrators
         </div>
-        <div class="btn" ng-click="changeTab('banking')" ng-class="{selected: currentPanel === 'banking'}">Banking
+        <div class="btn" ng-click="changeTab('banking')"
+             ng-class="{selected: currentPanel === 'banking','invalid': bankingInvalid}">Banking
           Details
         </div>
-        <div class="btn" ng-click="changeTab('businessrules')" ng-class="{selected: currentPanel === 'businessrules'}">
+        <div class="btn" ng-click="changeTab('businessrules')"
+             ng-class="{selected: currentPanel === 'businessrules','invalid': businessrulesInvalid}">
           Business Rules
         </div>
         <div class="btn" ng-click="changeTab('debtorcommunications')"
-             ng-class="{selected: currentPanel === 'debtorcommunications'}">Communications
+             ng-class="{selected: currentPanel === 'debtorcommunications','invalid': debtorcommunicationsInvalid}">Communications
         </div>
         <div class="btn" ng-click="changeTab('confirmation')"
              ng-class="{selected: currentPanel === 'confirmation'}">
@@ -169,7 +176,7 @@
                 <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0; width: 100px" ng-click="importConfig()">
                   Load
                 </button>-->
-        <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0;" ng-click="next()">
+        <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0;" ng-click="next()" ng-if="currentPanel !== 'referral'">
           Next
         </button>
         <button class="btn btn-primary pull-right" style="margin: 20px 20px 20px 0;" ng-click="validateAndExportConfig()">

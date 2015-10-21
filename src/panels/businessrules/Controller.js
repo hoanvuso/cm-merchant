@@ -4,7 +4,7 @@
     .controller('BusinessRulesPanelController', Controller);
 
   function Controller($scope,$rootScope, merchantConfigService,Modal) {
-
+    $scope.submitted = $rootScope.businessrulesInvalid;
     var savedDiscountForEarlyPaymentChangeValues = null, savedUniversallyAvailablePaymentTerms = [], savedDebtorSurcharges = null;
 
     $scope.paymentTerms = {
@@ -18,22 +18,12 @@
       $rootScope.formValid = value;
     });
 
-    $scope.$on('submitted',function(event,value) {
-      $scope.submitted = value;
-    });
-
     $rootScope.next = function() {
       $scope.submitted = true;
-      if ($scope.form.$valid) {
-        $rootScope.currentPanel = 'debtorcommunications';
-      } else {
-        Modal.confirm.changeTab(function(confirm) {
-          if (confirm) {
-            $rootScope.currentPanel = 'debtorcommunications';
-          }
-        });
-      }
+      $rootScope.businessrulesInvalid = !$scope.form.$valid;
+      $rootScope.currentPanel = 'debtorcommunications';
     };
+
     $rootScope.back = function() {
       $rootScope.currentPanel = 'banking';
     };

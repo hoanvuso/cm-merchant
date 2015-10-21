@@ -148,10 +148,10 @@
             console.log(result);
             if (result) {
               console.log("true");
-              $scope.step = 4;
+              $scope.step = merchantConfigService.communication.step = 4;
             } else {
               console.log("false");
-              $scope.step = 7;
+              $scope.step = merchantConfigService.communication.step = 7;
               $scope.communication.seriousArrears = {};
               $scope.communication.seriousArrearsReminder = {};
               $scope.communication.seriousArrears.daysAfterInvoicePastDueDate = 60;
@@ -276,7 +276,14 @@
       })
     };
 
+    $scope.$watch(function() {
+      return $scope.step
+    },function(value) {
+      $rootScope.formValid = value > 3;
+    });
+
     $rootScope.next = function() {
+      $rootScope.debtorcommunicationsInvalid = $scope.step > 3;
       $rootScope.currentPanel = 'confirmation';
     };
     $rootScope.back = function() {

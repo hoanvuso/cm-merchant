@@ -4,6 +4,7 @@
 
   function Controller($scope,$rootScope, merchantConfigService,Modal) {
     $scope.error = {};
+    $scope.submitted = $rootScope.contactsInvalid;
 
     if (merchantConfigService.merchantConfig.contacts.keyCommercial.phone) {
       var keyCommercialPhone = merchantConfigService.merchantConfig.contacts.keyCommercial.phone.toString();
@@ -86,21 +87,10 @@
       $rootScope.formValid = value;
     });
 
-    $scope.$on('submitted',function(event,value) {
-      $scope.submitted = value;
-    });
-
     $rootScope.next = function() {
       $scope.submitted = true;
-      if ($scope.form.$valid) {
-        $rootScope.currentPanel = 'administrators';
-      } else {
-        Modal.confirm.changeTab(function(confirm) {
-          if (confirm) {
-            $rootScope.currentPanel = 'administrators';
-          }
-        });
-      }
+      $rootScope.contactsInvalid = !$scope.form.$valid;
+      $rootScope.currentPanel = 'administrators';
     };
     $rootScope.back = function() {
       $rootScope.currentPanel = 'addresses';

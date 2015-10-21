@@ -5,7 +5,7 @@
 
   function Controller($scope,$rootScope, merchantConfigService,Modal) {
     $scope.error = {};
-    $scope.submitted = false;
+    $scope.submitted = $rootScope.bankingInvalid;
 
     if(!merchantConfigService.merchantConfig.banking.settlementAccountBsb){
       merchantConfigService.merchantConfig.banking.settlementAccountBsb = '';
@@ -28,25 +28,14 @@
       $rootScope.formValid = value;
     });
 
-    $scope.$on('submitted',function(event,value) {
-      $scope.submitted = value;
-    });
-
     $rootScope.next = function() {
       $scope.submitted = true;
-      if ($scope.form.$valid) {
-        $rootScope.currentPanel = 'businessrules';
-      } else {
-        Modal.confirm.changeTab(function(confirm) {
-          if (confirm) {
-            $rootScope.currentPanel = 'businessrules';
-          }
-        });
-      }
+      $rootScope.bankingInvalid = !$scope.form.$valid;
+      $rootScope.currentPanel = 'businessrules';
     };
+
     $rootScope.back = function() {
       $rootScope.currentPanel = 'administrators';
-      console.log($rootScope.currentPanel);
     };
 
     $scope.$watch(function() {

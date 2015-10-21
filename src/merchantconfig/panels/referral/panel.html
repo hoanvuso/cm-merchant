@@ -9,7 +9,7 @@
             <input type="text" name="months" class="form-control"
                    ng-model="merchantConfigService.merchantConfig.referral.months"
                    maxlength="6"
-                   only-digits>
+                   only-digits required>
           </td>
           <td>months</td>
         </tr>
@@ -19,11 +19,11 @@
             <input type="text" name="revenue1" class="form-control"
                    ng-model="merchantConfigService.merchantConfig.referral.revenue1"
                    mask="$999,999,999,999" clean="true"
-                   only-digits style="margin-bottom: 10px">
+                   only-digits required style="margin-bottom: 10px">
             <input type="text" name="revenue2" class="form-control"
                    ng-model="merchantConfigService.merchantConfig.referral.revenue2"
                    mask="$999,999,999,999" clean="true"
-                   only-digits>
+                   only-digits required>
           </td>
           <td></td>
         </tr>
@@ -33,7 +33,7 @@
             <input type="text" name="tangible" class="form-control"
                    ng-model="merchantConfigService.merchantConfig.referral.tangible"
                    mask="$999,999,999,999" clean="true"
-                   only-digits>
+                   only-digits required>
           </td>
           <td></td>
         </tr>

@@ -4,7 +4,7 @@
     .controller('AddressesPanelController', Controller);
 
   function Controller($scope,$rootScope, merchantConfigService,Modal) {
-    $scope.submitted = false;
+    $scope.submitted = $rootScope.addressesInvalid;
     $scope.activeTab = 'business';
     $scope.changeTab = function(tab) {
       $scope.activeTab = tab
@@ -26,7 +26,15 @@
     ];
 
     $scope.$watch(function() {
-      return $scope.form.$valid
+      return $scope.form1.$valid;
+    },function(value) {
+      if ($scope.form.$valid && !value && !merchantConfigService.mailingAddressSameAsBusinessAddress) {
+        $scope.activeTab = 'mailing'
+      }
+    });
+
+    $scope.$watch(function() {
+      return !($scope.form.$invalid || ($scope.form1.$invalid && !merchantConfigService.mailingAddressSameAsBusinessAddress))
     },function(value) {
       $rootScope.formValid = value;
     });
@@ -37,26 +45,11 @@
 
     $rootScope.next = function() {
       $scope.submitted = true;
-      if ($scope.form.$valid) {
-        if ($scope.form1.$valid || merchantConfigService.mailingAddressSameAsBusinessAddress) {
-          $rootScope.currentPanel = 'contacts';
-        } else if ( $scope.activeTab !== 'mailing'){
-          $scope.activeTab = 'mailing'
-        } else {
-          Modal.confirm.changeTab(function(confirm) {
-            if (confirm) {
-              $rootScope.currentPanel = 'contacts';
-            }
-          });
-        }
-      } else {
-        Modal.confirm.changeTab(function(confirm) {
-          if (confirm) {
-            $rootScope.currentPanel = 'contacts';
-          }
-        });
-      }
+      $rootScope.addressesInvalid = $scope.form.$invalid || ($scope.form1.$invalid && !merchantConfigService.mailingAddressSameAsBusinessAddress);
+      $rootScope.currentPanel = 'contacts';
     };
+
+
     $rootScope.back = function() {
       $rootScope.currentPanel = 'general';
     };

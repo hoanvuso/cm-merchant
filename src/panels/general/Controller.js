@@ -5,7 +5,7 @@
 
   function Controller($scope,$rootScope, merchantConfigService,FileUploader,Modal) {
     $scope.error = {};
-    $scope.submitted = false;
+    $scope.submitted = $rootScope.generalInvalid;
     if (merchantConfigService.merchantConfig.general.phone) {
       var phone = merchantConfigService.merchantConfig.general.phone.toString();
       $scope.phone = [
@@ -62,15 +62,8 @@
 
     $rootScope.next = function() {
       $scope.submitted = true;
-      if ($scope.form.$valid) {
-        $rootScope.currentPanel = 'addresses';
-      } else {
-        Modal.confirm.changeTab(function(confirm) {
-          if (confirm) {
-            $rootScope.currentPanel = 'addresses';
-          }
-        });
-      }
+      $rootScope.generalInvalid = !$scope.form.$valid;
+      $rootScope.currentPanel = 'addresses';
     };
 
     $scope.$watch(function() {
@@ -79,9 +72,6 @@
       $rootScope.formValid = value;
     });
 
-    $scope.$on('submitted',function(event,value) {
-      $scope.submitted = value;
-    });
 
     merchantConfigService.generalController = this;
     this.validate = validate;
