@@ -4,12 +4,18 @@
     .controller('GeneralPanelController', Controller);
 
   function Controller($scope,$rootScope, merchantConfigService,FileUploader,Modal) {
+    $scope.industryTypes = [
+      {id: 0,name: 'Type 1'},
+      {id: 1,name: 'Type 2'},
+      {id: 2,name: 'Type 3'},
+    ];
+
     $scope.error = {};
     $scope.submitted = $rootScope.generalInvalid;
     if (merchantConfigService.merchantConfig.general.phone) {
       var phone = merchantConfigService.merchantConfig.general.phone.toString();
       $scope.phone = [
-        phone.substring(0,2),
+        phone.substring(0,1),
         phone.substring(2,10)
       ];
     } else {
