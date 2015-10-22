@@ -1,0 +1,357 @@
+
+<div class="modal-body review">
+  <h1 class="text-center">Schedule</h1>
+  <!-- Contract offer-->
+  <div class="content">
+    <h4>Contract offer & Acceptance Details</h4>
+    <table class="table table-bordered">
+      <tr>
+        <th width="20%">Merchant Offer Date</th>
+        <td>{{ merchantOfferDate }}</td>
+      </tr>
+      <tr>
+        <th>OneBox Acceptance Date</th>
+        <td>{{ oneBoxDate }}</td>
+      </tr>
+    </table>
+  </div>
+  <!-- End contract offer -->
+
+  <!-- Entity details-->
+  <div class="content">
+    <h4>Entity Details</h4>
+    <table class="table table-bordered">
+      <tr>
+        <th width="20%" colspan="2">Entity Legal Name</th>
+        <td>{{merchantConfigService.merchantConfig.general.merchantName}}</td>
+      </tr>
+      <tr>
+        <th colspan="2">Entity Trading Name</th>
+        <td>{{merchantConfigService.merchantConfig.general.merchantTradingName}}</td>
+      </tr>
+      <tr>
+        <th colspan="2">ABN</th>
+        <td>{{merchantConfigService.merchantConfig.abnNumber | abnNumber}}</td>
+      </tr>
+      <tr>
+        <th colspan="2">Web URL</th>
+        <td>www.hardhats.com.au</td>
+      </tr>
+      <tr>
+        <th colspan="2">Industry Type</th>
+        <td>{{selecteddIndustry.name}}</td>
+      </tr>
+      <tr>
+        <th rowspan="2" style="vertical-align: middle">Office Telephone</th>
+        <th>Work</th>
+        <td>{{merchantConfigService.merchantConfig.general.phone| phoneNumber}}</td>
+      </tr>
+      <tr>
+        <th>Mobile</th>
+        <td>{{merchantConfigService.merchantConfig.general.mobile | mobileNumber}}</td>
+      </tr>
+    </table>
+  </div>
+  <!-- End entity details-->
+
+  <!-- Accounting package detail -->
+  <div class="content">
+    <h4>Accounting Package Details</h4>
+    <table class="table table-bordered">
+      <tr>
+        <th width="20%">Name of Package</th>
+        <td>{{packageName}}</td>
+      </tr>
+    </table>
+  </div>
+  <!-- End accounting package detail -->
+
+  <!-- Email from addresses debtors -->
+  <div class="content">
+    <h4>Email "From" Addresses to Debtors</h4>
+    <table class="table table-bordered">
+      <tr>
+        <th width="20%">Email Address</th>
+        <td>{{merchantConfigService.merchantConfig.emailAddresses.debtorEmailsFromAddress}}</td>
+      </tr>
+    </table>
+  </div>
+  <!-- End email from addresses debtors -->
+
+  <!-- Email mailing address details -->
+  <div class="content">
+    <h4>Email Mailing Address Details</h4>
+    <table class="table table-bordered">
+      <tr>
+        <th width="20%"></th>
+        <th>Business Address</th>
+        <th>Mailing Address</th>
+      </tr>
+      <tr>
+        <th>PO Box</th>
+        <td></td>
+        <td>{{merchantConfigService.merchantConfig.addresses.mailing.poBox}}</td>
+      </tr>
+      <tr>
+        <th>Unit/Level</th>
+        <td>{{merchantConfigService.merchantConfig.addresses.business.unitOrLevel}}</td>
+        <td>{{merchantConfigService.merchantConfig.addresses.mailing.unitOrLevel}}</td>
+      </tr>
+      <tr>
+        <th>Property Name</th>
+        <td>{{merchantConfigService.merchantConfig.addresses.business.propertyName}}</td>
+        <td>{{merchantConfigService.merchantConfig.addresses.mailing.propertyName}}</td>
+      </tr>
+      <tr>
+        <th>Address Line 1</th>
+        <td>{{merchantConfigService.merchantConfig.addresses.business.addressLine1}}</td>
+        <td>{{merchantConfigService.merchantConfig.addresses.mailing.addressLine1}}</td>
+      </tr>
+      <tr>
+        <th>Suburb</th>
+        <td>{{merchantConfigService.merchantConfig.addresses.business.suburb}}</td>
+        <td>{{merchantConfigService.merchantConfig.addresses.mailing.suburb}}</td>
+      </tr>
+      <tr>
+        <th>State</th>
+        <td>{{selectedBusinessState.name}}</td>
+        <td>{{selectedMailingState.name}}</td>
+      </tr>
+      <tr>
+        <th>Post Code</th>
+        <td>{{merchantConfigService.merchantConfig.addresses.business.postCode}}</td>
+        <td>{{merchantConfigService.merchantConfig.addresses.mailing.postCode}}</td>
+      </tr>
+      <tr>
+        <th>Country</th>
+        <td>{{merchantConfigService.merchantConfig.addresses.business.country}}</td>
+        <td>{{merchantConfigService.merchantConfig.addresses.mailing.country}}</td>
+      </tr>
+    </table>
+  </div>
+  <!-- End email mailing address details -->
+
+  <!-- Contact details -->
+  <div class="content">
+    <h4>Contact Details</h4>
+    <table class="table table-bordered">
+      <tr>
+        <th rowspan="3" width="15%">Key Commercial Contact</th>
+        <th width="5%">Name</th>
+        <td colspan="3">{{merchantConfigService.merchantConfig.contacts.keyCommercial.name}}</td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td colspan="3">{{merchantConfigService.merchantConfig.contacts.keyCommercial.email}}</td>
+      </tr>
+      <tr>
+        <th>Phone</th>
+        <td>{{merchantConfigService.merchantConfig.contacts.keyCommercial.phone | phoneNumber}}</td>
+        <th>Mobile</th>
+        <td>{{merchantConfigService.merchantConfig.contacts.keyCommercial.mobile | mobileNumber}}</td>
+      </tr>
+      <tr>
+        <th rowspan="3">IT Contact</th>
+        <th>Name</th>
+        <td colspan="3">{{merchantConfigService.merchantConfig.contacts.it.name}}</td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td colspan="3">{{merchantConfigService.merchantConfig.contacts.it.email}}</td>
+      </tr>
+      <tr>
+        <th>Phone</th>
+        <td>{{merchantConfigService.merchantConfig.contacts.it.phone | phoneNumber}}</td>
+        <th>Mobile</th>
+        <td>{{merchantConfigService.merchantConfig.contacts.it.mobile | mobileNumber}}</td>
+      </tr>
+      <tr>
+        <th rowspan="3">Billing</th>
+        <th>Name</th>
+        <td colspan="3">{{merchantConfigService.merchantConfig.contacts.oneBoxBillingPhone.name}}</td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td colspan="3">{{merchantConfigService.merchantConfig.contacts.oneBoxBillingPhone.email}}</td>
+      </tr>
+      <tr>
+        <th>Phone</th>
+        <td>{{merchantConfigService.merchantConfig.contacts.oneBoxBilling.phone | phoneNumber}}</td>
+        <th>Mobile</th>
+        <td>-</td>
+      </tr>
+      <tr ng-repeat="administrator in merchantConfigService.merchantConfig.merchantAdministrators">
+        <th colspan="2">System Administrator {{$index + 1}}</th>
+        <td colspan="3">{{administrator.emailAddress}}</td>
+      </tr>
+    </table>
+  </div>
+  <!-- End contact details -->
+
+  <!-- Settlement account banking details -->
+  <div class="content">
+    <h4>Settlement Account Banking Details</h4>
+    <table class="table table-bordered">
+      <tr>
+        <th width="20%">Account Name</th>
+        <td>{{merchantConfigService.merchantConfig.banking.settlementAccountName}}</td>
+      </tr>
+      <tr>
+        <th>Account BSB</th>
+        <td>{{merchantConfigService.merchantConfig.banking.settlementAccountBsb | accountBSB}}</td>
+      </tr>
+      <tr>
+        <th>Account Number</th>
+        <td>{{merchantConfigService.merchantConfig.banking.settlementAccountNumber | accountNumber}}</td>
+      </tr>
+    </table>
+  </div>
+  <!-- End settlement account banking details -->
+
+  <!-- System business rules -->
+  <div class="content">
+    <h4>System Business Rules:</h4>
+    <ol>
+      <!-- EPD -->
+      <li>
+        <h5>Discount for Early Payment (EPD)</h5>
+        <table class="table table-bordered">
+          <tr>
+            <th width="20%">EPD Cut-off</th>
+            <td>{{merchantConfigService.merchantConfig.businessRule.discounts.earlyPaymentDays | dueDate}}</td>
+          </tr>
+          <tr>
+            <th>Minimum Invoice Amount</th>
+            <td>{{merchantConfigService.merchantConfig.businessRule.discounts.earlyPaymentDiscountInvoiceMin | amount: 2}}</td>
+          </tr>
+          <tr>
+            <th>Discount -   Fixed Amount</th>
+            <td>{{ ((merchantConfigService.merchantConfig.businessRule.discounts.earlyPaymentDiscountAmountUnit === 'fixed') ? (merchantConfigService.merchantConfig.businessRule.discounts.earlyPaymentDiscountAmount ) : 'n\/a') | amount: 2}}</td>
+          </tr>
+          <tr>
+            <th>Discount - Percentage</th>
+            <td>{{ ((merchantConfigService.merchantConfig.businessRule.discounts.earlyPaymentDiscountAmountUnit === 'percentage') ? (merchantConfigService.merchantConfig.businessRule.discounts.earlyPaymentDiscountAmount ) : 'n\/a') | percentage: 2}}</td>
+          </tr>
+        </table>
+      </li>
+      <!-- End EPD -->
+
+      <!-- Universal payment term -->
+      <li>
+        <h5>Universal Payment Term</h5>
+        <table class="table table-bordered">
+          <tr>
+            <th width="20%">Term Duration</th>
+            <td>{{merchantConfigService.merchantConfig.businessRule.paymentTerm.termDuration}} {{merchantConfigService.merchantConfig.businessRule.paymentTerm.termDurationUnit}}{{merchantConfigService.merchantConfig.businessRule.paymentTerm.termDuration > 1 ? 's' : ''}}</td>
+          </tr>
+          <tr>
+            <th>Payment Frequency</th>
+            <td>{{merchantConfigService.merchantConfig.businessRule.paymentTerm.paymentFrequency}} {{merchantConfigService.merchantConfig.businessRule.paymentTerm.paymentFrequencyUnit}}{{merchantConfigService.merchantConfig.businessRule.paymentTerm.paymentFrequency > 1 ? 's' : ''}}</td>
+          </tr>
+        </table>
+      </li>
+      <!-- End universal payment term -->
+
+      <!-- Debtor specific payment terms -->
+      <li>
+        <h5>Debtor Specific Payment Terms</h5>
+        <table class="table table-bordered">
+          <tr>
+            <th width="60%">Merchant Ability to Offer Specific Payment Terms to Debtors?</th>
+            <td>{{merchantConfigService.merchantConfig.offersSpecialPaymentTerms ? 'Yes' : 'No'}}</td>
+          </tr>
+        </table>
+      </li>
+      <!-- End debtor specific payment terms -->
+
+      <!-- Debtor payment surcharges -->
+      <li>
+        <h5>Debtor Payment Surcharges</h5>
+        <table class="table table-bordered">
+          <tr>
+            <th width="20%">Nominated Bank A/C Charge</th>
+            <td>{{merchantConfigService.merchantConfig.businessRule.debtorSubcharge.directDebitCharge | amount : 2}}</td>
+          </tr>
+          <tr>
+            <th>Visa Rate</th>
+            <td>{{merchantConfigService.merchantConfig.businessRule.debtorSubcharge.visaRate | percentage: 2}}</td>
+          </tr>
+          <tr>
+            <th>Mastercard</th>
+            <td>{{merchantConfigService.merchantConfig.businessRule.debtorSubcharge.masterCardRate | percentage: 2}}</td>
+          </tr>
+          <tr>
+            <th>American Express</th>
+            <td>{{merchantConfigService.merchantConfig.businessRule.debtorSubcharge.americanExpressRate | percentage: 2}}</td>
+          </tr>
+          <tr>
+            <th>Diners Club</th>
+            <td>{{merchantConfigService.merchantConfig.businessRule.debtorSubcharge.dinnerClubsRate | percentage: 2}}</td>
+          </tr>
+        </table>
+      </li>
+      <!-- End debtor payment surcharges -->
+    </ol>
+  </div>
+  <!-- System business rules -->
+
+  <!-- Debtor communication rules -->
+  <div class="content">
+    <h4>Debtor Communication Rules:</h4>
+    <table class="table table-bordered">
+      <tr>
+        <th width="20%" rowspan="2" style="text-align: center;vertical-align: middle">Item</th>
+        <th colspan="4">Invoice Status</th>
+      </tr>
+      <tr>
+        <td>Current</td>
+        <td>Past Due</td>
+        <td>Serious Arrears</td>
+        <td>Notice of Default</td>
+      </tr>
+      <tr>
+        <th>SMS Sent</th>
+        <td>{{(communication.newInvoice.sendSMS) ? 'i + ' + (communication.newInvoice.noDaysEmailed | dueDate) : ''}}</td>
+        <td>{{(communication.invoicePastDue.sendSMS) ? (communication.invoicePastDue.invoicePastDueDate | noDay) : ''}}</td>
+        <td>{{step4Day | noDay}}</td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>Email Sent</th>
+        <td>i + {{communication.newInvoice.noDaysEmailed | dueDate}}</td>
+        <td>{{communication.invoicePastDue.invoicePastDueDate | noDay}}</td>
+        <td>{{(communication.seriousArrears.sendSMS) ? (step4Day | noDay) : ''}}</td>
+        <td>{{step6Day | noDay}}</td>
+      </tr>
+      <tr>
+        <th>Reminder Frequency</th>
+        <td></td>
+        <td>{{communication.pastDueReminder.reminderFrequency | dueDate}}</td>
+        <td>{{communication.seriousArrearsReminder.reminderFrequency | dueDate}}</td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>Maximum No. of Reminders</th>
+        <td></td>
+        <td></td>
+        <td>{{communication.seriousArrearsReminder.maxNoReminders }}</td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>Minimum Invoice Amount</th>
+        <td></td>
+        <td>{{communication.invoicePastDue.minInvoiceAmount | amount}}</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>Combined Total Arrears</th>
+        <td></td>
+        <td>{{communication.pastDueReminder.minArrearsAmount | amount}}</td>
+        <td>{{communication.seriousArrears.minArrearsAmount | amount}}</td>
+        <td>{{step7Amount | amount}}</td>
+      </tr>
+    </table>
+  </div>
+  <!-- End debtor communication rules -->
+</div>

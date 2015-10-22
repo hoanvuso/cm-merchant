@@ -46,11 +46,9 @@
         },
         "businessRule": {
           "discounts": {
-            earlyPaymentDiscountAmountUnit: 'fixed',
+
           },
           "paymentTerm": {
-            termDurationUnit: 'week',
-            paymentFrequencyUnit: 'week'
           }
         },
         "debtorCommunications": {},
@@ -66,7 +64,9 @@
             "postCode": null,
             "country": "Australia"
           },
-          "mailing": null
+          "mailing": {
+            state: null,
+          }
         },
         "merchantAdministrators": [
           {

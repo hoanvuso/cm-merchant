@@ -10,6 +10,8 @@
     "angular-bootstrap": "0.13.4",
     "angular-file-upload": "2.1.4",
     "ji-angular": "git@github.com:jirvan/ji-angular#1.0.106",
-    "ngMask": "angular-mask#~3.0.16"
+    "ngMask": "angular-mask#~3.0.16",
+    "moment": "~2.10.6",
+    "lodash": "~3.10.1"
   }
 }

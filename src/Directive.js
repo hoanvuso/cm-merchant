@@ -35,23 +35,27 @@
           target: '@changeFocus'
         },
         link: function ($scope, element, attrs) {
-          element.bind('keypress',function() {
-            if(element.val().length == element.attr("maxlength")) {
-              var $nextElement = angular.element($scope.target);
-              if($nextElement.length) {
-                $nextElement[0].focus();
+          element.bind('keydown',function($event) {
+            var charCode = ($event.which) ? $event.which : event.keyCode;
+            if ((charCode >= 48 && charCode <= 57) || charCode == 43) {
+              if (element.val().length == element.attr("maxlength")) {
+                var $nextElement = angular.element($scope.target);
+                if ($nextElement.length) {
+                  $nextElement[0].focus();
+                }
               }
             }
           })
         }
       }
-    }).directive('changePrefix', function() {
+    }).directive('changePrefix', function($timeout) {
     return {
       restrict: 'A',
+      require: 'ngModel',
       scope: {
         prefix: '=changePrefix'
       },
-      link: function ($scope, element, attrs) {
+      link: function ($scope, element, attrs,ctrl) {
         element.bind('keyup',function($event) {
           var numberPattern = /\d+/g;
           var number = element.val().match(numberPattern);
@@ -60,10 +64,16 @@
             if (number) {
               if ($scope.prefix === 'fixed') {
                 element.val('$' + number[0]);
+                $scope.ngModel = number[0];
+
               } else {
 
                 element.val(number.join("") + '%');
+                $scope.ngModel = number[0];
               }
+              $timeout(function() {
+                $scope.$apply();
+              },1000);
             }
           }
         });
@@ -76,9 +86,16 @@
           if (number) {
             if (value === 'fixed') {
               element.val('$' + number[0]);
+              ctrl.$setViewValue(number[0]);
+                $scope.ngModel = number[0];
             } else {
-              element.val(number[0] + '%');
+              element.val(number.join("") + '%');
+              ctrl.$setViewValue(number.join(""));
+                $scope.ngModel = number.join("")
             }
+            $timeout(function() {
+              $scope.$apply();
+            },1000);
           }
         })
       }

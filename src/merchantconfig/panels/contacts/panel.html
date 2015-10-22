@@ -114,7 +114,7 @@
         </div>
         <div class="col-xs-5">
           <input id="oneBoxBillingPhone" type="text" class="form-control" maxlength="8" placeholder="Phone Number" ng-model="oneBoxBillingPhone[1]"
-                 ng-keypress="onlyDigits($event)" style="margin-top: 10px">
+                 only-digits style="margin-top: 10px">
         </div>
         <div class="help-block col-xs-5" ng-if="error.oneBoxBillingPhone && submitted">{{error.keyCommercialPhone}}</div>
       </div>

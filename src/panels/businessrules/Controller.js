@@ -11,6 +11,9 @@
       termDuration: null,
       paymentInterval: null
     };
+  console.log(merchantConfigService.merchantConfig.businessRule.discounts);
+  console.log(_.isEmpty());
+    $scope.discountForEarlyPayment = !_.isEmpty(merchantConfigService.merchantConfig.businessRule.discounts);
 
     $scope.$watch(function() {
       return $scope.form.$valid
@@ -41,11 +44,15 @@
 
     function onDiscountForEarlyPaymentChange() {
       if ($scope.discountForEarlyPayment) {
+        merchantConfigService.merchantConfig.businessRule.discounts.earlyPaymentDiscountAmountUnit = 'fixed';
         if (savedDiscountForEarlyPaymentChangeValues && !( merchantConfigService.merchantConfig.discounts.earlyPaymentDays
           || merchantConfigService.merchantConfig.discounts.earlyPaymentDiscountInvoiceMin
           || merchantConfigService.merchantConfig.discounts.earlyPaymentDiscountAmount
-          || merchantConfigService.merchantConfig.discounts.earlyPaymentDiscountRate))
+          || merchantConfigService.merchantConfig.discounts.earlyPaymentDiscountRate)) {
+
           merchantConfigService.merchantConfig.discounts = savedDiscountForEarlyPaymentChangeValues;
+        }
+
       } else {
         savedDiscountForEarlyPaymentChangeValues = merchantConfigService.merchantConfig.discounts
           ? {
@@ -82,6 +89,8 @@
 
     function onUniversallyAvailablePaymentTerms() {
       if (merchantConfigService.universallyAvailablePaymentTermsSelected) {
+        merchantConfigService.merchantConfig.businessRule.paymentTerm.termDurationUnit = 'week';
+        merchantConfigService.merchantConfig.businessRule.paymentTerm.paymentFrequencyUnit = 'week';
         merchantConfigService.universallyAvailablePaymentTerms = savedUniversallyAvailablePaymentTerms
           ? savedUniversallyAvailablePaymentTerms
           : {

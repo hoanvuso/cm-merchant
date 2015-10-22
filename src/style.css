@@ -102,3 +102,12 @@ body > hr {
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+.review {
+  font-size: 12px;
+}
+
+.review .content h4 {
+  font-weight: bold;
+  text-decoration: underline;
+}

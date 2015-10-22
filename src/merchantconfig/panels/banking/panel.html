@@ -17,7 +17,7 @@
       <input name="settlementAccountBsb" type="text" class="form-control" placeholder="Enter 6 digits" required
              ng-model="merchantConfigService.merchantConfig.banking.settlementAccountBsb"
              mask='999-999' clean="true"
-             ng-keypress="onlyDigits($event)">
+             only-digits>
 
       <div ng-if=" form.settlementAccountBsb.$error.required && submitted" class="help-block">Settlement Account BSB is required</div>
     </div>
