@@ -53,7 +53,7 @@
           <div class="col-sm-9">
             <select class="form-control" required name="state"
                     ng-model="merchantConfigService.merchantConfig.addresses.business.state"
-                    ng-options="state.name for state in states">
+                    ng-options="state.id as state.name for state in states">
                 <option value="">Select state</option>
             </select>
             <div class="help-block" ng-if="form.state.$error.required && submitted">This input is required</div>
@@ -148,7 +148,7 @@
           <div class="col-sm-9">
             <select class="form-control" required name="state"
                     ng-model="merchantConfigService.merchantConfig.addresses.mailing.state"
-                    ng-options="state.name for state in states">
+                    ng-options="state.id as state.name for state in states">
               <option value="">Select state</option>
             </select>
             <div class="help-block" ng-if="form1.state.$error.required && submitted">This input is required</div>

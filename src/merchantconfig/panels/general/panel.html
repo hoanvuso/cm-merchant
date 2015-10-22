@@ -56,9 +56,9 @@
 
     <div class="col-sm-5">
       <select class="form-control" name="industryType"
-              ng-options="type.name for type in industryTypes"
+              ng-options="type.id as type.name for type in industryTypes"
               ng-model="merchantConfigService.merchantConfig.general.industryType" required>
-        <option value="" selected>Industry Type</option>
+        <option value="">Industry Type</option>
       </select>
       <div ng-if="form.industryType.$error.required && submitted" class="help-block">Industry Type is required</div>
       <!--<input type="text" class="form-control" placeholder="Industry Type" ng-model="merchantConfigService.merchantConfig.general.industryType">-->

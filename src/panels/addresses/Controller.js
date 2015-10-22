@@ -11,18 +11,9 @@
     };
 
     $scope.states = [
-      {
-        name: "state 1",
-        value: '0'
-      },
-      {
-        name: "state 2",
-        value: '1'
-      },
-      {
-        name: "state 3",
-        value: '2'
-      }
+      { id: 0, name: 'state 1' },
+      { id: 1, name: 'state 2' },
+      { id: 2, name: 'state 3' }
     ];
 
     $scope.$watch(function() {
