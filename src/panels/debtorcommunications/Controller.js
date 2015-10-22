@@ -151,7 +151,7 @@
               $scope.step = merchantConfigService.communication.step = 4;
             } else {
               console.log("false");
-              $scope.step = merchantConfigService.communication.step = 7;
+              $scope.step = merchantConfigService.communication.step = 6;
               $scope.communication.seriousArrears = {};
               $scope.communication.seriousArrearsReminder = {};
               $scope.communication.seriousArrears.daysAfterInvoicePastDueDate = 60;
@@ -163,9 +163,9 @@
                 parseInt($scope.communication.invoicePastDue.invoicePastDueDate);
               $scope.step5Day = $scope.step4Day + parseInt($scope.communication.seriousArrearsReminder.reminderFrequency);
               $scope.step6Amount = $scope.communication.seriousArrears.minArrearsAmount;
-              $scope.step6Day = $scope.step5Day +
-                ($scope.communication.seriousArrearsReminder.reminderFrequency * $scope.communication.seriousArrearsReminder.maxNoReminders)
-              $scope.step7Amount = $scope.communication.seriousArrears.minArrearsAmount;
+              //$scope.step6Day = $scope.step5Day +
+              //  ($scope.communication.seriousArrearsReminder.reminderFrequency * $scope.communication.seriousArrearsReminder.maxNoReminders)
+              //$scope.step7Amount = $scope.communication.seriousArrears.minArrearsAmount;
             }
           })
         }
