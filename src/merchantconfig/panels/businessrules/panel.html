@@ -7,6 +7,10 @@
     <div class="col-sm-9">
       <input name="discountForEarlyPayment" type="checkbox" ng-model="discountForEarlyPayment"
              ng-click="onDiscountForEarlyPaymentChange()" style="height: 25px;width: 25px">
+      <span style="font-size: 25px; cursor: pointer;margin-left: 10px"
+            popover="Tick this check box to configure early payment discounts if the Merchant wishes to offer debtors discounts for early payments"
+            popover-trigger="mouseenter" popover-placement="right"
+            class="glyphicon glyphicon-question-sign"></span>
     </div>
   </div>
   <div ng-if="discountForEarlyPayment">
@@ -64,6 +68,10 @@
       <input name="universallyAvailablePaymentTerms" type="checkbox"
              ng-model="merchantConfigService.universallyAvailablePaymentTermsSelected"
              ng-click="onUniversallyAvailablePaymentTerms()" style="height: 25px;width: 25px">
+      <span style="font-size: 25px; cursor: pointer;margin-left: 10px"
+            popover="Tick this check box to configure payment terms if the Merchant wishes to offer universal payment terms for all debtors"
+            popover-trigger="mouseenter" popover-placement="right"
+            class="glyphicon glyphicon-question-sign"></span>
     </div>
   </div>
   <div ng-if="merchantConfigService.universallyAvailablePaymentTerms">
@@ -106,14 +114,14 @@
     </div>
   </div>
 
-  <div class="form-group" style="margin-top: 40px; margin-bottom: 0">
-    <label class="col-sm-3 control-label">Debtor Specific Payment Terms</label>
+  <!--<div class="form-group" style="margin-top: 40px; margin-bottom: 0">-->
+    <!--<label class="col-sm-3 control-label">Debtor Specific Payment Terms</label>-->
 
-    <div class="col-sm-9">
-      <input type="checkbox" ng-model="merchantConfigService.merchantConfig.offersSpecialPaymentTerms"
-             style="height: 25px;width: 25px">
-    </div>
-  </div>
+    <!--<div class="col-sm-9">-->
+      <!--<input type="checkbox" ng-model="merchantConfigService.merchantConfig.offersSpecialPaymentTerms"-->
+             <!--style="height: 25px;width: 25px">-->
+    <!--</div>-->
+  <!--</div>-->
 
   <div class="form-group" style="margin-top: 40px; margin-bottom: 0">
     <label class="col-sm-3 control-label">Debtor Surcharges</label>
@@ -121,59 +129,71 @@
     <div class="col-sm-9">
       <input name="debtorSurcharges" type="checkbox" ng-model="merchantConfigService.debtorSurchargesSelected"
              style="height: 25px;width: 25px" ng-click="onDebtorSurchargesChange()">
+      <span style="font-size: 25px; cursor: pointer;margin-left: 10px"
+            popover="Tick this check box to configure debtor surcharge amounts for different payment types if the Merchant wishes to optionally pass on some / all of these charges to debtors."
+            popover-trigger="mouseenter" popover-placement="right"
+            class="glyphicon glyphicon-question-sign"></span>
     </div>
   </div>
   <div ng-if="merchantConfigService.debtorSurchargesSelected">
-    <div class="form-group">
+    <div class="form-group" ng-class="{'has-error': form.directDebitCharge.$invalid && submitted}">
       <label class="col-sm-offset-3 col-sm-2 control-label" style="text-align: left">Nominated Back A/C Charge
       </label>
 
       <div class="col-sm-4">
-        <input type="text" ji-currency-input class="form-control" placeholder="$" required
+        <input type="text" ji-currency-input class="form-control" placeholder="$  (maximum $1.00)" name="directDebitCharge"
                ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.directDebitCharge"
                only-digits
-               mask="$999" clean="true">
+               mask="$9.99" clean="true">
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" ng-class="{'has-error': form.visaRate.$invalid && submitted}">
       <label class="col-sm-offset-3 col-sm-2 control-label" style="text-align: left">Visa Rate
       </label>
 
       <div class="col-sm-4">
-        <input type="text" ji-percentage-input decimalPlaces="4" class="form-control" placeholder="%" required
-               maxlength="3" only-digits
+        <input type="text" class="form-control" name="visaRate"
+               placeholder="%  (maximum 1.50%)" maxlength="7" only-digits
+               ui-percentage-mask="2"  max="1.50" ui-percentage-value
                ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.visaRate">
+        <div class="help-block" ng-if="form.visaRate.$error.max && submitted">Max value is 1.50%</div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" ng-class="{'has-error': form.masterCardRate.$invalid && submitted}">
       <label class="col-sm-offset-3 col-sm-2 control-label" style="text-align: left">Mastercard Rate
       </label>
 
       <div class="col-sm-4">
-        <input type="text" ji-percentage-input decimalPlaces="4" maxlength="3" class="form-control"
-               placeholder="%" required only-digits
+        <input type="text" maxlength="7" class="form-control" name="masterCardRate"
+               placeholder="%  (maximum 1.50%)" only-digits
+               ui-percentage-mask="2"  max="1.50"  ui-percentage-value
                ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.masterCardRate">
+        <div class="help-block" ng-if="form.masterCardRate.$error.max && submitted">Max value is 1.50%</div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" ng-class="{'has-error': form.americanExpressRate.$invalid && submitted}">
       <label class="col-sm-offset-3 col-sm-2 control-label" style="text-align: left">American Express Rate
       </label>
 
       <div class="col-sm-4">
-        <input type="text" ji-percentage-input decimalPlaces="4" maxlength="3" class="form-control"
-               placeholder="%"
-               required only-digits
+        <input type="text" maxlength="7" class="form-control" name="americanExpressRate"
+               placeholder="%  (maximum 1.50%)"
+               ui-percentage-mask="2" max="1.50"  ui-percentage-value
+               only-digits
                ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.americanExpressRate">
+        <div class="help-block" ng-if="form.americanExpressRate.$error.max && submitted">Max value is 1.50%</div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" ng-class="{'has-error': form.dinnerClubsRate.$invalid && submitted}">
       <label class="col-sm-offset-3 col-sm-2 control-label" style="text-align: left">Diners Club Rate
       </label>
 
       <div class="col-sm-4">
-        <input type="text" ji-percentage-input decimalPlaces="4" maxlength="3" class="form-control"
-               placeholder="%" required only-digits
+        <input type="text" maxlength="7" class="form-control" name="dinnerClubsRate"
+               placeholder="%  (maximum 1.50%)" only-digits
+               ui-percentage-mask="2" max="1.50" ui-percentage-value
                ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.dinnerClubsRate">
+        <div class="help-block" ng-if="form.dinnerClubsRate.$error.max && submitted">Max value is 1.50%</div>
       </div>
     </div>
   </div>

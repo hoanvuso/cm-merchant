@@ -120,4 +120,32 @@
       </div>
     </div>
   </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">
+      Account receivable contact
+       <span style="font-size: 25px; cursor: pointer;margin-left: 10px"
+             popover="The email address of the Accounts Receivable Contact and the general office phone number [contained in the General tab] will appear at the bottom of all debtor payment communications."
+             popover-trigger="mouseenter" popover-placement="right"
+             class="glyphicon glyphicon-question-sign"></span>
+    </label>
+
+    <div class="col-sm-8">
+      <div class="row" ng-class="{'has-error': form.accountReceivableName.$invalid && submitted}">
+        <div class="col-xs-7">
+          <input name="accountReceivableName" type="text" class="form-control" placeholder="Name" required
+                 ng-model="merchantConfigService.merchantConfig.contacts.accountReceivable.name">
+        </div>
+        <div class="help-block col-xs-5" ng-if="form.accountReceivableName.$error.required && submitted">This input is required</div>
+      </div>
+      <div class="row" ng-class="{'has-error': form.accountReceivableEmail.$invalid && submitted}">
+        <div class="col-xs-7">
+          <input name="accountReceivableEmail" type="email" class="form-control" placeholder="Email" required
+                 ng-model="merchantConfigService.merchantConfig.contacts.accountReceivable.email" style="margin-top: 10px">
+        </div>
+        <div class="help-block col-xs-5" ng-if="form.accountReceivableEmail.$error.email && submitted">Wrong email format</div>
+        <div class="help-block col-xs-5" ng-if="form.accountReceivableEmail.$error.required && submitted">This input is required</div>
+      </div>
+    </div>
+  </div>
 </form>

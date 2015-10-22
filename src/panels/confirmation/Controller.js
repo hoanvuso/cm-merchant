@@ -30,7 +30,7 @@
             $scope.oneBoxDate =  m.add(5,'days').format("D MMMM YYYY");
             $scope.merchantConfigService = merchantConfigService;
             $scope.communication =  merchantConfigService.communication;
-            $scope.step = merchantConfigService.communication.step;
+            $scope.step = merchantConfigService.communication.step || 1;
             if ($scope.step >= 5) {
               $scope.step4Day = parseInt($scope.communication.seriousArrears.daysAfterInvoicePastDueDate - 0) +
                 parseInt($scope.communication.invoicePastDue.invoicePastDueDate);

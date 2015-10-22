@@ -6,6 +6,7 @@ angular.module('CmMerchantConfigApp', ['ngRoute',
                                        'jiAngular',
                                        'ngCookies',
                                        'ngMask',
+                                        'ui.utils.masks',
                                        'CmCommon'])
     .constant('skin', {
         stylesheet: "div.navbar {\n" +
