@@ -29,7 +29,7 @@
       <li ng-class="{'active': step === 2,'completed-yellow': step > 2}">
         <a href="#" ng-click="invoicePastDue(communication.invoicePastDue)"><span>Invoice Past Due</span></a>
       </li>
-      <li ng-class="{'active': step === 3,'completed-yellow': step > 3}">
+      <li ng-class="{'active': step === 3 && !notConfigSerriousArrears,'completed-yellow': step > 3 || notConfigSerriousArrears}">
         <a href="#" ng-click="pastDueReminder(communication.pastDueReminder)"><span>Past Due Reminder(s)</span></a>
       </li>
       <li ng-class="{'active': step === 4,'completed-red': step > 4}">
@@ -129,6 +129,7 @@
             <td>{{step7Amount | amount}}</td>
           </tr>
         </table>
+        <div class="watermark" ng-if="notConfigSerriousArrears">Not Configured</div>
       </div>
     </div>
 

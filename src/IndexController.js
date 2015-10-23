@@ -29,10 +29,12 @@
       }
     });
 
-    $scope.changeTab = function(tab) {
-      $rootScope[$rootScope.currentPanel + 'Invalid'] = !$rootScope.formValid;
+    $scope.changeTab = function(panel) {
+      if (panel !== $rootScope.currentPanel) {
+        $rootScope[$rootScope.currentPanel + 'Invalid'] = !$rootScope.formValid;
 
-      $rootScope.currentPanel = tab;
+        $rootScope.currentPanel = panel;
+      }
 
     };
 

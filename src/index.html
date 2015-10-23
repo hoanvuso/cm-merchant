@@ -82,7 +82,9 @@
           Business Rules
         </div>
         <div class="btn" ng-click="changeTab('debtorcommunications')"
-             ng-class="{selected: currentPanel === 'debtorcommunications','invalid': debtorcommunicationsInvalid}">Communications
+             ng-class="{selected: currentPanel === 'debtorcommunications',
+                        'invalid': debtorcommunicationsInvalid,
+                        'valid': debtorcommunicationsInvalid === false}">Communications
         </div>
         <div class="btn" ng-click="changeTab('confirmation')"
              ng-class="{selected: currentPanel === 'confirmation'}">

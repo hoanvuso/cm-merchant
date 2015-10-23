@@ -33,6 +33,11 @@
   background-color: #d9534f;
   border-color: #d43f3a;
 }
+#mainTabSet > div.valid {
+  color: #fff;
+  background-color: #3c763d;
+  border-color: #3c763d;
+}
 
 
 #mainPanels {
