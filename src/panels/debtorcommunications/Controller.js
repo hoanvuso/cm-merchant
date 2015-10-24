@@ -27,6 +27,20 @@
       }
     }
 
+    var emailForma = function(type) {
+      $modal.open({
+        templateUrl: 'merchantconfig/panels/debtorcommunications/emails/' + type + '.modal.html',
+        size: 'lg',
+        controller: [
+          '$scope',
+          function($scope) {
+            $scope.logoUrl = merchantConfigService.merchantConfig.general.logoUrl || '/assets/referralPartners/79023490234/CBD-Accounting-Logo.png'
+            $scope.merchantConfigService = merchantConfigService;
+          }
+        ]
+      })
+    }
+
 
     $scope.newInvoice = function(newInvoice) {
       var newInvoiceModal = $modal.open({
@@ -42,6 +56,8 @@
             $scope.back = function() {
               $modalInstance.dismiss('cancel');
             };
+
+            $scope.emailForma = emailForma;
 
             $scope.next = function(form) {
               $scope.submitted = true;
@@ -78,6 +94,8 @@
               $modalInstance.dismiss('cancel');
             };
 
+            $scope.emailForma = emailForma;
+
             $scope.next = function(form) {
               $scope.submitted = true;
               console.log(form.$valid);
@@ -109,6 +127,8 @@
           function($scope,$modalInstance) {
             $scope.submitted = false;
             $scope.pastDueReminder = angular.copy(pastDueReminder);
+
+            $scope.emailForma = emailForma;
 
             $scope.back = function() {
               $modalInstance.dismiss('cancel');
@@ -183,6 +203,8 @@
             $scope.submitted = false;
             $scope.seriousArrears = angular.copy(seriousArrears);
 
+            $scope.emailForma = emailForma;
+
             $scope.back = function() {
               $modalInstance.dismiss('cancel');
             };
@@ -218,6 +240,8 @@
             $scope.submitted = false;
             $scope.seriousArrearsReminder = angular.copy(seriousArrearsReminder);
 
+            $scope.emailForma = emailForma;
+
             $scope.back = function() {
               $modalInstance.dismiss('cancel');
             };
@@ -252,6 +276,8 @@
           function($scope,$modalInstance) {
             $scope.submitted = false;
 
+            $scope.emailForma = emailForma;
+
             $scope.back = function() {
               $modalInstance.dismiss('cancel');
             };
@@ -281,6 +307,8 @@
     },function(value) {
       $rootScope.formValid = value[0] > 3 || value[1];
     });
+
+
 
     $rootScope.next = function() {
       $rootScope.debtorcommunicationsInvalid = $scope.step > 3 || $scope.notConfigSerriousArrears;

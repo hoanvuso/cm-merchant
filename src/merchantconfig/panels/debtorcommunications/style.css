@@ -201,3 +201,69 @@
     -o-transform: rotate(-10deg);
     color: #ACADAD;
 }
+.email-forma a {
+    text-decoration: underline;
+}
+
+.email-forma .header {
+    border-bottom: solid 6px;
+    margin-bottom: 20px;
+}
+
+.email-forma .body {
+    padding-left: 25px;
+    border-bottom: solid 2px #DEDEDE
+}
+
+.email-forma .body h5 {
+    font-weight: bold;
+}
+
+.email-forma .body p span {
+    float:right;
+}
+
+.email-forma .body table {
+    margin-bottom: 10px;
+}
+.email-forma .body .payment-options {
+    position: absolute;
+    right: 70px;
+    width: 149px;
+    /* height: 79px; */
+    overflow: hidden;
+    text-wra: initial;
+    word-wrap: break-word;
+    white-space: pre-line;
+}
+
+.email-forma .body table tr:first-child{
+    border-bottom: solid 1px #000;
+}
+
+.email-forma .body table td{
+    padding: 0 15px;
+}
+
+.email-forma .footer {
+    padding: 10px 0 0 25px;
+    border-bottom: solid 6px;
+}
+.email-forma .footer p{
+    margin-top: 30px
+}
+
+.email-forma.border-green .header, .email-forma.border-green .footer {
+    border-bottom-color:#92D050;
+}
+
+.email-forma.border-yellow .header, .email-forma.border-yellow .footer {
+    border-bottom-color:#FFC000;
+}
+
+.email-forma.border-red .header, .email-forma.border-red .footer {
+    border-bottom-color:#FF0000;
+}
+.email-forma.border-purple .header, .email-forma.border-purple .footer {
+    border-bottom-color:#660066;
+}
