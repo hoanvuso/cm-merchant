@@ -141,10 +141,11 @@
       </label>
 
       <div class="col-sm-4">
-        <input type="text" ji-currency-input class="form-control" placeholder="$  (maximum $1.00)" name="directDebitCharge"
+        <input type="text" class="form-control" placeholder="$  (maximum $1.00)" name="directDebitCharge"
                ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.directDebitCharge"
-               only-digits
+               only-digits max-value="100"
                mask="$9.99" clean="true">
+        <div class="help-block" ng-if="form.directDebitCharge.$error.maxValue && submitted">Max value is $1.00</div>
       </div>
     </div>
     <div class="form-group" ng-class="{'has-error': form.visaRate.$invalid && submitted}">

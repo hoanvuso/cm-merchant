@@ -100,5 +100,23 @@
         })
       }
     }
+  }).directive('maxValue',function() {
+    return {
+      restrict: 'A',
+      require: 'ngModel',
+      scope: {
+        max: '=maxValue'
+      },
+      link: function($scope,element,attrs,ctrl) {
+
+        $scope.$watch(function() {
+          return ctrl.$modelValue;
+        },function(value) {
+          if (value) {
+            ctrl.$setValidity('maxValue',value <= $scope.max)
+          }
+        });
+      }
+    }
   });
 })();
