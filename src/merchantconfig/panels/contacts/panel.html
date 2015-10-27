@@ -146,6 +146,18 @@
         <div class="help-block col-xs-5" ng-if="form.accountReceivableEmail.$error.email && submitted">Wrong email format</div>
         <div class="help-block col-xs-5" ng-if="form.accountReceivableEmail.$error.required && submitted">This input is required</div>
       </div>
+      <div class="row" ng-class="{'has-error': error.accountReceivablePhone && submitted}">
+        <div class="col-xs-2">
+          <input type="text" class="form-control" maxlength="2" placeholder="Area Code"
+                 ng-model="accountReceivablePhone[0]" style="margin-top: 10px"
+                 only-digits change-focus="#accountReceivablePhone">
+        </div>
+        <div class="col-xs-5">
+          <input id="accountReceivablePhone" type="text" class="form-control" maxlength="8" placeholder="Phone Number" ng-model="accountReceivablePhone[1]"
+                 only-digits style="margin-top: 10px">
+        </div>
+        <div class="help-block col-xs-5" ng-if="error.accountReceivablePhone && submitted">{{error.accountReceivablePhone}}</div>
+      </div>
     </div>
   </div>
 </form>

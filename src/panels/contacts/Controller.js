@@ -36,6 +36,16 @@
       $scope.oneBoxBillingPhone = [];
     }
 
+    if (merchantConfigService.merchantConfig.contacts.accountReceivable.phone) {
+      var accountReceivablePhone = merchantConfigService.merchantConfig.contacts.accountReceivable.phone.toString();
+      $scope.accountReceivablePhone = [
+        accountReceivablePhone.substring(0,3),
+        accountReceivablePhone.substring(3,10)
+      ]
+    } else {
+      $scope.accountReceivablePhone = [];
+    }
+
     $scope.$watch(function() {
       return $scope.keyCommercialPhone;
     },function(value) {
@@ -78,6 +88,21 @@
         }
       } else {
         $scope.error.oneBoxBillingPhone = "This input is required";
+      }
+    },true);
+
+    $scope.$watch(function() {
+      return $scope.accountReceivablePhone;
+    },function(value) {
+      if (value.length > 0) {
+        merchantConfigService.merchantConfig.contacts.accountReceivable.phone = value.join("");
+        if (merchantConfigService.merchantConfig.contacts.accountReceivable.phone.length < 10) {
+          $scope.error.accountReceivablePhone = "Phone number must have 10 digits";
+        } else {
+          $scope.error.accountReceivablePhone = "";
+        }
+      } else {
+        $scope.error.accountReceivablePhone = "This input is required";
       }
     },true);
 

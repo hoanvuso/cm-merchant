@@ -37,7 +37,8 @@
         contacts: {
           keyCommercial: {},
           it: {},
-          oneBoxBilling: {}
+          oneBoxBilling: {},
+          accountReceivable: {}
         },
         "banking": {
           "settlementAccountName": null,
