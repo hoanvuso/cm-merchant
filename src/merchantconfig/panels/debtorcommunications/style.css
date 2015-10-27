@@ -219,8 +219,9 @@
     font-weight: bold;
 }
 
-.email-forma .body p span {
-    float:right;
+.email-forma .body p span:first-child {
+    display: inline-block;
+    width:10%
 }
 
 .email-forma .body table {
