@@ -170,7 +170,7 @@
               $scope.step = merchantConfigService.communication.step = 4;
             } else {
               $scope.notConfigSerriousArrears = merchantConfigService.communication.notConfigSerriousArrears = true;
-              $scope.step = 3
+              $scope.step = 3;
               //$scope.step = merchantConfigService.communication.step = 6;
               //$scope.communication.seriousArrears = {};
               //$scope.communication.seriousArrearsReminder = {};
@@ -220,10 +220,12 @@
       });
 
       seriousArrearsModal.result.then(function(result) {
+
         $scope.communication.seriousArrears = result;
         $scope.step4Day = parseInt($scope.communication.seriousArrears.daysAfterInvoicePastDueDate-0) +
           parseInt($scope.communication.invoicePastDue.invoicePastDueDate);
-        if ($scope.step === 4) {
+        if ($scope.step === 4 || $scope.notConfigSerriousArrears) {
+          $scope.notConfigSerriousArrears = merchantConfigService.communication.notConfigSerriousArrears = false;
           $scope.step = merchantConfigService.communication.step = 5;
         }
       })

@@ -104,17 +104,113 @@
     return {
       restrict: 'A',
       require: 'ngModel',
-      scope: {
-        max: '=maxValue'
-      },
+      //scope: {
+      //  max: '=maxValue'
+      //},
       link: function($scope,element,attrs,ctrl) {
-
+        var max = Number(attrs['maxValue']);
         $scope.$watch(function() {
           return ctrl.$modelValue;
         },function(value) {
           if (value) {
-            ctrl.$setValidity('maxValue',value <= $scope.max)
+            ctrl.$setValidity('maxValue',value <= max)
           }
+        });
+      }
+    }
+  }).directive('percentageInput',function() {
+    return {
+      restrict: 'A',
+      require: 'ngModel',
+      //scope: {
+      //  max: '=maxValue'
+      //},
+      link: function($scope,element,attrs,ctrl) {
+        var decimalPlaces = attrs['decimalPlaces'] ? Number(attrs['decimalPlaces']) : 0;
+
+        ctrl.$formatters.push(function (inputValue) {
+          if (inputValue) {
+            console.log(inputValue);
+            var formattedValue = inputValue + '%';
+            element.val(formattedValue);
+            return formattedValue;
+          } else {
+            return '';
+          }
+
+        });
+
+        // Parser
+        ctrl.$parsers.push(function (inputValue) {
+          if (inputValue) {
+
+            var numericValue = Number(parseFloat(inputValue.toString().replace(/[^0-9-.]/g, '')).toFixed(decimalPlaces));
+            var sanitizedValue = inputValue.replace(/[^0-9-.]/g, '');
+            if (sanitizedValue === '' || sanitizedValue === '-') return '';
+            var signPrefix = sanitizedValue.charAt(0) === '-' ? '-' : '';
+            var numericIntegerPart = Math.abs(parseInt(sanitizedValue));
+            var integerPart = '' + numericIntegerPart;
+            if (decimalPlaces == 0) {
+              fractionalPart = '';
+              periodPresent = false;
+            } else if (sanitizedValue.match(/\./)) {
+              var fractionalPart = sanitizedValue.replace(/.*\./, '');
+              var periodPresent = true;
+            } else {
+              fractionalPart = '';
+              periodPresent = false;
+            }
+
+            var formattedValue;
+            if (integerPart === inputValue) {
+              formattedValue = numericValue + '%';
+            } else {
+
+
+              if (integerPart === '') {
+                if (fractionalPart === '') {
+                  formattedValue = signPrefix + '0.' + '%';
+                } else {
+                  formattedValue = signPrefix + '0.' + '%' + fractionalPart.substr(0, decimalPlaces);
+                }
+              } else {
+                if (fractionalPart === '') {
+                  formattedValue = signPrefix + numericIntegerPart + (periodPresent ? '.' : '') + '%';
+                } else {
+                  formattedValue = signPrefix + numericIntegerPart + "." + fractionalPart.substr(0, decimalPlaces) + '%';
+                }
+              }
+            }
+
+            element.val(formattedValue);
+            setCaretPosition(element[0], formattedValue.length - 1);
+            return Number(numericValue);
+
+          } else if (inputValue === '0') {
+            return 0;
+          } else {
+            return '';
+          }
+
+          function setCaretPosition(elem, caretPos) {
+
+            if (elem != null) {
+              if (elem.createTextRange) {
+                var range = elem.createTextRange();
+                range.move('character', caretPos);
+                range.select();
+              }
+              else {
+                if (elem.selectionStart) {
+                  elem.focus();
+                  elem.setSelectionRange(caretPos, caretPos);
+                }
+                else
+                  elem.focus();
+              }
+            }
+          }
+
         });
       }
     }

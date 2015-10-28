@@ -154,10 +154,10 @@
 
       <div class="col-sm-4">
         <input type="text" class="form-control" name="visaRate"
-               placeholder="%  (maximum 1.50%)" maxlength="7" only-digits
-               ui-percentage-mask="2"  max="1.50" ui-percentage-value
+               placeholder="%  (maximum 1.50%)"
+               percentage-input decimal-places="2" max-value="1.50"
                ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.visaRate">
-        <div class="help-block" ng-if="form.visaRate.$error.max && submitted">Max value is 1.50%</div>
+        <div class="help-block" ng-if="form.visaRate.$error.maxValue && submitted">Max value is 1.50%</div>
       </div>
     </div>
     <div class="form-group" ng-class="{'has-error': form.masterCardRate.$invalid && submitted}">
@@ -166,10 +166,10 @@
 
       <div class="col-sm-4">
         <input type="text" maxlength="7" class="form-control" name="masterCardRate"
-               placeholder="%  (maximum 1.50%)" only-digits
-               ui-percentage-mask="2"  max="1.50"  ui-percentage-value
+               placeholder="%  (maximum 1.50%)"
+               percentage-input decimal-places="2"max-value="1.50"
                ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.masterCardRate">
-        <div class="help-block" ng-if="form.masterCardRate.$error.max && submitted">Max value is 1.50%</div>
+        <div class="help-block" ng-if="form.masterCardRate.$error.maxValue && submitted">Max value is 1.50%</div>
       </div>
     </div>
     <div class="form-group" ng-class="{'has-error': form.americanExpressRate.$invalid && submitted}">
@@ -178,11 +178,10 @@
 
       <div class="col-sm-4">
         <input type="text" maxlength="7" class="form-control" name="americanExpressRate"
-               placeholder="%  (maximum 1.50%)"
-               ui-percentage-mask="2" max="1.50"  ui-percentage-value
-               only-digits
+               placeholder="%  (maximum 3.30%)"
+               percentage-input decimal-places="2" max-value="3.30"
                ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.americanExpressRate">
-        <div class="help-block" ng-if="form.americanExpressRate.$error.max && submitted">Max value is 1.50%</div>
+        <div class="help-block" ng-if="form.americanExpressRate.$error.maxValue && submitted">Max value is 1.50%</div>
       </div>
     </div>
     <div class="form-group" ng-class="{'has-error': form.dinnerClubsRate.$invalid && submitted}">
@@ -191,10 +190,10 @@
 
       <div class="col-sm-4">
         <input type="text" maxlength="7" class="form-control" name="dinnerClubsRate"
-               placeholder="%  (maximum 1.50%)" only-digits
-               ui-percentage-mask="2" max="1.50" ui-percentage-value
+               placeholder="%  (maximum 3.30%)"
+               percentage-input decimal-places="2" max-value="3.30"
                ng-model="merchantConfigService.merchantConfig.businessRule.debtorSubcharge.dinnerClubsRate">
-        <div class="help-block" ng-if="form.dinnerClubsRate.$error.max && submitted">Max value is 1.50%</div>
+        <div class="help-block" ng-if="form.dinnerClubsRate.$error.maxValue && submitted">Max value is 1.50%</div>
       </div>
     </div>
   </div>
