@@ -1,50 +1,132 @@
-<form name="form" ng-controller="ReferralPanelController" class="css-form form-horizontal" ji-form style="margin-top: 30px" novalidate>
+<form name="form" ng-controller="ReferralPanelController" ng-submit="authorised(form)" class="css-form form-horizontal" ji-form style="margin-top: 30px" novalidate>
   <p>We certify that the referral merchant:</p>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
       <table class="table borderless">
+        <tr ng-class="{'has-error': form.merchantName.$invalid && submitted}">
+          <td><label class="control-label">1. Has the legal entity name of</label></td>
+          <td style="width:55%">
+            <input name="merchantName" type="text" class="form-control" placeholder="Entity Legal Name" required
+                   ng-model="merchantConfigService.merchantConfig.general.merchantName">
+            <div class="help-block" ng-if="form.merchantName.$error.required && submitted">Legal name is required</div>
+          </td>
+        </tr>
+        <tr ng-class="{'has-error': form.merchantTradingName.$invalid && submitted}">
+          <td><label class="control-label">2. Has the trading name of</label></td>
+          <td>
+            <input name="merchantTradingName" type="text" class="form-control" placeholder="Entity Trading Name" required
+                   ng-model="merchantConfigService.merchantConfig.general.merchantTradingName">
+            <div class="help-block" ng-if="form.merchantTradingName.$error.required && submitted">Trading name is required</div>
+          </td>
+        </tr>
+        <tr ng-class="{'has-error': form.abnNumber.$invalid && submitted}">
+          <td><label class="control-label">3. Has the ABN of</label></td>
+          <td>
+            <input id="abnNumber" name="abnNumber" type="text" class="form-control"
+                   placeholder="ABN"
+                   ng-model="merchantConfigService.merchantConfig.abnNumber" required
+                   mask='99-999-999-999' clean="true"
+                   only-digits>
+            <div ng-if="form.abnNumber.$error.required && submitted" class="help-block">Abn number is required</div>
+            <div ng-if="form.abnNumber.$error.mask && submitted" class="help-block">Wrong abn number format</div>
+          </td>
+        </tr>
+        <tr ng-class="{'has-error': form.industryType.$invalid && submitted}">
+          <td><label class="control-label">4. Is in the following industry</label></td>
+          <td>
+            <select class="form-control" name="industryType"
+                    ng-options="type.id as type.name for type in industryTypes"
+                    ng-model="merchantConfigService.merchantConfig.general.industryType" required>
+              <option value="">Industry Type</option>
+            </select>
+            <div ng-if="form.industryType.$error.required && submitted" class="help-block">Industry Type is required</div>
+          </td>
+        </tr>
         <tr>
-          <td><p>1. Has been a client of the firm for</p></td>
-          <td style="width:29%">
+          <td ng-class="{'has-error': (form.keyCommercialName.$invalid || form.keyCommercialEmail.$invalid || error.keyCommercialPhone) && submitted}">
+            <label class="control-label">5. Key commercial contacts</label>
+          </td>
+          <td>
+            <div ng-class="{'has-error': form.keyCommercialName.$invalid && submitted}">
+              <input name="keyCommercialName" type="text" class="form-control" placeholder="Name" required
+                     ng-model="merchantConfigService.merchantConfig.contacts.keyCommercial.name">
+              <div class="help-block" ng-if="form.keyCommercialName.$error.required && submitted">Key commercial name is required</div>
+            </div>
+
+            <div ng-class="{'has-error': form.keyCommercialEmail.$invalid && submitted}">
+              <input name="keyCommercialEmail" type="email" class="form-control" placeholder="Email" required
+                     ng-model="merchantConfigService.merchantConfig.contacts.keyCommercial.email" style="margin-top: 10px">
+              <div class="help-block" ng-if="form.keyCommercialEmail.$error.required && submitted">Key commercial email is required</div>
+              <div class="help-block" ng-if="form.keyCommercialEmail.$error.email && submitted">Wrong email format</div>
+            </div>
+
+            <div ng-class="{'has-error': error.keyCommercialPhone && submitted}">
+              <div class="row">
+                <div class="col-xs-4">
+                  <input type="text" class="form-control" maxlength="2" placeholder="Area Code"
+                         ng-model="keyCommercialPhone[0]" style="margin-top: 10px"
+                         only-digits change-focus="#keyCommercialPhone">
+                </div>
+                <div class="col-xs-8">
+                  <input id="keyCommercialPhone" type="text" class="form-control" maxlength="8" placeholder="Phone Number" ng-model="keyCommercialPhone[1]"
+                         only-digits style="margin-top: 10px">
+                </div>
+              </div>
+              <div class="help-block" ng-if="error.keyCommercialPhone && submitted">{{error.keyCommercialPhone}}</div>
+            </div>
+          </td>
+        </tr>
+        <tr ng-class="{'has-error': form.months.$invalid && submitted}">
+          <td><label class="control-label">6. Has been a client of the firm for</label></td>
+          <td>
             <input type="text" name="months" class="form-control"
                    ng-model="merchantConfigService.merchantConfig.referral.months"
-                   maxlength="6"
+                   maxlength="6" required
                    only-digits required>
+            <div class="help-block" ng-if="form.months.$error.required && submitted">This input is required</div>
           </td>
           <td>months</td>
         </tr>
         <tr>
-          <td><p>2. Has trading revenue of the past 2 Financial years (to nearest $100k)</p></td>
+          <td ng-class="{'has-error': form.revenue1.$invalid && submitted}"><label class="control-label" style="text-align: left">7. Has trading revenue for the past 2 financial years (to nearest $100k)</label></td>
           <td>
-            <input type="text" name="revenue1" class="form-control"
-                   ng-model="merchantConfigService.merchantConfig.referral.revenue1"
-                   mask="$999,999,999,999" clean="true"
-                   only-digits required style="margin-bottom: 10px">
+            <div  ng-class="{'has-error': form.revenue1.$invalid && submitted}">
+              <input type="text" name="revenue1" class="form-control"
+                     ng-model="merchantConfigService.merchantConfig.referral.revenue1"
+                     mask="$999,999,999,999" clean="true" validate="false"
+                     placeholder="$ (FY {{currentYear}})"
+                     only-digits required style="margin-bottom: 10px" >
+              <div class="help-block" ng-if="form.revenue1.$error.required && submitted">This input is required</div>
+            </div>
+
             <input type="text" name="revenue2" class="form-control"
                    ng-model="merchantConfigService.merchantConfig.referral.revenue2"
-                   mask="$999,999,999,999" clean="true"
-                   only-digits required>
+                   mask="$999,999,999,999" clean="true" validate="false"
+                   placeholder="$ (FY {{pastYear}})"
+                   only-digits>
           </td>
           <td></td>
         </tr>
-        <tr>
-          <td><p>3. Has net tangible assets at 30 June</p></td>
+        <tr ng-class="{'has-error': form.tangible.$invalid && submitted}">
+          <td><label class="control-label">8. Has net tangible assets at 30 June</label></td>
           <td>
             <input type="text" name="tangible" class="form-control"
                    ng-model="merchantConfigService.merchantConfig.referral.tangible"
-                   mask="$999,999,999,999" clean="true"
+                   mask="$999,999,999,999" clean="true" validate="false"
+                   placeholder="$ (FY {{currentYear}})"
                    only-digits required>
+            <div class="help-block" ng-if="form.tangible.$error.required && submitted">This input is required</div>
           </td>
           <td></td>
         </tr>
       </table>
     </div>
   </div>  
-  <div class="row">
+  <div class="row" ng-class="{'has-error': form.confirm.$error.required && submitted}">
     <div class="col-md-6">
-      <p>We certify that the referral merchant is to the best of our knowledge, not as risk of financially or otherwise and that
+      <p class="help-block">We certify that the referral merchant is to the best of our knowledge, not as risk of financially or otherwise and that
         there is no known reason why this merchant would be a credit risk for OneBox or its banking counterparties 
-        (please confirm by ticking the box adjacent) <input type="checkbox" class="pull-right" ng-model="merchantConfigService.merchantConfig.referral.confirm" />
+        (please confirm by ticking the box adjacent) <input  type="checkbox" name="confirm" class="pull-right" ng-model="merchantConfigService.merchantConfig.referral.confirm" required/>
       </p>
     </div>
     <div class="col-md-6">

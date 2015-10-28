@@ -8,6 +8,10 @@
   width: 135px
 }
 
+#mainTabSet > div:first-child{
+  margin-bottom: 30px;
+}
+
 #mainTabSet > div {
   text-align: left;
   display: block;
@@ -35,8 +39,8 @@
 }
 #mainTabSet > div.valid {
   color: #fff;
-  background-color: #3c763d;
-  border-color: #3c763d;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
 }
 
 
@@ -58,6 +62,13 @@
 .main {
   padding-left: 155px;
   position: relative;
+}
+
+#tab-header > div > p{
+  padding-top: 16px;
+  padding-left: 36px;
+  font-size: 30px;
+
 }
 
 #mainPanels > h3 {

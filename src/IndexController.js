@@ -19,15 +19,15 @@
     $scope.uploader.onErrorItem = onUploadError;
     $scope.uploader.autoUpload = true;
 
-    $rootScope.currentPanel = 'general';
+    $rootScope.currentPanel = 'referral';
 
-    $scope.$watch(function () {
-      return $rootScope.currentPanel
-    }, function (value) {
-      if (value !== 'general' && merchantConfigService.merchantConfig.general.merchantTradingName) {
-        $scope.tradingName = merchantConfigService.merchantConfig.general.merchantTradingName;
+    $scope.newMerchant = function() {
+      if (merchantConfigService.step === 0) {
+        merchantConfigService.step = 1;
       }
-    });
+    }
+
+
 
     $scope.changeTab = function(panel) {
       if (panel !== $rootScope.currentPanel) {

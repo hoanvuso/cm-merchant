@@ -16,86 +16,105 @@
     <div ng-include="'merchantconfig/navbar.html'"></div>
 
     <input ji-scope-element="fileSelectInput" type="file" nv-file-select uploader="uploader" style="display: none"/>
-
-
-    <div class="control-group pull-right">
-      <div class="btn-group">
-        <button type="button" class="btn btn-primary" style="width:142px">Live merchant</button>
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="caret"></span>
-          <span class="sr-only">Pending merchant</span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-        </ul>
+    <div id="tab-header" class="row">
+      <div class="col-xs-6">
+        <p ng-if="merchantConfigService.step === 1">Step 1: Referral Certification</p>
+        <p ng-if="merchantConfigService.step === 2">Step 2: Business Information</p>
       </div>
-      <!-- Split button -->
-      <div class="btn-group">
-        <button type="button" class="btn btn-danger">Pending merchant</button>
-        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="caret"></span>
-          <span class="sr-only">Pending merchant</span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-        </ul>
+      <div class="col-xs-6">
+        <div class="control-group pull-right">
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" style="width:142px">Live merchant</button>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="caret"></span>
+              <span class="sr-only">Pending merchant</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>
+          <!-- Split button -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-danger">Pending merchant</button>
+            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="caret"></span>
+              <span class="sr-only">Pending merchant</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0" ng-click="newMerchant()">
+              Create new merchant
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="btn-group">
-        <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0" ng-click="importConfig()">
-          Create new merchant
-        </button>
-      </div>
-
     </div>
     <div class="clearfix"></div>
-    <div class="main">      
+    <div class="main" ng-if="merchantConfigService.step > 0">
       <div id="mainTabSet">
+        <div class="btn" ng-click="changeTab('referral')"
+             ng-class="{selected: currentPanel === 'referral',
+                        'valid': merchantConfigService.step > 1}"
+             ng-disabled="merchantConfigService.step > 1"
+             ng-if="merchantConfigService.step >= 1">
+          <small>Referral Partner</small><br/>
+          Certification
+        </div>
         <div class="btn" ng-click="changeTab('general')"
              ng-class="{selected: currentPanel === 'general','invalid': generalInvalid}"
-             ng-class="{}"
-            >General</div>
+             ng-if="merchantConfigService.step > 1">
+          General</div>
         <div class="btn" ng-click="changeTab('addresses')"
-             ng-class="{selected: currentPanel === 'addresses','invalid': addressesInvalid}">
+             ng-class="{selected: currentPanel === 'addresses','invalid': addressesInvalid}"
+             ng-if="merchantConfigService.step > 1">
           Addresses
         </div>
         <!--<div class="btn" ng-click="currentPanel = 'emailaddresses'" ng-class="{selected: currentPanel === 'emailaddresses'}">Email Addresses</div>-->
         <div class="btn" ng-click="changeTab('contacts')"
-             ng-class="{selected: currentPanel === 'contacts','invalid': contactsInvalid}">Contacts
+             ng-class="{selected: currentPanel === 'contacts','invalid': contactsInvalid}"
+             ng-if="merchantConfigService.step > 1">
+          Contacts
         </div>
         <div class="btn" ng-click="changeTab('administrators')"
-             ng-class="{selected: currentPanel === 'administrators','invalid': administratorsInvalid}">Administrators
+             ng-class="{selected: currentPanel === 'administrators','invalid': administratorsInvalid}"
+             ng-if="merchantConfigService.step > 1">
+          Administrators
         </div>
         <div class="btn" ng-click="changeTab('banking')"
-             ng-class="{selected: currentPanel === 'banking','invalid': bankingInvalid}">Banking
-          Details
+             ng-class="{selected: currentPanel === 'banking','invalid': bankingInvalid}"
+             ng-if="merchantConfigService.step > 1">
+          Banking Details
         </div>
         <div class="btn" ng-click="changeTab('businessrules')"
-             ng-class="{selected: currentPanel === 'businessrules','invalid': businessrulesInvalid}">
+             ng-class="{selected: currentPanel === 'businessrules','invalid': businessrulesInvalid}"
+             ng-if="merchantConfigService.step > 1">
           Business Rules
         </div>
         <div class="btn" ng-click="changeTab('debtorcommunications')"
              ng-class="{selected: currentPanel === 'debtorcommunications',
                         'invalid': debtorcommunicationsInvalid,
-                        'valid': debtorcommunicationsInvalid === false}">Communications
+                        'valid': debtorcommunicationsInvalid === false}"
+             ng-if="merchantConfigService.step > 1">
+          Communications
         </div>
         <div class="btn" ng-click="changeTab('confirmation')"
-             ng-class="{selected: currentPanel === 'confirmation'}">
+             ng-class="{selected: currentPanel === 'confirmation'}"
+             ng-if="merchantConfigService.step > 1">
           <small>Services Agreement <br/>& Business Rules</small> <br/>
           Confirmation
         </div>
-        <div class="btn" ng-click="changeTab('referral')"
-             ng-class="{selected: currentPanel === 'referral'}">
-          <small>Referral Partner</small><br/>
-          Certification
-        </div>
+
       </div>
 
       <!--<accordion close-others="true">-->
@@ -123,7 +142,7 @@
       <!--</accordion>-->
 
       <div id="mainPanels">
-        <h3 ng-bind="tradingName"></h3>
+        <h3 ng-if="merchantConfigService.step > 1" ng-bind="merchantConfigService.merchantConfig.general.merchantTradingName"></h3>
 
         <div ng-switch="currentPanel">
 
@@ -181,10 +200,10 @@
         <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0;" ng-click="next()" ng-if="currentPanel !== 'referral'">
           Next
         </button>
-        <button class="btn btn-primary pull-right" style="margin: 20px 20px 20px 0;" ng-click="validateAndExportConfig()">
-          Send to merchant
+        <button class="btn btn-primary pull-right" style="margin: 20px 20px 20px 0;" ng-click="validateAndExportConfig()" ng-if="currentPanel !== 'referral'">
+          Save & Close
         </button>
-        <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0;" ng-click="back()" ng-if="currentPanel !== 'general'">
+        <button class="btn btn-info pull-right" style="margin: 20px 20px 20px 0;" ng-click="back()" ng-if="currentPanel !== 'general' && currentPanel !== 'referral'">
           Back
         </button>
       </div>
