@@ -4,7 +4,7 @@
 
   function Controller($scope,$rootScope, merchantConfigService,Modal) {
     $scope.error = {};
-    $scope.submitted = $rootScope.contactsInvalid;
+    $scope.submitted = $rootScope.contactsClean;
 
     if (merchantConfigService.merchantConfig.contacts.keyCommercial.phone) {
       var keyCommercialPhone = merchantConfigService.merchantConfig.contacts.keyCommercial.phone.toString();
@@ -112,9 +112,18 @@
       $rootScope.formValid = value;
     });
 
+    $scope.$watch(function() {
+      return $scope.form.$dirty
+    },function(value) {
+      if (!$rootScope.formDirty) {
+        $rootScope.formDirty = value;
+      }
+    });
+
     $rootScope.next = function() {
       $scope.submitted = true;
       $rootScope.contactsInvalid = !$scope.form.$valid;
+      $rootScope.contactsClean = $scope.form.$dirty;
       $rootScope.currentPanel = 'administrators';
     };
     $rootScope.back = function() {

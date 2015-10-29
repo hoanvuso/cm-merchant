@@ -4,7 +4,7 @@
     .controller('BusinessRulesPanelController', Controller);
 
   function Controller($scope,$rootScope, merchantConfigService,Modal) {
-    $scope.submitted = $rootScope.businessrulesInvalid;
+    $scope.submitted = $rootScope.businessrulesClean;
     var savedDiscountForEarlyPaymentChangeValues = null, savedUniversallyAvailablePaymentTerms = [], savedDebtorSurcharges = null;
 
     $scope.paymentTerms = {
@@ -21,9 +21,18 @@
       $rootScope.formValid = value;
     });
 
+    $scope.$watch(function() {
+      return $scope.form.$dirty
+    },function(value) {
+      if (!$rootScope.formDirty) {
+        $rootScope.formDirty = value;
+      }
+    });
+
     $rootScope.next = function() {
       $scope.submitted = true;
       $rootScope.businessrulesInvalid = !$scope.form.$valid;
+      $rootScope.businessrulesClean = !$scope.form.$dirty;
       $rootScope.currentPanel = 'debtorcommunications';
     };
 

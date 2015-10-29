@@ -130,8 +130,7 @@
 
         ctrl.$formatters.push(function (inputValue) {
           if (inputValue) {
-            console.log(inputValue);
-            var formattedValue = inputValue + '%';
+            var formattedValue = parseFloat(inputValue).toFixed(2) + '%';
             element.val(formattedValue);
             return formattedValue;
           } else {

@@ -4,7 +4,7 @@
     .controller('AddressesPanelController', Controller);
 
   function Controller($scope,$rootScope, merchantConfigService,Modal) {
-    $scope.submitted = $rootScope.addressesInvalid;
+    $scope.submitted = $rootScope.addressesClean;
     $scope.activeTab = 'business';
     $scope.changeTab = function(tab) {
       $scope.activeTab = tab
@@ -25,6 +25,15 @@
     });
 
     $scope.$watch(function() {
+      return $scope.form.$dirty || ($scope.form1.$dirty && !merchantConfigService.mailingAddressSameAsBusinessAddress)
+    },function(value) {
+      console.log(value);
+      if (!$rootScope.formDirty) {
+        $rootScope.formDirty = value;
+      }
+    });
+
+    $scope.$watch(function() {
       return !($scope.form.$invalid || ($scope.form1.$invalid && !merchantConfigService.mailingAddressSameAsBusinessAddress))
     },function(value) {
       $rootScope.formValid = value;
@@ -37,6 +46,7 @@
     $rootScope.next = function() {
       $scope.submitted = true;
       $rootScope.addressesInvalid = $scope.form.$invalid || ($scope.form1.$invalid && !merchantConfigService.mailingAddressSameAsBusinessAddress);
+      $rootScope.addressesClean = $scope.form.$pristine || ($scope.form1.$pristine && !merchantConfigService.mailingAddressSameAsBusinessAddress);
       $rootScope.currentPanel = 'contacts';
     };
 

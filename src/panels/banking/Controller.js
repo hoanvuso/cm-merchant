@@ -5,7 +5,7 @@
 
   function Controller($scope,$rootScope, merchantConfigService,Modal) {
     $scope.error = {};
-    $scope.submitted = $rootScope.bankingInvalid;
+    $scope.submitted = $rootScope.bankingClean;
 
     if(!merchantConfigService.merchantConfig.banking.settlementAccountBsb){
       merchantConfigService.merchantConfig.banking.settlementAccountBsb = '';
@@ -28,9 +28,18 @@
       $rootScope.formValid = value;
     });
 
+    $scope.$watch(function() {
+      return $scope.form.$dirty
+    },function(value) {
+      if (!$rootScope.formDirty) {
+        $rootScope.formDirty = value;
+      }
+    });
+
     $rootScope.next = function() {
       $scope.submitted = true;
       $rootScope.bankingInvalid = !$scope.form.$valid;
+      $rootScope.bankingClean = !$scope.form.$dirty;
       $rootScope.currentPanel = 'businessrules';
     };
 

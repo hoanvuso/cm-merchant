@@ -72,32 +72,44 @@
           Certification
         </div>
         <div class="btn" ng-click="changeTab('general')"
-             ng-class="{selected: currentPanel === 'general','invalid': generalInvalid}"
+             ng-class="{'selected': currentPanel === 'general',
+                        'invalid': generalInvalid && generalClean,
+                        'valid': generalInvalid === false}"
              ng-if="merchantConfigService.step > 1">
           General</div>
         <div class="btn" ng-click="changeTab('addresses')"
-             ng-class="{selected: currentPanel === 'addresses','invalid': addressesInvalid}"
+             ng-class="{'selected': currentPanel === 'addresses',
+                        'invalid': addressesInvalid && addressesClean,
+                        'valid': addressesInvalid === false}"
              ng-if="merchantConfigService.step > 1">
           Addresses
         </div>
         <!--<div class="btn" ng-click="currentPanel = 'emailaddresses'" ng-class="{selected: currentPanel === 'emailaddresses'}">Email Addresses</div>-->
         <div class="btn" ng-click="changeTab('contacts')"
-             ng-class="{selected: currentPanel === 'contacts','invalid': contactsInvalid}"
+             ng-class="{'selected': currentPanel === 'contacts',
+                        'invalid': contactsInvalid && contactsClean,
+                        'valid': contactsInvalid === false}"
              ng-if="merchantConfigService.step > 1">
           Contacts
         </div>
         <div class="btn" ng-click="changeTab('administrators')"
-             ng-class="{selected: currentPanel === 'administrators','invalid': administratorsInvalid}"
+             ng-class="{'selected': currentPanel === 'administrators',
+                        'invalid': administratorsInvalid && administratorsClean,
+                        'valid': administratorsInvalid === false}"
              ng-if="merchantConfigService.step > 1">
           Administrators
         </div>
         <div class="btn" ng-click="changeTab('banking')"
-             ng-class="{selected: currentPanel === 'banking','invalid': bankingInvalid}"
+             ng-class="{'selected': currentPanel === 'banking',
+                        'invalid': bankingInvalid && bankingClean,
+                        'valid': bankingInvalid === false}"
              ng-if="merchantConfigService.step > 1">
           Banking Details
         </div>
         <div class="btn" ng-click="changeTab('businessrules')"
-             ng-class="{selected: currentPanel === 'businessrules','invalid': businessrulesInvalid}"
+             ng-class="{'selected': currentPanel === 'businessrules',
+                        'invalid': businessrulesInvalid && businessrulesClean,
+                        'valid': businessrulesInvalid === false}"
              ng-if="merchantConfigService.step > 1">
           Business Rules
         </div>

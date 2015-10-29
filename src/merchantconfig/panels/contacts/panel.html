@@ -1,48 +1,5 @@
 <form name="form" ng-controller="ContactPanelController" class="css-form form-horizontal contact-form" ji-form
       style="margin-top: 30px" novalidate>
-  <div class="form-group">
-    <label class="col-sm-3 control-label">Key Commercial Contact</label>
-
-    <div class="col-sm-8">
-      <div class="row" ng-class="{'has-error': form.keyCommercialName.$invalid && submitted}">
-        <div class="col-xs-7">
-          <input name="keyCommercialName" type="text" class="form-control" placeholder="Name" required
-             ng-model="merchantConfigService.merchantConfig.contacts.keyCommercial.name">
-
-        </div>
-        <div class="help-block col-xs-5" ng-if="form.keyCommercialName.$error.required && submitted">This input is required</div>
-      </div>
-      <div class="row" ng-class="{'has-error': form.keyCommercialEmail.$invalid && submitted}">
-        <div class="col-xs-7">
-          <input name="keyCommercialEmail" type="email" class="form-control" placeholder="Email" required
-             ng-model="merchantConfigService.merchantConfig.contacts.keyCommercial.email" style="margin-top: 10px">
-        </div>
-        <div class="help-block col-xs-5" ng-if="form.keyCommercialEmail.$error.required && submitted">This input is required</div>
-        <div class="help-block col-xs-5" ng-if="form.keyCommercialEmail.$error.email && submitted">Wrong email format</div>
-      </div>
-      <div class="row" ng-class="{'has-error': error.keyCommercialPhone && submitted}">
-        <div class="col-xs-2">
-          <input type="text" class="form-control" maxlength="2" placeholder="Area Code"
-                 ng-model="keyCommercialPhone[0]" style="margin-top: 10px"
-                 only-digits change-focus="#keyCommercialPhone">
-        </div>
-        <div class="col-xs-5">
-          <input id="keyCommercialPhone" type="text" class="form-control" maxlength="8" placeholder="Phone Number" ng-model="keyCommercialPhone[1]"
-                 only-digits style="margin-top: 10px">
-        </div>
-        <div class="help-block col-xs-5" ng-if="error.keyCommercialPhone && submitted">{{error.keyCommercialPhone}}</div>
-      </div>
-      <div class="row" ng-class="{'has-error': form.keyCommercialMobile.$invalid && submitted}">
-        <div class="col-xs-7">
-          <input type="text" class="form-control" placeholder="Mobile" name="keyCommercialMobile" ng-keypress="onlyDigits($event)"
-                 ng-model="merchantConfigService.merchantConfig.contacts.keyCommercial.mobile"
-                 maxlength="10" style="margin-top: 10px" required
-                 mask="0999999999" restrict="reject">
-        </div>
-        <div class="help-block col-xs-5" ng-if="form.keyCommercialMobile.$error.required && submitted">This input is required</div>
-      </div>
-    </div>
-  </div>
 
   <div class="form-group">
     <label class="col-sm-3 control-label">IT Contact</label>

@@ -98,7 +98,6 @@
 
             $scope.next = function(form) {
               $scope.submitted = true;
-              console.log(form.$valid);
               if (form.$valid) {
                 $modalInstance.close($scope.invoicePastDue);
               }

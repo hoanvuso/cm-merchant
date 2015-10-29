@@ -11,7 +11,7 @@
     ];
 
     $scope.error = {};
-    $scope.submitted = $rootScope.generalInvalid;
+    $scope.submitted = $rootScope.generalClean;
     if (merchantConfigService.merchantConfig.general.phone) {
       var phone = merchantConfigService.merchantConfig.general.phone.toString();
       $scope.phone = [
@@ -66,18 +66,27 @@
       }
     });
 
-    $rootScope.next = function() {
-      $scope.submitted = true;
-      $rootScope.generalInvalid = !$scope.form.$valid;
-      $rootScope.currentPanel = 'addresses';
-    };
-
     $scope.$watch(function() {
       return $scope.form.$valid
     },function(value) {
       $rootScope.formValid = value;
     });
 
+    $scope.$watch(function() {
+      return $scope.form.$dirty
+    },function(value) {
+      if (!$rootScope.formDirty) {
+        $rootScope.formDirty = value;
+      }
+    });
+
+    $rootScope.next = function() {
+      $scope.submitted = true;
+      console.log($scope.form);
+      $rootScope.generalInvalid = !$scope.form.$valid;
+      $rootScope.generalClean = $scope.form.$dirty;
+      $rootScope.currentPanel = 'addresses';
+    };
 
     merchantConfigService.generalController = this;
     this.validate = validate;

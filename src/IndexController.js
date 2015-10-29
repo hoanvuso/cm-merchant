@@ -32,6 +32,9 @@
     $scope.changeTab = function(panel) {
       if (panel !== $rootScope.currentPanel) {
         $rootScope[$rootScope.currentPanel + 'Invalid'] = !$rootScope.formValid;
+        $rootScope[$rootScope.currentPanel + 'Clean'] = $rootScope.formDirty;
+        console.log($rootScope.formValid)
+        console.log($rootScope.formDirty)
 
         $rootScope.currentPanel = panel;
       }
