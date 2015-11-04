@@ -39,7 +39,20 @@
           }
         ]
       })
-    }
+    };
+
+    var smsForma = function(type) {
+      $modal.open({
+        templateUrl: 'merchantconfig/panels/debtorcommunications/sms/' + type + '.modal.html',
+        size: 'md',
+        controller: [
+          '$scope',
+          function($scope) {
+            $scope.merchantConfigService = merchantConfigService;
+          }
+        ]
+      })
+    };
 
 
     $scope.newInvoice = function(newInvoice) {
@@ -58,6 +71,7 @@
             };
 
             $scope.emailForma = emailForma;
+            $scope.smsForma = smsForma;
 
             $scope.next = function(form) {
               $scope.submitted = true;
@@ -95,6 +109,7 @@
             };
 
             $scope.emailForma = emailForma;
+            $scope.smsForma = smsForma;
 
             $scope.next = function(form) {
               $scope.submitted = true;
@@ -128,6 +143,7 @@
             $scope.pastDueReminder = angular.copy(pastDueReminder);
 
             $scope.emailForma = emailForma;
+            $scope.smsForma = smsForma;
 
             $scope.back = function() {
               $modalInstance.dismiss('cancel');
@@ -203,6 +219,7 @@
             $scope.seriousArrears = angular.copy(seriousArrears);
 
             $scope.emailForma = emailForma;
+            $scope.smsForma = smsForma;
 
             $scope.back = function() {
               $modalInstance.dismiss('cancel');
@@ -242,6 +259,7 @@
             $scope.seriousArrearsReminder = angular.copy(seriousArrearsReminder);
 
             $scope.emailForma = emailForma;
+            $scope.smsForma = smsForma;
 
             $scope.back = function() {
               $modalInstance.dismiss('cancel');
@@ -278,6 +296,7 @@
             $scope.submitted = false;
 
             $scope.emailForma = emailForma;
+            $scope.smsForma = smsForma;
 
             $scope.back = function() {
               $modalInstance.dismiss('cancel');

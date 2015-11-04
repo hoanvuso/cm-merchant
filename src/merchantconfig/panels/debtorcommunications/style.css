@@ -268,3 +268,34 @@
 .email-forma.border-purple .header, .email-forma.border-purple .footer {
     border-bottom-color:#660066;
 }
+
+.sms-forma .exmaple-chat {
+    width: 300px;
+    height: 615px;
+    background: url(/images/iphone.jpg) no-repeat;
+    background-size: 100%;
+}
+.sms-forma .text-header {
+    text-align: center;
+    padding-top: 90px;
+}
+.sms-forma .box-chat {
+    padding: 10px;
+    background: #e5e5ea;
+    margin-top: 60px;
+    margin-left: 42px;
+    width: 190px;
+    border-radius: 10px;
+    position: relative;
+    line-height: 16px;
+}
+.sms-forma .box-chat:after {
+    content: ' ';
+    position: absolute;
+    bottom: 0px;
+    left: -5px;
+    background: url(/images/arrow.png) no-repeat;
+    width: 19px;
+    height: 9px;
+
+}

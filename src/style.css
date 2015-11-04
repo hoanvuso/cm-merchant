@@ -156,3 +156,7 @@ body > hr {
     height: 70px;
     font-size: 21px;
 }
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}

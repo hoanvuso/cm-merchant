@@ -7,7 +7,7 @@
 
   function Service() {
 
-    this.step = 2;
+    this.step = 0;
     this.merchantConfig = getDefaultMerchantConfig();
     this.generalAccountingPackage = "Xero";
     this.generalEntityType = "PtyLtd";
