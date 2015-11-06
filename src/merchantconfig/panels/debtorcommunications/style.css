@@ -268,11 +268,24 @@
 .email-forma.border-purple .header, .email-forma.border-purple .footer {
     border-bottom-color:#660066;
 }
+.sms-forma-modal .modal-dialog {
+    width: 301px;
+}
+.sms-forma-modal .modal-dialog .modal-content{
+    background-color: transparent;
+    border: 0;
+    box-shadow: 0 0 0;
+    -webkit-box-shadow: 0 0 0;
+}
+
+.sms-forma-modal .modal-dialog .modal-body {
+    padding: 0;
+}
 
 .sms-forma .exmaple-chat {
     width: 300px;
     height: 615px;
-    background: url(/images/iphone.jpg) no-repeat;
+    background: url(/images/iphone.png) no-repeat;
     background-size: 100%;
 }
 .sms-forma .text-header {

@@ -45,6 +45,7 @@
       $modal.open({
         templateUrl: 'merchantconfig/panels/debtorcommunications/sms/' + type + '.modal.html',
         size: 'md',
+        windowClass: 'sms-forma-modal',
         controller: [
           '$scope',
           function($scope) {
