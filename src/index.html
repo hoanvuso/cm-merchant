@@ -64,7 +64,7 @@
     <div class="clearfix"></div>
     <div class="main" ng-cloak class="ng-cloak" ng-show="merchantConfigService.step > 0">
       <div id="mainTabSet">
-        <div class="btn" ng-click="changeTab('referral')"
+        <div class="btn" ng-click="merchantConfigService.step > 1 || changeTab('referral')"
              ng-class="{selected: currentPanel === 'referral',
                         'valid': merchantConfigService.step > 1}"
              ng-disabled="merchantConfigService.step > 1"
@@ -242,6 +242,8 @@
     <script src="../bower_components/moment/min/moment.min.js"></script>
     <script src="../bower_components/lodash/lodash.min.js"></script>
     <script src="../bower_components/angular-input-masks/angular-input-masks-standalone.min.js"></script>
+    <script src="../bower_components/ckeditor/ckeditor.js"></script>
+    <script src="../bower_components/ng-ckeditor/ng-ckeditor.js"></script>
 
     <script src="../cm-angular-common/src/module.js"></script>
     <script src="../cm-angular-common/src/CmService.js"></script>

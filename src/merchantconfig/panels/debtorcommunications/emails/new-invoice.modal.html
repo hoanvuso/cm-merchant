@@ -1,45 +1,98 @@
-<div class="modal-body email-forma border-green">
-  <div class="header">
-    <img ng-src="{{logoUrl}}" class="center-block">
-    <h3 class="text-center">Payment instruction</h3>
+<div class="row">
+  <div class="col-md-6 modal-1">
+    <div class="modal-body email-forma border-green">
+      <div class="header">
+        <img ng-src="{{logoUrl}}" class="center-block">
+        <h3 class="text-center">{{params.heading}}</h3>
+      </div>
+      <div class="body">
+        <button class="btn btn-lg btn-primary payment-options">Payment options</button>
+        <p>{{params.salutation}}</p>
+        <h4>Bloggs, Joe Smith</h4>
+        <p>Please see attached a copy of our invoice for our services provided as summarised below:</p>
+        <table>
+          <tr>
+            <td>Invoice</td>
+            <td>Due Date</td>
+            <td>Amount</td>
+          </tr>
+          <tr>
+            <td>46963</td>
+            <td>27-Aug-2015</td>
+            <td>$660.00</td>
+          </tr>
+        </table>
+        <p>There are a number of payment options available to you, all of which can be accessed by click <a href="#">here</a> </p>
+        <p>{{params.thankYou}}</p>
+        <p>{{params.valediction}}</p>
+        <p>{{merchantConfigService.merchantConfig.general.merchantTradingName}}</p>
+        <h5>Please direct all enquires as follows:</h5>
+        <p>
+          <span>Telephone:</span>
+          <span>{{merchantConfigService.merchantConfig.contacts.accountReceivable.phone | phoneNumber}}</span>
+        </p>
+        <p>
+          <span>Email:</span>
+          <span><a href="mailto:{{merchantConfigService.merchantConfig.contacts.accountReceivable.email}}">{{merchantConfigService.merchantConfig.contacts.accountReceivable.email}}</a></span>
+        </p>
+      </div>
+      <div class="footer">
+        <small class="text-center"><i>
+          This email and any files transmitted with it are confidential and intended safely for use of the individual or
+          entity to whom they are addressed it. If you have received this email in error, please delete this email from
+          your system
+        </i></small>
+        <p class="text-center">Interested in using this service for your business? click <a href="#">here</a> </p>
+      </div>
+    </div>
   </div>
-  <div class="body">
-    <button class="btn btn-lg btn-primary payment-options">Payment options</button>
-    <p>Dear Sir/Madam</p>
-    <h4>Bloggs, Joe Smith</h4>
-    <p>Please see attached a copy of our invoice for our services provided as summarised below:</p>
-    <table>
-      <tr>
-        <td>Invoice</td>
-        <td>Due Date</td>
-        <td>Amount</td>
-      </tr>
-      <tr>
-        <td>46963</td>
-        <td>27-Aug-2015</td>
-        <td>$660.00</td>
-      </tr>
-    </table>
-    <p>There are a number of payment options available to you, all of which can be accessed by click <a href="#">here</a> </p>
-    <p>We thank you in advance for your prompt attention to this matter</p>
-    <p>Your sincerely</p>
-    <p>{{merchantConfigService.merchantConfig.general.merchantTradingName}}</p>
-    <h5>Please direct all enquires as follows:</h5>
-    <p>
-      <span>Telephone:</span>
-      <span>{{merchantConfigService.merchantConfig.contacts.accountReceivable.phone | phoneNumber}}</span>
-    </p>
-    <p>
-      <span>Email:</span>
-      <span><a href="mailto:{{merchantConfigService.merchantConfig.contacts.accountReceivable.email}}">{{merchantConfigService.merchantConfig.contacts.accountReceivable.email}}</a></span>
-    </p>
-  </div>
-  <div class="footer">
-    <small class="text-center"><i>
-      This email and any files transmitted with it are confidential and intended safely for use of the individual or
-      entity to whom they are addressed it. If you have received this email in error, please delete this email from
-      your system
-    </i></small>
-    <p class="text-center">Interested in using this service for your business? click <a href="#">here</a> </p>
+
+  <div class="col-md-6 modal-2">
+    <form name=form class="form-horizontal" ng-submit="save(form)">
+      <div class="modal-header">
+        <h2 class="text-center">Merchant Email Edit Fields</h2>
+      </div>
+      <div class="modal-body new-invoice email-editable"  get-height=".email-forma">
+          <div class="form-group heading" ng-class="{'has-error': form.heading.$invalid && submitted}">
+            <label for="heading" class="control-label col-xs-4">Heading</label>
+            <div class="col-xs-8">
+              <input type="text" id="heading" name="heading" ng-model="editable.heading" class="form-control" required>
+              <div class="help-block" ng-if="form.heading.$error.required && submitted">This input is required</div>
+            </div>
+          </div>
+          <div class="form-group" ng-class="{'has-error': form.salutation.$invalid && submitted}">
+            <label for="salutation" class="control-label col-xs-4">Salutation</label>
+            <div class="col-xs-8">
+              <input type="text" id="salutation" name="salutation" ng-model="editable.salutation" class="form-control">
+              <div class="help-block" ng-if="form.salutation.$error.required && submitted">This input is required</div>
+            </div>
+          </div>
+          <!--<div class="form-group">-->
+            <!--<label for="heading" class="control-label col-xs-4">Invoice Description</label>-->
+            <!--<div class="col-xs-8">-->
+              <!--<input type="text" id="heading" class="form-control">-->
+            <!--</div>-->
+          <!--</div>-->
+          <div class="form-group thankYou" ng-class="{'has-error': form.thankYou.$invalid && submitted}">
+            <label for="thankYou" class="control-label col-xs-4">Thank you</label>
+            <div class="col-xs-8">
+              <input type="text" id="thankYou" name="thankYou" ng-model="editable.thankYou" class="form-control">
+              <div class="help-block" ng-if="form.thankYou.$error.required && submitted">This input is required</div>
+            </div>
+          </div>
+          <div class="form-group" ng-class="{'has-error': form.valediction.$invalid && submitted}">
+            <label for="valediction" class="control-label col-xs-4">Valediction</label>
+            <div class="col-xs-8">
+              <input type="text" id="valediction" name="valediction" ng-model="editable.valediction" class="form-control">
+              <div class="help-block" ng-if="form.valediction.$error.required && submitted">This input is required</div>
+            </div>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary">Confirm Email Template</button>
+        <button class="btn btn-default" ng-click="cancel()">Back</button>
+      </div>
+    </form>
   </div>
 </div>

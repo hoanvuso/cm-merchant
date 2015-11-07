@@ -31,11 +31,62 @@
       $modal.open({
         templateUrl: 'merchantconfig/panels/debtorcommunications/emails/' + type + '.modal.html',
         size: 'lg',
+        windowClass: 'email-forma-modal',
         controller: [
-          '$scope',
-          function($scope) {
+          '$scope','$modalInstance',
+          function($scope,$modalInstance) {
+            $scope.submitted = false;
             $scope.logoUrl = merchantConfigService.merchantConfig.general.logoUrl || '/assets/referralPartners/79023490234/CBD-Accounting-Logo.png'
             $scope.merchantConfigService = merchantConfigService;
+
+            $scope.editorOptions = {
+              language: 'en',
+              toolbar: 'Basic',
+              toolbar_Basic:
+                [
+                  [ 'Source', '-', 'Bold', 'Italic','BulletedList', 'NumberedList', 'Blockquote' ],
+                ],
+              uiColor: '#FFFFFF',
+              toolbarCanCollapse: true,
+              height: 200
+            };
+
+            function getInvoiceType(type) {
+              switch (type) {
+                case 'new-invoice':
+                  return 'newInvoice';
+                case 'invoice-past-due':
+                  return 'invoicePastDue';
+                case 'invoice-past-due-reminder':
+                  return 'invoicePastDueReminder';
+                case 'serious-arrears':
+                  return 'seriousArrears';
+                case 'serious-arrears-reminder':
+                  return 'seriousArrearsReminder';
+                default:
+                  return 'noticeDefault';
+              }
+            }
+
+            var invoiceType = getInvoiceType(type);
+            console.log(invoiceType);
+            console.log(merchantConfigService.emailSubstitutions[invoiceType]);
+
+            $scope.params = merchantConfigService.emailSubstitutions[invoiceType];
+            $scope.editable = angular.copy($scope.params);
+
+            $scope.save = function(form) {
+              $scope.submitted = true;
+              if (form.$valid) {
+                $scope.params = merchantConfigService.emailSubstitutions[invoiceType] =  angular.copy($scope.editable);
+                console.log($scope.params);
+                console.log(merchantConfigService.emailSubstitutions.newInvoice);
+              }
+            };
+
+            $scope.cancel = function() {
+              $modalInstance.dismiss('cancel');
+            }
           }
         ]
       })

@@ -213,5 +213,19 @@
         });
       }
     }
+  }).directive('getHeight',function($timeout) {
+    return {
+      restrict: 'AE',
+      scope: {
+        target: '@getHeight'
+      },
+      link: function($scope,element,attrs,ctrl) {
+
+        $timeout(function () {
+          var height = angular.element($scope.target).outerHeight() - 94 - 65;
+          element.css('height',height);
+        });
+      }
+    }
   });
 })();

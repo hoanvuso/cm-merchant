@@ -6,6 +6,7 @@ angular.module('CmMerchantConfigApp', ['ngRoute',
                                        'jiAngular',
                                        'ngCookies',
                                        'ngMask',
+                                       'ngCkeditor',
                                         'ui.utils.masks',
                                        'CmCommon'])
     .constant('skin', {

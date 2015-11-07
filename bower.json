@@ -13,6 +13,7 @@
     "ngMask": "angular-mask#~3.0.16",
     "moment": "~2.10.6",
     "lodash": "~3.10.1",
-    "angular-input-masks": "~2.1.0"
+    "angular-input-masks": "~2.1.0",
+    "ng-ckeditor": "~0.2.1"
   }
 }

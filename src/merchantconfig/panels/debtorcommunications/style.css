@@ -201,6 +201,54 @@
     -o-transform: rotate(-10deg);
     color: #ACADAD;
 }
+
+.email-forma-modal .modal-dialog{
+    width: 100%;
+}
+
+.email-forma-modal .modal-dialog .modal-content{
+    background-color: transparent;
+    box-shadow: 0 0 0;
+    -webkit-box-shadow: 0 0 0;
+    border: none;
+}
+.email-forma-modal .modal-dialog .modal-content  .modal-header,
+.email-forma-modal .modal-dialog .modal-content  .modal-footer{
+    background-color: #fff;
+}
+
+.email-forma-modal .modal-1{
+    padding: 0 10px 0 20px;
+}
+
+.email-forma-modal .modal-2{
+    padding: 0 20px 0 10px;
+}
+
+.email-forma, .email-editable{
+    background-color: #FFF;
+}
+
+.email-editable h2{
+    margin-bottom: 20px;
+}
+
+.email-editable.new-invoice .form-group.thankYou{
+    margin-top: 155px
+}
+
+.email-editable.invoice-past-due .form-group.thankYou,
+.email-editable.invoice-past-due-reminder .form-group.thankYou {
+    margin-top: 155px
+}
+
+.email-editable.invoice-past-due .form-group.invoice-description,
+.email-editable.invoice-past-due-reminder .form-group.invoice-description,
+.email-editable.serious-arrears .form-group.invoice-description,
+.email-editable.serious-arrears-reminder .form-group.invoice-description, {
+    margin-top: 25px
+}
+
 .email-forma a {
     text-decoration: underline;
 }
@@ -221,7 +269,7 @@
 
 .email-forma .body p span:first-child {
     display: inline-block;
-    width:10%
+    width:15%
 }
 
 .email-forma .body table {
@@ -230,12 +278,9 @@
 .email-forma .body .payment-options {
     position: absolute;
     right: 70px;
-    width: 149px;
-    /* height: 79px; */
+    width: 165px;
+     height: 57px;
     overflow: hidden;
-    text-wra: initial;
-    word-wrap: break-word;
-    white-space: pre-line;
 }
 
 .email-forma .body table tr:first-child{
